@@ -25,6 +25,13 @@ Dal vault Obsidian, che **non** sta in questo repo:
 I file `.md` hanno un frontmatter con `title`, `source` (l'URL YouTube, da cui il sito
 ricava la miniatura), `autore`, `durata`, `visto`.
 
+## Cosa NON viene pubblicato
+
+Le pagine con `pubblico: false` nel frontmatter non vengono mai costruite in HTML.
+Serve per il materiale tratto dai **libri** di Giuliodori, che resta nel vault: i video
+YouTube sono pubblici, i suoi libri a pagamento no. Se una pagina marcata cosi era gia
+stata pubblicata, la pulizia delle pagine orfane la rimuove al build successivo.
+
 ## Nota sulla sincronizzazione
 
 Le pagine usano lo stesso worker (`brain-sync`) del second brain AI per i progressi di

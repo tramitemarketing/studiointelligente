@@ -5,6 +5,8 @@ Genera un sito statico leggibile da telefono dai riassunti in <vault>/crescita/r
 - File .md sciolti  -> video singolo (una card in homepage).
 - Sottocartelle     -> playlist: una card in homepage -> un index con i video -> pagina per video.
 Non scrive in nessuna cartella del vault. Output in ./docs/.
+Le pagine con `pubblico: false` nel frontmatter NON vengono pubblicate:
+e' cosi' che il materiale tratto dai libri resta nel vault e fuori dal sito.
 Uso:  python build_site.py
 """
 import os
@@ -529,6 +531,16 @@ def read_md(path):
     with open(path, encoding="utf-8") as fh:
         return parse_frontmatter(fh.read())
 
+def pubblicabile(path):
+    """False se il frontmatter dice `pubblico: false`.
+
+    E' la garanzia meccanica che il materiale tratto dai LIBRI resti nel vault:
+    le pagine marcate cosi' non vengono mai costruite in HTML, e se una era gia'
+    stata pubblicata viene rimossa al build successivo dalla pulizia delle orfane.
+    """
+    meta, _ = read_md(path)
+    return str(meta.get("pubblico", "")).strip().lower() not in ("false", "no", "0")
+
 # Concetti da fissare in homepage come schede, sopra ai video.
 # Sono pagine di wiki/concepts che vale la pena vedere senza doverle cercare.
 # Per fissarne un'altra basta aggiungere il suo slug a questa lista.
@@ -583,7 +595,8 @@ def main():
         pdir = os.path.join(SRC, d)
         if not os.path.isdir(pdir):
             continue
-        files = sorted(glob.glob(os.path.join(pdir, "*.md")))
+        files = [f for f in sorted(glob.glob(os.path.join(pdir, "*.md")))
+                 if pubblicabile(f)]
         if not files:
             continue
         known = {os.path.splitext(os.path.basename(f))[0] for f in files}
@@ -634,7 +647,8 @@ def main():
                        len(vids), html.escape(pname), html.escape(autore))})
 
     # --- video singoli (file sciolti) ---
-    loose = sorted(glob.glob(os.path.join(SRC, "*.md")))
+    loose = [f for f in sorted(glob.glob(os.path.join(SRC, "*.md")))
+             if pubblicabile(f)]
     known_loose = {os.path.splitext(os.path.basename(f))[0] for f in loose}
     for f in loose:
         slug = os.path.splitext(os.path.basename(f))[0]
@@ -654,8 +668,9 @@ def main():
     # --- concetti (wiki/concepts): la conoscenza fusa per argomento ---
     cpath = CONC
     # ordine cronologico: i concetti toccati piu' di recente vanno in cima
-    concetti = sorted(glob.glob(os.path.join(cpath, "*.md")),
-                      key=os.path.getmtime, reverse=True) if os.path.isdir(cpath) else []
+    concetti = [f for f in sorted(glob.glob(os.path.join(cpath, "*.md")),
+                                  key=os.path.getmtime, reverse=True)
+                if pubblicabile(f)] if os.path.isdir(cpath) else []
     info_concetti = {}                                  # slug -> (titolo, gist)
     if concetti:
         os.makedirs(os.path.join(OUT, "concetti"), exist_ok=True)
