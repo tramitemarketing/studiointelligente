@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>L&#x27;AI per la crescita personale</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%2260%22%20height%3D%2242%22%20rx%3D%2211%22%20fill%3D%22%23e8262d%22/%3E%3Cpath%20d%3D%22M26%2022.5%2044%2032%2026%2041.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E">
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1.1rem 1.1rem 4rem;
+  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 44rem; margin-inline: auto; color: #1a1a1a; background: #fbfbfa; }
+
+a { color: #1a5fb4; text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: .2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .6rem; } h3 { font-size: 1.1rem; margin: 1.4rem 0 .5rem; }
+p { margin: .7rem 0; }
+blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid #d0d0d0; color: #555; }
+code { background: #ececec; padding: .1rem .35rem; border-radius: .3rem; font-size: .9em; }
+hr { border: none; border-top: 1px solid #e2e2e2; margin: 2rem 0; }
+ul, ol { margin: .7rem 0; padding-left: 1.4rem; } li { margin: .25rem 0; }
+.topbar { margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #e2e2e2; }
+.topbar a { font-weight: 600; }
+.muted { color: #6b7075; font-size: .92rem; }
+.tag { display: inline-block; background: #eceff3; color: #4a5560; font-size: .72rem;
+  font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .12rem .45rem; border-radius: .4rem; margin-bottom: .35rem; }
+.card { display: block; border: 1px solid #e6e6e6; background: #fff; border-radius: .7rem;
+  padding: .9rem 1rem; margin: .7rem 0; }
+.card:hover { text-decoration: none; border-color: #9ab8e0; }
+.card h2 { margin: 0 0 .2rem; font-size: 1.15rem; } .card .muted { display: block; }
+.card .desc { margin: .35rem 0 0; }
+.btn { display: inline-block; margin: .5rem 0; padding: .55rem 1rem; background: #1a5fb4;
+  color: #fff !important; border-radius: .5rem; font-weight: 600; font-size: .95rem; }
+.btn:hover { background: #154c92; text-decoration: none; }
+
+/* --- tendina "lo so gia": contenuto ripiegato, si apre se serve --- */
+details.gia { border: 1px solid #e6e6e6; border-radius: .6rem; background: #fafafa;
+  padding: .1rem .9rem; margin: 1rem 0; }
+details.gia > summary { cursor: pointer; padding: .6rem 0; font-weight: 600;
+  font-size: .95rem; color: #6b7075; list-style: none; }
+details.gia > summary::-webkit-details-marker { display: none; }
+details.gia > summary::before { content: "▸ "; color: #9aa0a6; }
+details.gia[open] > summary::before { content: "▾ "; }
+details.gia > summary:hover { color: #1a5fb4; }
+details.gia[open] { background: transparent; }
+details.gia > *:last-child { margin-bottom: .8rem; }
+/* --- copertine dei video --- */
+.cover { display: block; width: 100%; max-width: 100%; border-radius: .7rem;
+  margin: 0 0 1.2rem; background: #ececec; aspect-ratio: 16/9; object-fit: cover; }
+.card { display: flex; gap: .85rem; align-items: flex-start; }
+.card .thumb { flex: 0 0 6.6rem; width: 6.6rem; aspect-ratio: 16/9; border-radius: .45rem;
+  object-fit: cover; background: #ececec; }
+.card .txt { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 30rem) { .card .thumb { flex-basis: 5.2rem; width: 5.2rem; } }
+.tw { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { border: 1px solid #e2e2e2; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 700; }
+
+/* --- lettura: barra di avanzamento, pillola, spunte di sezione --- */
+#rp { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: #1a5fb4; z-index: 50; transition: width .3s ease; }
+#rd { position: fixed; right: .8rem; bottom: .8rem; z-index: 50;
+  background: rgba(255,255,255,.94); border: 1px solid #e2e2e2; border-radius: 2rem;
+  padding: .4rem .8rem; font-size: .82rem; font-weight: 700; color: #4a5560;
+  box-shadow: 0 2px 10px rgba(0,0,0,.09); cursor: pointer; user-select: none; }
+#rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.sec { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 700;
+  color: #6b7075; padding: .1rem .45rem; margin-left: .5rem; border-radius: 1rem;
+  vertical-align: middle; }
+.sec:hover { background: #eceff3; color: #4a5560; }
+.sec.ok { color: #1a7f37; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  padding: .1rem .45rem; border-radius: 1rem; margin-left: .4rem; vertical-align: middle;
+  background: #eceff3; color: #4a5560; }
+.pill.done { background: #1a7f37; color: #fff; }
+.card.read { opacity: .72; }
+/* i temi scuri vanno DOPO le regole chiare: a parita' di peso vince
+   l'ultima scritta, altrimenti il chiaro le sovrascrive tutte */
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e6e6; background: #17181a; }
+  a { color: #7db3ff; } blockquote { border-color: #3a3d42; color: #b8bcc2; }
+  code { background: #2a2c30; } hr { border-color: #2a2c30; }
+  .card { background: #1e2023; border-color: #2a2c30; } .muted { color: #9aa0a6; }
+  .tag { background: #2a2c30; color: #cbd0d6; }
+  .btn { background: #2b6fd6 !important; } .btn:hover { background: #3f7fe0 !important; }
+  details.gia { border-color: #2a2c30; background: #1c1e21; }
+  details.gia > summary { color: #9aa0a6; }
+  details.gia > summary:hover { color: #7db3ff; }
+  details.gia[open] { background: transparent; }
+  th, td { border-color: #2a2c30; } th { background: #24262a; } }
+@media (prefers-color-scheme: dark) {
+  #rd { background: rgba(30,32,35,.94); border-color: #2a2c30; color: #cbd0d6; }
+  #rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+  .sec { color: #9aa0a6; } .sec:hover { background: #2a2c30; color: #cbd0d6; }
+  .sec.ok { color: #4ac26b; } .pill { background: #2a2c30; color: #cbd0d6; }
+  .pill.done { background: #1a7f37; color: #fff; } }
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← Concetti</a> · <a href="../index.html">Home</a></div>
+<h1>L'AI per la crescita personale</h1>
+<p><strong>Gist:</strong> l'intelligenza artificiale <strong>non rende né più stupidi né più intelligenti: amplifica la direzione che sceglie chi la usa</strong>. Usata come <strong>stampella</strong> — le si delega il pensiero — fa accumulare <strong>debito cognitivo</strong> e atrofizza le capacità; usata come <strong>amplificatore</strong> moltiplica competenze che però devono già esistere, perché <strong>zero moltiplicato per mille fa sempre zero</strong>. La regola di delega è la distinzione fra <strong>attività soffitto</strong> (dove oltre un certo punto lo sforzo non aggiunge nulla) e <strong>attività cielo</strong> (dove non c'è tetto), con l'acronimo <strong>CIAO</strong> a dire cosa affidare al modello. E l'uso più potente e meno sfruttato non è chiedere risposte ma <strong>usare l'LLM come specchio</strong>, con <strong>11 domande scomode</strong> che espongono i nostri schemi ricorrenti — perché il superpotere di questi modelli non è sapere, è <strong>trovare pattern</strong>.</p>
+<h2>Il debito cognitivo</h2>
+<p>Nel <strong>2025</strong> un gruppo di ricercatori del <strong>MIT</strong> — nei sottotitoli «dell'IT» e «i ricercatori di Boston», con «dell MIT» esplicito solo in chiusura: ricostruzione a orecchio, e <strong>titolo e autori dello studio non vengono mai pronunciati</strong> — ha messo a dei volontari una cuffia con <strong>32 elettrodi</strong> in testa mentre scrivevano usando ChatGPT, per osservare in diretta l'attività cerebrale. I partecipanti erano divisi in <strong>tre gruppi</strong> con lo stesso compito, <strong>scrivere un breve saggio</strong>: il primo poteva usare ChatGPT, il secondo un motore di ricerca, il terzo doveva cavarsela senza alcun aiuto tecnologico.</p>
+<p>Due risultati. Il primo, prevedibile: il gruppo ChatGPT mostrò <strong>le connessioni neurali più deboli</strong> — meno sforzo, meno neuroni accesi. Il secondo colpisce: pochi minuti dopo la consegna fu chiesto ai partecipanti di <strong>citare almeno una frase qualsiasi</strong> di ciò che avevano appena scritto. Nel gruppo ChatGPT <strong>8 persone su 10 non ci riuscirono</strong>: <strong>l'80%</strong> non ricordava una sola frase del proprio saggio. Negli altri gruppi la percentuale fu <strong>inferiore al 10%</strong>.</p>
+<p>I ricercatori chiamarono il fenomeno <strong>debito cognitivo</strong>: ogni volta che deleghiamo il pensiero «è come se firmassimo una piccola cambiale» — lì per lì non costa nulla, «però poi il conto arriva e arriva sempre». Da segnalare che <strong>il caveat lo mette l'autore stesso</strong>: «questo è un singolo studio su un compito molto specifico e non stiamo parlando di un campione di migliaia di partecipanti». È l'unica cautela metodologica esplicita in tutta la serie di video.</p>
+<p>La seconda immagine è <strong>il gesso</strong>: chi lo ha portato ricorda com'era quell'arto un mese dopo, «praticamente la metà dell'altro». Il corpo segue una regola semplice — <strong>quello che non usiamo lo smantella</strong> — e vale anche per la mente. «Milioni di persone oggi stanno usando l'AI come un gesso messo su una gamba che in realtà è perfettamente sana.»</p>
+<h2>Stampella o amplificatore</h2>
+<p>Da qui la biforcazione. La <strong>stampella</strong>: <em>scrivimi questa email, riassumimi questo documento, dammi la risposta al perché dell'universo</em> — le chiediamo di pensare al posto nostro e al massimo leggiamo il risultato, spesso nemmeno quello. Comoda, veloce, a costo zero, ed è oggi l'uso più diffuso.</p>
+<p>L'<strong>amplificatore</strong>: una leva per moltiplicare conoscenza e risultati, con un vincolo aritmetico che è il cuore della pagina — <strong>un amplificatore può amplificare solo qualcosa che già esiste</strong>. «Se prima dell'avvento dell'AI le tue capacità valevano 10, imparando a usarla possono arrivare a 100 o addirittura a 1000. Chi invece non ha capacità ha poco da moltiplicare: <strong>0 moltiplicato per 10 o per 100 fa zero</strong>.» Per questo la stampella è rischiosa in modo composto: più deleghiamo abilità di base, più si atrofizzano, e una volta disimparato tutto <strong>l'AI avrà poco da moltiplicare</strong>.</p>
+<h2>Attività soffitto e attività cielo</h2>
+<p>La regola di delega non è «cosa è noioso» ma «dove il mio sforzo aggiuntivo produce ancora valore». Le <strong>attività soffitto</strong> sono quelle in cui, oltre un certo punto, ogni sforzo in più non aggiunge nulla: formattare le slide di una riunione interna, compilare le note spese, rispondere all'email del dipartimento logistico, riordinare i dati di un foglio Excel. «Se le hai fatte abbastanza bene, le hai già fatte alla perfezione.» Le <strong>attività cielo</strong> non hanno tetto: colloqui con clienti e futuri clienti, contenuti di marketing, ore di formazione, sviluppo di nuove competenze, tempo con le persone che ami.</p>
+<p><strong>Regola: delega all'AI le soffitto, concentrati sulle cielo, mai il contrario.</strong> E soprattutto <strong>la fatica non è mai il criterio di scelta</strong>: c'è la <strong>fatica che consuma</strong> — attività ripetitive, meccaniche, sempre uguali: niente da imparare, niente da decidere, niente da rischiare — e la <strong>fatica che rafforza</strong> — attività complesse, creative, mai uguali: «ti stancano, sì, ma ti allenano anche». È la stessa frattura che regge <a href="architetto-e-muratore.html">architetto-e-muratore</a>: l'architetto evita il cantiere proprio perché è una fatica che espone, e la delega comoda all'AI è una <strong>fintazione</strong> nuovissima.</p>
+<h2>L'acronimo CIAO</h2>
+<p>Le quattro categorie di attività soffitto a cui dire ciao:</p>
+<ul>
+<li><strong>C — Canovacci</strong>: le prime bozze. Il momento più duro di qualsiasi lavoro è il foglio bianco, il passaggio da 0 a 1. L'AI in 30 secondi produce un canovaccio «brutto, banale e senza anima», ma «lavorare su una bozza da correggere è mille volte più facile che partire da zero».</li>
+<li><strong>I — Indagini</strong>: ricerche, raccolta di informazioni, confronto di fonti, riassunti di documenti chilometrici. «Nella mia precedente vita da consulente, per una ricerca di mercato servivano giornate intere; oggi il deep research ti consegna un report completo in una decina di minuti.» Con l'avvertenza di <strong>trattare l'AI come uno stagista alle prime armi</strong> e non fidarsi mai fino in fondo dei risultati.</li>
+<li><strong>A — Analisi</strong>: trovare schemi ricorrenti in moli di dati, dove gli LLM eccellono. Ma <strong>la decisione se lo schema abbia senso resta nostra</strong>.</li>
+<li><strong>O — Operazioni ripetitive</strong>: formattare, tradurre, riordinare, convertire, pulire. La «manovalanza digitale», da delegare costruendo skill, file MD e prompt.</li>
+</ul>
+<p><strong>Cosa non delegare mai:</strong> tutto ciò che richiede <strong>giudizio personale, scelte di gusto, decisioni strategiche o interazione umana</strong> — «quelle ce le teniamo strette e guai a chi ce le tocca».</p>
+<blockquote>WARN: <em>Come essere avanti al 99% usando l'AI</em> mette «farsi riassumere documenti chilometrici» fra le Indagini da delegare, mentre <em>3 strategie per leggere più libri</em> liquida «quelle app che ti fanno la sintesi dei libri» come «assolutamente inutili se non addirittura dannose» — verificare. Vedi <a href="attenzione-focus-e-lettura.html">attenzione-focus-e-lettura</a>.</blockquote>
+<h2>Come parlarle: le tre mosse</h2>
+<p>Premessa esplicita del video: <strong>non è una calcolatrice</strong>. «Con la calcolatrice 2 + 2 fa sempre 4»; l'AI è un <strong>motore probabilistico</strong>: stessa domanda due volte, due risposte leggermente diverse, e quando non sa una cosa «nella maggior parte dei casi non te lo dice, se la inventa, e spesso lo fa con una sicurezza invidiabile». Seconda immagine: <strong>il genio della lampada</strong>, «potentissimo, ma esaudisce alla lettera quello che dici, non quello che intendi davvero». (Nota terminologica: nell'altro video l'autore chiama gli LLM una <strong>«calcolatrice stocastica»</strong> — le due formule non si contraddicono, <em>stocastica</em> è precisamente ciò che una calcolatrice non è, ma sentite a distanza suonano opposte.)</p>
+<p>Le tre mosse, in ordine:</p>
+<ol>
+<li><strong>Contesto ed esempi, non desideri.</strong> «I desideri al massimo nella letterina per Babbo Natale.» Invece di «fammi un post per LinkedIn», che si becca «la solita minestra riscaldata», dai il tema <strong>più tre tuoi post precedenti</strong> come riferimento di stile e tono, <strong>più il pubblico</strong>, <strong>più l'obiettivo</strong>. «Più materiale vero gli dai, meno il genio della lampada inventa.» Se sembra troppo da scrivere, <strong>non scrivere: parla</strong> — con uno strumento di dettatura intelligente si comunica <strong>dalle due alle tre volte più velocemente</strong> che da tastiera. Lo strumento citato è reso dai sottotitoli come «Whisper Flow»: <strong>nome incerto</strong>, probabilmente <em>Wispr Flow</em>, ma «Whisper» è anche il nome del modello di trascrizione di OpenAI — non verificato, e non è dichiarata alcuna sponsorizzazione.</li>
+<li><strong>Fatti mostrare il ragionamento.</strong> Prima di accettare qualsiasi risposta, soprattutto su temi importanti o delicati, aggiungi sempre: <strong>«Spiegami passo passo come sei arrivato a questa conclusione.»</strong> Due effetti: risposte migliori e meno invenzioni; e <strong>impari qualcosa tu</strong>, così i muscoli mentali crescono invece di atrofizzarsi.</li>
+<li><strong>Ribalta i ruoli.</strong> La preferita dell'autore: invece di farti dare risposte, <strong>fatti fare le domande</strong>. Prompt letterale: <em>«Interrogami su questo argomento. Parti da domande semplici e ad ogni mia risposta corretta aumenta il livello di difficoltà; se è necessario incalzami come farebbe un professore severo.»</em> Poi usa le tue risposte e il modo in cui hai spiegato i concetti per costruire insieme il post o la presentazione. «Così non accumuli debito cognitivo: sviluppi le tue capacità cognitive.»</li>
+</ol>
+<p>Sopra tutto questo c'è una posizione di metodo: <strong>prima dei tool serve un metodo</strong>. Approcciare l'AI partendo dagli strumenti «che cambiano ogni sei mesi» o dai «trucchetti per ChatGPT» è, testualmente, «pura masturbazione mentale».</p>
+<h2>Lo specchio: le 11 domande</h2>
+<p>Il secondo video riparte da cosa sono davvero questi strumenti. ChatGPT, Gemini, Claude e simili non sono propriamente intelligenza artificiale: sono <strong>Large Language Model</strong>, allenati su una quantità mostruosa di testi, libri, articoli scientifici, blog, conversazioni, codice. Una <strong>«calcolatrice stocastica»</strong>: prevedono parola dopo parola la sequenza statisticamente più probabile. «Non c'è nulla di realmente intelligente, non c'è una coscienza, non c'è un guizzo intuitivo» — quindi <strong>non generano conoscenza realmente nuova</strong> e a volte inventano di sana pianta «con una sicurezza disarmante».</p>
+<p>In compenso hanno <strong>un superpotere: trovare schemi ricorrenti dentro moli gigantesche di dati</strong>. Applicato a noi: più conversiamo, più dettagli condividiamo, più il motore statistico vede i nostri <strong>pattern, contraddizioni, pensieri limitanti, temi ricorrenti</strong> — alcuni dei quali sfuggono ad amici, partner, medico, psicologo e soprattutto a noi stessi. La metafora: <strong>trovare un ago in un pagliaio gigantesco</strong>, dove il pagliaio è l'insieme delle nostre interazioni sommate al suo addestramento, e l'ago sono gli insight su di noi.</p>
+<p>Le <strong>11 domande</strong>, nell'ordine del video (l'autore avverte in apertura che <strong>la 5, la 7 e l'11</strong> saranno «quelle che ti faranno più male, ma sono anche quelle di cui hai più bisogno»):</p>
+<ol>
+<li><strong>Che cosa sai di me che io ancora non ho capito di me stesso?</strong> — trasforma l'LLM in uno specchio: schemi, paure che tornano, scuse che ripetiamo, ambizioni dichiarate e non onorate.</li>
+<li><strong>In quale area della mia vita sto cercando di dimostrare qualcosa, e a chi?</strong> — distingue gli obiettivi davvero nostri da quelli rincorsi per essere visti. Variante suggerita: chiedergli se ha notato una tendenza a compiacere o impressionare gli altri.</li>
+<li><strong>Quali tratti critico negli altri che in realtà condivido anch'io?</strong> — «critichiamo chi cerca riconoscimento, ma anche noi lo desideriamo; critichiamo chi è rigido, ma anche noi abbiamo bisogno di controllo; critichiamo chi procrastina, ma anche noi stiamo evitando qualcosa».</li>
+<li><strong>Quale critica faccio fatica ad accettare, ma che in fondo so essere vera?</strong> — l'LLM, «nel suo distacco digitale», può mostrarci ciò che non ammetteremmo mai.</li>
+<li><strong>Quale paura sto giustificando, considerandola una mia preferenza?</strong> — smaschera le false razionalizzazioni: «non fa per me», «non è il momento giusto», «io sono fatto così», «non mi interessa».</li>
+<li><strong>Quale consiglio do agli altri, ma faccio fatica a seguire io per primo?</strong> — «il modo più veloce per realizzare i nostri obiettivi è colmare il divario tra quello che sappiamo di dover fare e quello che facciamo».</li>
+<li><strong>Se dovessi scommettere su ciò che potrebbe farmi mollare, su cosa punteresti?</strong> — ognuno ha un punto di rottura diverso: noia, troppa fatica, perfezionismo, impazienza, paura del giudizio, mancanza di energia. Individuarlo serve ad anticiparlo.</li>
+<li><strong>In quale area della mia vita sto scegliendo il comfort al posto della crescita?</strong> — qui entra <strong>Michael Easter</strong> e il suo libro, reso in italiano come <em>Troppo comodi</em> (<strong>titolo dell'edizione italiana da verificare</strong>): la vita moderna ci permette di evitare ogni disagio — fame, fatica, noia, silenzio, freddo, caldo, incertezza — ma sono proprio quelle piccole dosi di scomodità a renderci più forti e più lucidi. La citazione che l'autore sceglierebbe fra tutte: <strong>«Scelte facili, vita difficile. Scelte difficili, vita facile.»</strong></li>
+<li><strong>Che cosa sto sbagliando, sottovalutando o evitando?</strong> — errori ricorrenti, priorità trascurate (sonno, corpo, relazioni), decisioni e conversazioni rimandate. «Meno autoinganni, meno teoria, meno pippe mentali.»</li>
+<li><strong>Qual è la domanda che spero che tu non mi faccia?</strong> — la più astuta, perché aggira le difese: «non chiediamo quale sia il problema, chiediamo cos'è che non vogliamo neanche vedere che ci sta fregando in questo momento».</li>
+<li><strong>Di che cosa sarò più orgoglioso tra 10 anni?</strong> — l'unica domanda ispirazionale del gruppo: ragionare su scala temporale ampia fa uscire dalle urgenze del momento e riporta alle scelte difficili ma sane sul lungo termine.</li>
+</ol>
+<h2>Contesto, non prompt engineering</h2>
+<p>La chiusura ridimensiona tutto ciò che si è detto negli ultimi anni sul prompt: «più avanzano questi modelli, meno è importante scrivere prompt super arzigogolati» — i migliori capiscono l'intento anche da domande scritte male. Ciò che influenza davvero la qualità delle risposte è <strong>il contesto</strong>: più rispecchia in modo approfondito <strong>valori, obiettivi e preferenze</strong>, più le risposte sono rilevanti.</p>
+<p>E il contesto personale più potente non è una questione tecnica — «non sto parlando della strutturazione puramente tecnica del contesto, file MD e così via» — ma <strong>la propria visione di vita</strong>, il <strong>piano di vita</strong>. Da anni l'autore usa a questo scopo un metodo che ha ribattezzato <strong>Life Plan</strong> (grafia non verificabile dai sottotitoli), con cui descrive valori, preferenze e ciò che vuole realizzare in quelle che chiama <strong>le 12 aree fondamentali dell'esistenza</strong> — numero chiaro nell'audio, <strong>ma le aree non vengono mai elencate</strong>. È anche il gancio della masterclass gratuita in descrizione: materiale promozionale, non contenuto verificato.</p>
+<blockquote>WARN: <em>Come usare ChatGPT per cambiare vita</em> dice che il prompt conta sempre meno e che l'unica leva vera è il contesto, mentre <em>Come essere avanti al 99% usando l'AI</em> costruisce tre mosse di prompting con prompt letterali da copiare — verificare. La conciliazione plausibile è che la mossa 1 <em>sia</em> contesto e che le mosse 2-3 siano richieste di processo, non formulazioni magiche; ma detto così è una tensione fra i due video.</blockquote>
+<h2>Ponti con il resto della zona</h2>
+<ul>
+<li><strong>Togliere e proteggere</strong>: «delega le soffitto, proteggi le cielo» è la chiave che chiude <a href="otto-abitudini-persone-super-produttive.html">otto-abitudini-persone-super-produttive</a>. L'AI è ciò che <em>toglie</em>; le cielo sono ciò che va <em>protetto</em>, come le prime due ore dell'abitudine 2.</li>
+<li><strong>Il divario sapere/fare</strong>: la domanda 6 è la tesi d'apertura di <a href="procrastinazione-resistenza-e-avvio.html">procrastinazione-resistenza-e-avvio</a>; la domanda 8 è la dopamina istantanea di quel video con vocabolario diverso.</li>
+<li><strong>La delega come fintazione</strong>: vedi <a href="architetto-e-muratore.html">architetto-e-muratore</a> — sembra lavoro, appaga l'architetto, non apre nessun cantiere; stessa dinamica dello spettatore in <a href="spettatore-o-regista.html">spettatore-o-regista</a>. Sulle domande 7 e 11 vedi <a href="vincolo-costanza-e-identita.html">vincolo-costanza-e-identita</a> e <a href="quattro-livelli-di-crescita.html">quattro-livelli-di-crescita</a>; sulla 2 e sui confronti sociali <a href="assertivita-e-regole-relazionali.html">assertivita-e-regole-relazionali</a>.</li>
+<li><strong>L'io futuro</strong>: la domanda 11 rovescia l'abitudine 4 di Kruse — lì l'io futuro è un alibi, qui una bussola. Da leggere con <a href="scopo-e-scelte-reversibili.html">scopo-e-scelte-reversibili</a>.</li>
+<li><strong>Materiale promozionale</strong>: entrambi i video chiudono su asset proprietari (Creatempo Week del 15-17 settembre 2026 il primo, masterclass Life Plan il secondo). Vedi <a href="anti-fuffa-e-reference-group.html">anti-fuffa-e-reference-group</a>.</li>
+</ul>
+<h2>Fonti</h2>
+<ul>
+<li>come-essere-avanti-al-99-delle-persone-usando-l-ai-2026-09-18 (Andrea Giuliodori / EfficaceMente, 2026-09-18) — il debito cognitivo e lo studio MIT 2025 (32 elettrodi, tre gruppi, l'80% che non ricorda una frase), la metafora del gesso, stampella contro amplificatore con l'aritmetica dello zero, attività soffitto e cielo, fatica che consuma e fatica che rafforza, l'acronimo CIAO, le tre mosse di prompting, «prima dei tool serve un metodo». Avvertenze: «MIT» è ricostruito dai sottotitoli («dell'IT», «i ricercatori di Boston»), <strong>titolo e autori dello studio non sono mai pronunciati</strong>, e il caveat sul campione è dell'autore stesso; lo strumento di dettatura «Whisper Flow» ha nome incerto.</li>
+<li>come-usare-chatgpt-per-cambiare-vita-2026-09-18 (Andrea Giuliodori / EfficaceMente, 2026-09-18) — l'LLM come motore di pattern e «calcolatrice stocastica» con i suoi limiti, la metafora dell'ago nel pagliaio, le 11 domande introspettive per intero, Michael Easter e il comfort, contesto contro prompt engineering, il metodo Life Plan e le 12 aree. Avvertenze: il titolo italiano del libro di Easter («Troppo comodi») è da verificare, la grafia di «Life Plan» non è verificabile dai sottotitoli e <strong>le 12 aree non vengono mai elencate</strong>; l'affermazione d'apertura sul «99% delle persone» è senza fonte.</li>
+<li><a href="andrea-giuliodori.html">andrea-giuliodori</a> — profilo dell'autore e ricorrenze promozionali fra i video.</li>
+</ul>
+<script>
+window.SB = (function () {
+  var API = 'https://brain-sync.tramitemarketing-it.workers.dev';
+  function url() { return API + '/state'; }
+  return {
+    attivo: !!API,
+    prendi: function () {
+      if (!API) return Promise.resolve(null);
+      return fetch(url(), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    },
+    manda: function (page, n, b, finale) {
+      if (!API) return;
+      var dati = JSON.stringify({ page: page, n: n, b: b });
+      try {
+        fetch(url(), {
+          method: 'POST', body: dati, keepalive: !!finale,
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(function () {});
+      } catch (e) {}
+    },
+    commenta: function (testo) {
+      if (!API) return Promise.resolve(false);
+      return fetch(API + '/commenti', {
+        method: 'POST',
+        body: JSON.stringify({ slug: location.pathname, testo: testo }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+  };
+})();
+
+
+(function () {
+  var KEY = 'sb2:' + location.pathname;
+  var WPS = 4;             // parole al secondo (~240 wpm)
+  var MIN = 0.7, MAX = 6;  // secondi per blocco: minimo e tetto
+  var PASS = 0.5;          // se l'ho letto almeno a metà e sono andato oltre, conta
+  var IDLE = 120000;       // fermo da 2 min = non sta leggendo
+  var DONE = 0.9;          // 90% dei contenuti = letto
+
+  var nodes = [].slice.call(document.querySelectorAll('p, li, blockquote'))
+    .filter(function (n) { return !n.closest('.topbar') && n.textContent.trim().length > 1; });
+  if (nodes.length < 3) return;
+
+  var words = nodes.map(function (n) {
+    return Math.max(1, n.textContent.trim().split(/\s+/).length);
+  });
+  var need = words.map(function (w) {
+    return Math.min(MAX, Math.max(MIN, w / WPS));
+  });
+  var total = words.reduce(function (a, b) { return a + b; }, 0);
+  var acc = words.map(function () { return 0; });
+  var read = words.map(function () { return false; });
+
+  // ripristina lo stato salvato (se la pagina non è cambiata)
+  try {
+    var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (s && s.n === nodes.length && typeof s.b === 'string') {
+      for (var i = 0; i < nodes.length; i++) read[i] = s.b.charAt(i) === '1';
+    }
+  } catch (e) {}
+
+  var bar = document.createElement('div'); bar.id = 'rp';
+  var dot = document.createElement('div'); dot.id = 'rd';
+  document.body.appendChild(bar); document.body.appendChild(dot);
+
+  // spunte di sezione: ogni h2 governa i blocchi fino all'h2 successivo
+  var secs = [];
+  var heads = [].slice.call(document.querySelectorAll('h2'));
+  heads.forEach(function (h) {
+    var idx = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (h.compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var prev = null;
+        for (var k = 0; k < heads.length; k++) {
+          if (heads[k].compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) prev = heads[k];
+        }
+        if (prev === h) idx.push(i);
+      }
+    }
+    if (!idx.length) return;
+    var b = document.createElement('button');
+    b.className = 'sec'; b.type = 'button';
+    b.title = 'Segna questa sezione come letta / non letta';
+    h.appendChild(b);
+    var sec = { el: b, idx: idx };
+    b.addEventListener('click', function () {
+      var allRead = idx.every(function (i) { return read[i]; });
+      idx.forEach(function (i) { read[i] = !allRead; acc[i] = allRead ? 0 : need[i]; });
+      paint(); save();
+    });
+    secs.push(sec);
+  });
+
+  function pct() {
+    var w = 0;
+    for (var i = 0; i < nodes.length; i++) if (read[i]) w += words[i];
+    return w / total;
+  }
+  function paint() {
+    var p = pct();
+    bar.style.width = (p * 100).toFixed(1) + '%';
+    var done = p >= DONE;
+    dot.textContent = done ? '✓ Letto' : Math.round(p * 100) + '%';
+    dot.className = done ? 'done' : '';
+    secs.forEach(function (s) {
+      var ok = s.idx.every(function (i) { return read[i]; });
+      s.el.className = ok ? 'sec ok' : 'sec';
+      s.el.textContent = ok ? '✓' : '○';
+    });
+  }
+  function bits() {
+    var b = '';
+    for (var i = 0; i < nodes.length; i++) b += read[i] ? '1' : '0';
+    return b;
+  }
+  var saveT = 0, syncT = 0, ultimo = '';
+  function save(finale) {
+    var b = bits();
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          v: 2, n: nodes.length, b: b, p: Math.round(pct() * 100), t: Date.now()
+        }));
+      } catch (e) {}
+    }, 400);
+    // verso il server: di rado, per non consumare la quota gratuita
+    if (!window.SB || !SB.attivo || b === ultimo) return;
+    if (finale) { ultimo = b; SB.manda(location.pathname, nodes.length, b, true); return; }
+    clearTimeout(syncT);
+    syncT = setTimeout(function () {
+      ultimo = b;
+      SB.manda(location.pathname, nodes.length, b, false);
+    }, 8000);
+  }
+
+  // all'apertura: unisco i progressi già fatti su altri dispositivi
+  if (window.SB && SB.attivo) {
+    SB.prendi().then(function (st) {
+      if (!st || !st.pages) return;
+      var r = st.pages[location.pathname];
+      if (!r || r.n !== nodes.length) return;
+      var cambiato = false;
+      for (var i = 0; i < nodes.length; i++) {
+        if (r.b.charAt(i) === '1' && !read[i]) { read[i] = true; acc[i] = need[i]; cambiato = true; }
+      }
+      if (cambiato) { paint(); save(); }
+    });
+  }
+
+  // quali blocchi sono nella fascia centrale dello schermo (dove si legge davvero)
+  var visible = Object.create(null);
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = nodes.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) visible[i] = 1; else delete visible[i];
+    });
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  nodes.forEach(function (n) { io.observe(n); });
+
+  var last = Date.now();
+  ['scroll', 'mousemove', 'keydown', 'touchstart', 'wheel', 'click'].forEach(function (ev) {
+    addEventListener(ev, function () { last = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function () {
+    if (document.hidden || Date.now() - last > IDLE) return;
+    var changed = false, i;
+    for (i in visible) {
+      i = +i;
+      if (read[i]) continue;
+      acc[i] += 0.25;
+      if (acc[i] >= need[i]) { read[i] = true; changed = true; }
+    }
+    // blocco letto almeno a metà e ormai scorso sopra la fascia di lettura:
+    // è il comportamento di chi legge un paragrafo e prosegue.
+    for (i = 0; i < nodes.length; i++) {
+      if (read[i] || acc[i] < need[i] * PASS) continue;
+      if (nodes[i].getBoundingClientRect().bottom < innerHeight * 0.25) {
+        read[i] = true; changed = true;
+      }
+    }
+    if (changed) { paint(); save(); }
+  }, 250);
+
+  dot.addEventListener('click', function () {
+    var all = pct() >= DONE;
+    for (var i = 0; i < nodes.length; i++) { read[i] = !all; acc[i] = all ? 0 : need[i]; }
+    paint(); save();
+  });
+  dot.title = 'Tocca per segnare tutto come letto / non letto';
+
+  paint();
+  addEventListener('beforeunload', function () { save(true); });
+  addEventListener('visibilitychange', function () { if (document.hidden) save(true); });
+})();
+
+(function () {
+  if (!window.SB || !SB.attivo || !SB.commenta) return;
+  var btn = document.createElement('button');
+  btn.textContent = '💬';
+  btn.title = 'Lascia un commento-istruzione per Claude';
+  btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:24px;border:none;font-size:22px;background:#2b6cb0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer';
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;right:16px;bottom:72px;z-index:60;display:none;width:min(92vw,340px);background:#1c2733;border:1px solid #33475b;border-radius:12px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+  box.innerHTML = '<textarea rows="4" placeholder="Scrivi a Claude: es. salva questo prompt come prompt-XXX e aggiungilo alla skill prompt" style="width:100%;box-sizing:border-box;background:#111a22;color:#eee;border:1px solid #33475b;border-radius:8px;padding:8px;font:inherit"></textarea>' +
+    '<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center">' +
+    '<span data-esito style="font-size:13px;color:#9fb3c8"></span>' +
+    '<button data-invia style="background:#2b6cb0;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit">Invia</button></div>';
+  document.body.appendChild(btn); document.body.appendChild(box);
+  var ta = box.querySelector('textarea'), esito = box.querySelector('[data-esito]');
+  btn.onclick = function () {
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'block') ta.focus();
+  };
+  box.querySelector('[data-invia]').onclick = function () {
+    var t = ta.value.trim(); if (!t) return;
+    esito.textContent = '…';
+    SB.commenta(t).then(function (ok) {
+      esito.textContent = ok ? 'Salvato ✓ Claude lo legge al prossimo /watch' : 'Errore, riprova';
+      if (ok) ta.value = '';
+    });
+  };
+})();
+</script>
+</body>
+</html>

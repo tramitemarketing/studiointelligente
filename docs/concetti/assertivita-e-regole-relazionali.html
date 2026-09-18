@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Assertività e regole relazionali</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%2260%22%20height%3D%2242%22%20rx%3D%2211%22%20fill%3D%22%23e8262d%22/%3E%3Cpath%20d%3D%22M26%2022.5%2044%2032%2026%2041.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E">
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1.1rem 1.1rem 4rem;
+  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 44rem; margin-inline: auto; color: #1a1a1a; background: #fbfbfa; }
+
+a { color: #1a5fb4; text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: .2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .6rem; } h3 { font-size: 1.1rem; margin: 1.4rem 0 .5rem; }
+p { margin: .7rem 0; }
+blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid #d0d0d0; color: #555; }
+code { background: #ececec; padding: .1rem .35rem; border-radius: .3rem; font-size: .9em; }
+hr { border: none; border-top: 1px solid #e2e2e2; margin: 2rem 0; }
+ul, ol { margin: .7rem 0; padding-left: 1.4rem; } li { margin: .25rem 0; }
+.topbar { margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #e2e2e2; }
+.topbar a { font-weight: 600; }
+.muted { color: #6b7075; font-size: .92rem; }
+.tag { display: inline-block; background: #eceff3; color: #4a5560; font-size: .72rem;
+  font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .12rem .45rem; border-radius: .4rem; margin-bottom: .35rem; }
+.card { display: block; border: 1px solid #e6e6e6; background: #fff; border-radius: .7rem;
+  padding: .9rem 1rem; margin: .7rem 0; }
+.card:hover { text-decoration: none; border-color: #9ab8e0; }
+.card h2 { margin: 0 0 .2rem; font-size: 1.15rem; } .card .muted { display: block; }
+.card .desc { margin: .35rem 0 0; }
+.btn { display: inline-block; margin: .5rem 0; padding: .55rem 1rem; background: #1a5fb4;
+  color: #fff !important; border-radius: .5rem; font-weight: 600; font-size: .95rem; }
+.btn:hover { background: #154c92; text-decoration: none; }
+
+/* --- tendina "lo so gia": contenuto ripiegato, si apre se serve --- */
+details.gia { border: 1px solid #e6e6e6; border-radius: .6rem; background: #fafafa;
+  padding: .1rem .9rem; margin: 1rem 0; }
+details.gia > summary { cursor: pointer; padding: .6rem 0; font-weight: 600;
+  font-size: .95rem; color: #6b7075; list-style: none; }
+details.gia > summary::-webkit-details-marker { display: none; }
+details.gia > summary::before { content: "▸ "; color: #9aa0a6; }
+details.gia[open] > summary::before { content: "▾ "; }
+details.gia > summary:hover { color: #1a5fb4; }
+details.gia[open] { background: transparent; }
+details.gia > *:last-child { margin-bottom: .8rem; }
+/* --- copertine dei video --- */
+.cover { display: block; width: 100%; max-width: 100%; border-radius: .7rem;
+  margin: 0 0 1.2rem; background: #ececec; aspect-ratio: 16/9; object-fit: cover; }
+.card { display: flex; gap: .85rem; align-items: flex-start; }
+.card .thumb { flex: 0 0 6.6rem; width: 6.6rem; aspect-ratio: 16/9; border-radius: .45rem;
+  object-fit: cover; background: #ececec; }
+.card .txt { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 30rem) { .card .thumb { flex-basis: 5.2rem; width: 5.2rem; } }
+.tw { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { border: 1px solid #e2e2e2; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 700; }
+
+/* --- lettura: barra di avanzamento, pillola, spunte di sezione --- */
+#rp { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: #1a5fb4; z-index: 50; transition: width .3s ease; }
+#rd { position: fixed; right: .8rem; bottom: .8rem; z-index: 50;
+  background: rgba(255,255,255,.94); border: 1px solid #e2e2e2; border-radius: 2rem;
+  padding: .4rem .8rem; font-size: .82rem; font-weight: 700; color: #4a5560;
+  box-shadow: 0 2px 10px rgba(0,0,0,.09); cursor: pointer; user-select: none; }
+#rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.sec { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 700;
+  color: #6b7075; padding: .1rem .45rem; margin-left: .5rem; border-radius: 1rem;
+  vertical-align: middle; }
+.sec:hover { background: #eceff3; color: #4a5560; }
+.sec.ok { color: #1a7f37; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  padding: .1rem .45rem; border-radius: 1rem; margin-left: .4rem; vertical-align: middle;
+  background: #eceff3; color: #4a5560; }
+.pill.done { background: #1a7f37; color: #fff; }
+.card.read { opacity: .72; }
+/* i temi scuri vanno DOPO le regole chiare: a parita' di peso vince
+   l'ultima scritta, altrimenti il chiaro le sovrascrive tutte */
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e6e6; background: #17181a; }
+  a { color: #7db3ff; } blockquote { border-color: #3a3d42; color: #b8bcc2; }
+  code { background: #2a2c30; } hr { border-color: #2a2c30; }
+  .card { background: #1e2023; border-color: #2a2c30; } .muted { color: #9aa0a6; }
+  .tag { background: #2a2c30; color: #cbd0d6; }
+  .btn { background: #2b6fd6 !important; } .btn:hover { background: #3f7fe0 !important; }
+  details.gia { border-color: #2a2c30; background: #1c1e21; }
+  details.gia > summary { color: #9aa0a6; }
+  details.gia > summary:hover { color: #7db3ff; }
+  details.gia[open] { background: transparent; }
+  th, td { border-color: #2a2c30; } th { background: #24262a; } }
+@media (prefers-color-scheme: dark) {
+  #rd { background: rgba(30,32,35,.94); border-color: #2a2c30; color: #cbd0d6; }
+  #rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+  .sec { color: #9aa0a6; } .sec:hover { background: #2a2c30; color: #cbd0d6; }
+  .sec.ok { color: #4ac26b; } .pill { background: #2a2c30; color: #cbd0d6; }
+  .pill.done { background: #1a7f37; color: #fff; } }
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← Concetti</a> · <a href="../index.html">Home</a></div>
+<h1>Assertività e regole relazionali</h1>
+<p><strong>Gist:</strong> dietro il «non sono uno che fa storie, io lascio correre» spesso non c'è equilibrio ma <strong>«vigliaccheria travestita da virtù»</strong>, e ogni rospo ingoiato per quieto vivere costa <strong>«una piccola tassa in termini di autostima»</strong>. La tesi che tiene insieme le due fonti: l'assertività <strong>non è un tratto di personalità ma un'abitudine</strong>, quindi si allena come un muscolo, «una conversazione scomoda alla volta». Attorno a quel muscolo ruotano sei strategie e sette regole relazionali non scritte — come si ascolta chi si sfoga, come si conquista un ostile, come si gestisce una figuraccia, come viene ricordata un'esperienza, a che intensità si lavora, come si tratta il proprio io futuro — e un'ultima senza la quale «le altre sei valgono zero».</p>
+<h2>Passivo, aggressivo, assertivo</h2>
+<p>Nell'interazione esistono tre atteggiamenti: <strong>passivo</strong> (chi incassa e magari abbozza anche un sorrisetto), <strong>aggressivo</strong> («quello dei bulli e dei prepotenti, di chi confonde il farsi rispettare col calpestare gli altri») e <strong>assertivo</strong> (chi esprime le proprie posizioni e si fa valere con calma, senza ansia, rispettando chi ha davanti). La definizione citata nel video è attribuita alle ricercatrici <strong>Hadfield e Hasson</strong> — nomi ricostruiti a orecchio, i sottotitoli mangiano la H iniziale di entrambi i cognomi; verosimilmente Sue Hadfield e Gill Hasson, autrici di <em>Come essere assertivi in ogni situazione</em> — e suona: «la capacità di difendere i propri interessi, esprimere i propri pensieri e affermare il proprio punto di vista con disinvoltura, senza ansia <strong>e nel rispetto degli altri</strong>». Sono le ultime parole a fare la differenza fra la terza via e la seconda.</p>
+<p>Il passaggio decisivo è di categoria: <strong>«nessuno di noi è nato con un atteggiamento passivo. Ci siamo abituati a subire, e un'abitudine, a differenza di un tratto della nostra personalità, può essere sempre cambiata.»</strong> Gli esempi quotidiani sono minuscoli e riconoscibili: il collega che ci scarica il suo lavoro <strong>5 minuti prima di staccare</strong>, il tizio che al supermercato ci supera in cassa senza neanche chiedercelo. Il primo è, letteralmente, il nemico dell'abitudine 5 di <a href="otto-abitudini-persone-super-produttive.html">otto-abitudini-persone-super-produttive</a>: <strong>senza assertività l'orario di chiusura non è difendibile</strong>. È il pezzo mancante e pratico di quella abitudine.</p>
+<h2>Le sei strategie</h2>
+<ol>
+<li><strong>Rispetta te stesso.</strong> Primo passo: accorgersi di quante volte ci diamo addosso («non ce la farò mai», «non sono capace», «non me la sento di espormi»). Secondo: cambiare quel dialogo interiore — ma <strong>non con le autoaffermazioni</strong>, che «ci suonano finte se le diciamo noi». Tre leve: esporsi ogni giorno al dialogo potenziante di persone che si ammirano (audiolibri, playlist), ripetere quei contenuti con la propria voce interiore e soprattutto <strong>fare azioni diverse</strong>, comportandosi con più coraggio in situazioni già affrontate male. La prima leva è il <strong>reference group</strong> senza il nome: teoria e correzione stanno in <a href="anti-fuffa-e-reference-group.html">anti-fuffa-e-reference-group</a>.</li>
+<li><strong>Impara a comunicare.</strong> A volte non siamo assertivi per un motivo banale: non siamo bravi a comunicare. Due azioni quotidiane — <strong>leggere narrativa</strong> (non saggistica di crescita personale: i romanzi arricchiscono il vocabolario, e «più parole abbiamo per descrivere il mondo, più saremo capaci di farlo») e <strong>praticare i fondamentali</strong>, soggetto-verbo-complemento, frasi semplici e chiare. «A complicare si fa sempre in tempo.»</li>
+<li><strong>Alza la mano.</strong> Se in riunione hai un'idea, parla; se in aula non capisci, chiedi che ti venga rispiegato — senza diventare «il rompiballe che spara la prima cosa che gli passa per la testa». Il freno è la paura di passare per stupidi. Da stagista in consulenza <strong>a Milano</strong> diceva sempre quando una cosa non gli tornava: «il mio manager dell'epoca mi odiava un po'», ma quel coraggio lo portò a lavorare a diretto contatto con il presidente della società. «Quando ti esponi le mezze calzette ti guardano storto, ma se non dici delle minchiate chi è al vertice ti nota e ti rispetta qualsiasi sia il tuo ruolo.»</li>
+<li><strong>Filtra le critiche.</strong> Per chi è assertivo la critica non è un attacco alla persona ma <strong>un dato</strong>, utile o no. Il criterio è <strong>verificare la fonte</strong>: lo sconosciuto che sotto il video gli scrive «hai le occhiaie» vale zero, perché non lo aiuta a migliorare in niente; il collaboratore di fiducia che gli dice «in questo video il secondo concetto non lo hai spiegato in modo chiaro» fa drizzare le orecchie.</li>
+<li><strong>Fai complimenti chirurgici.</strong> Sinceri, <strong>specifici</strong> e <strong>tempestivi</strong>, nel momento esatto in cui si nota qualcosa di positivo — il commesso particolarmente gentile, la collega che ha gestito con eleganza una riunione complicata, dicendole esattamente cosa ci è piaciuto. È la <strong>palestra dell'assertività</strong>: la critica costruttiva è difficile e mal accolta, il complimento vero è facile e ci costringe comunque a dire ad alta voce quello che pensiamo.</li>
+<li><strong>Non indietreggiare.</strong> Davanti al conflitto di solito ci facciamo controllare (via passiva) o perdiamo il controllo (via aggressiva). La terza via presidia <strong>due fronti</strong>: quello <strong>interno</strong> — se l'interlocutore ci trascina verso la rabbia, prenderne consapevolezza e ritrovare l'equilibrio, perché «le nostre emozioni sono una nostra responsabilità» — e quello <strong>valoriale</strong>: diplomatici e disposti al compromesso, ma senza mai rinnegare i propri principi. Se l'altro non intende ragionare si interrompe e si va via: <strong>«farsi rispettare a volte significa semplicemente togliere il pubblico a chi alza la voce.»</strong></li>
+</ol>
+<blockquote>WARN: come-essere-assertivi consiglia di leggere <strong>narrativa e non saggistica di crescita personale</strong>; ho-43-anni-ho-provato-tutti-i-consigli-dei-guru attribuisce l'intera traiettoria della propria vita proprio ai libri di personal development divorati dai 18 anni in poi, che erano il suo reference group - verificare (i due consigli hanno scopi diversi — vocabolario contro modelli mentali — ma letti come prescrizioni si escludono).</blockquote>
+<h2>Le regole non scritte</h2>
+<p><strong>La regola dello sfogo.</strong> Quando qualcuno si apre con noi, non dare consigli. <strong>Charles Derber</strong>, sociologo di Boston, <strong>negli anni Settanta</strong> studia le conversazioni quotidiane e trova due soli modi di rispondere: la <strong>risposta che sposta</strong> (riporta il discorso su di sé — «con la mia ex è andata proprio così») e la <strong>risposta che sostiene</strong> (tiene il discorso sull'altro). Al primo dà un nome poco lusinghiero: <strong>narcisismo conversazionale</strong>. Chi si sfoga non chiede «un piano d'azione in cinque punti con tanto di diagramma di flusso», chiede «ti va di reggere questo peso con me per un momento?». <strong>«Il dolore, prima ancora di una soluzione, cerca un testimone.»</strong> È la strategia 4 vista dall'altro lato: là non leggere la critica come attacco, qui non leggere lo sfogo come richiesta di soluzione.</p>
+<p><strong>L'effetto Franklin.</strong> <strong>Benjamin Franklin</strong>, Pennsylvania, metà del <strong>1700</strong>: giovane politico con un avversario colto, influente e ostile. Gli scrive per chiedergli in prestito un libro raro della sua biblioteca; l'avversario, indispettito ma lusingato, glielo presta; lui aspetta <strong>una settimana</strong>, poi lo restituisce con un biglietto di ringraziamento. Diventeranno amici per la vita. Il meccanismo: il favore concesso costringe il cervello dell'altro a giustificare lo sforzo fatto, e la giustificazione più economica è «evidentemente questa persona mi sta simpatica». <strong>«Se vuoi farti un alleato, non fargli un favore: chiediglielo.»</strong></p>
+<p><strong>Ridi o perdi.</strong> Davanti alla figuraccia inevitabile, ridere per primi di sé stessi invece di arrampicarsi sugli specchi. <strong>Elliot Aronson</strong>, esperimento del <strong>1966</strong>: ai volontari viene fatta ascoltare la registrazione di un concorrente di un quiz in due versioni, in entrambe brillante e impeccabile, ma nella seconda a un certo punto si rovescia il caffè addosso — e il concorrente con la macchia risulta nettamente più simpatico di «Mister Perfettino». L'aneddoto personale: un workshop su YouTube con <strong>quasi 5.000 persone collegate in diretta</strong> e il sito che va giù nel momento clou; sceglie l'ironia, visto che il workshop parlava di come costruire una visione di vita efficace e lui «doveva aver visualizzato il futuro sbagliato». Precisazione esplicita, che salva la regola dal diventare una scusa: non creare problemi apposta, «lavorare duramente, lavorare bene ed essere competenti ripaga sempre».</p>
+<p><strong>La regola del picco e della fine.</strong> La memoria non fa la media di un'esperienza: fotografa il <strong>momento di picco</strong> e il <strong>finale</strong>. <strong>Daniel Kahneman</strong> e il medico <strong>Donald Redelmeier</strong> (cognome ricostruito: nei sottotitoli è irriconoscibile), <strong>negli anni Novanta</strong>, misurano minuto per minuto il dolore di <strong>154 pazienti</strong> durante una colonscopia, all'epoca senza gli strumenti di sedazione di oggi: il ricordo non ha alcuna correlazione con la durata della procedura — un esame più lungo e doloroso ma con finale più delicato viene ricordato come migliore di uno più corto e finito male. Uso pratico: curare <strong>come finisce</strong> una litigata, l'ultimo giorno di vacanza, l'ultima mezz'ora di lavoro. Progettare i finali.</p>
+<p><strong>La regola dell'85%.</strong> <strong>Bud Winter</strong> (nome ricostruito: nei sottotitoli esce come «Bad Winter» e «Bat Winter») è il giovane allenatore di atletica reclutato dalla <strong>Marina americana durante la Seconda Guerra Mondiale</strong>, perché i piloti sotto stress si irrigidivano e sbagliavano bersaglio. Finita la guerra trasforma <strong>San Jose State</strong>, normale università statale, nella fabbrica di velocisti di maggior successo della storia, ribattezzata <strong>Speed City</strong>: ne escono <strong>27 atleti olimpici</strong> e a un certo punto i suoi ragazzi detengono contemporaneamente <strong>tutti e 10 i record mondiali di velocità</strong>. Il suo esperimento preferito: tre corse consecutive al massimo, poi una quarta a non più dell'<strong>85%</strong> dello sforzo — e l'ultima è ogni volta la più veloce, perché al 100% i muscoli antagonisti si contraggono «come una sorta di freno a mano». Mantra: <strong>«mascella morbida, mani morbide»</strong>. Consegna a 7 giorni: entrare in una trattativa da chi cerca la soluzione migliore per tutti e non da chi vuole vincere a ogni costo; chiudere il progetto prima delle ferie lasciando andare il perfezionismo.</p>
+<blockquote>WARN: ho-43-anni-tutte-le-regole-non-scritte prescrive di stare <strong>all'85%</strong> dello sforzo per ottenere di più; ho-43-anni-ho-provato-tutti-i-consigli-dei-guru chiude il suo acronimo pratico con «e soprattutto <strong>agisci costantemente, in modo massivo</strong>» - verificare (l'85% riguarda la tensione dentro la singola prestazione, l'azione massiva la quantità di ripetizioni; ma come slogan tirano in direzioni opposte).</blockquote>
+<p><strong>La regola dell'estraneo.</strong> Smettere di trattare il proprio io futuro come uno sconosciuto. <strong>Studio di Stanford del 2009</strong>: delle persone in risonanza magnetica pensano a tre cose — a sé stesse oggi, a sé stesse tra 10 anni, a un estraneo — e pensando all'io futuro il cervello attiva <strong>le stesse aree</strong> che attiva pensando a uno sconosciuto; inoltre, più il cervello di una persona trattava il proprio io futuro da estraneo, <strong>meno quella persona tendeva a risparmiare</strong>. (Nel video non viene nominato il ricercatore, né il paper, né la rivista: solo «un ricercatore di Stanford» — vedi <a href="anti-fuffa-e-reference-group.html">anti-fuffa-e-reference-group</a>.) Da qui la ridefinizione della disciplina come <strong>«la più elevata forma d'amore»</strong>: è il modo in cui iniziamo a prenderci cura di tutte le nostre versioni future.</p>
+<h3>Perché non contraddice l'abitudine 4 di Kruse</h3>
+<p>A prima vista «rispetta il tuo io futuro» e <strong>«non fidarti del tuo io futuro»</strong> di <a href="otto-abitudini-persone-super-produttive.html">otto-abitudini-persone-super-produttive</a> sono opposte. Non lo sono: parlano di due cose diverse. Kruse dice di <strong>non delegargli il lavoro</strong> — rimandare a lunedì è scommettere che quel sé avrà più tempo, energia e motivazione, ed è una scommessa persa, quindi gli si prepara il terreno adesso. Giuliodori dice di <strong>non sacrificarlo</strong>: considerarne bisogni e desideri quando decidiamo oggi, invece di scaricargli addosso le conseguenze. Una regola riguarda <strong>le sue capacità</strong> (basse: non contarci), l'altra <strong>i suoi interessi</strong> (reali: contano quanto i tuoi). Insieme danno una sola istruzione coerente: <em>fai tu il lavoro, ora, per una persona che merita rispetto e che non potrà rimediare ai tuoi rinvii</em>. L'aggancio operativo è in <a href="vincolo-costanza-e-identita.html">vincolo-costanza-e-identita</a>.</p>
+<p><strong>La regola dell'inizio.</strong> Le sei precedenti non producono alcun cambiamento finché non vengono applicate: «non cambiamo quando veniamo a conoscenza di una nuova idea, cambiamo solo quando quell'idea la applichiamo». E non serve sentirsi pronti: <strong>«ogni volta che rimandi il problema cresce. Ogni volta che inizi a crescere sei tu. Essere pronti non è una sensazione, è una decisione.»</strong> È la stessa porta di <a href="procrastinazione-resistenza-e-avvio.html">procrastinazione-resistenza-e-avvio</a> e di <a href="spettatore-o-regista.html">spettatore-o-regista</a>.</p>
+<p><em>Nota di metodo: il video sull'assertività è l'unico della zona che non cita nessuno studio — i sei consigli poggiano sull'esperienza personale dell'autore e su una definizione presa da un libro divulgativo. Il video sulle regole non scritte fa l'opposto e cita quattro studi senza mai dare un titolo. Vedi <a href="andrea-giuliodori.html">andrea-giuliodori</a>.</em></p>
+<h2>Fonti</h2>
+<ul>
+<li>come-essere-assertivi-6-modi-per-farsi-rispettare-spoiler-2026-09-18 (Andrea Giuliodori / EfficaceMente, 2026-09-18) - passivo/aggressivo/assertivo, la definizione di Hadfield e Hasson, l'assertività come abitudine allenabile e le sei strategie, con l'aneddoto della consulenza a Milano e il criterio della fonte per le critiche.</li>
+<li>ho-43-anni-tutte-le-regole-non-scritte-che-avrei-voluto-2026-09-18 (Andrea Giuliodori / EfficaceMente, 2026-09-18) - le sette regole: sfogo e narcisismo conversazionale di Derber, effetto Franklin, «ridi o perdi» con l'esperimento di Aronson del 1966, picco e fine con Kahneman e Redelmeier sui 154 pazienti, regola dell'85% con Bud Winter e Speed City, regola dell'estraneo con lo studio Stanford 2009, regola dell'inizio.</li>
+<li>ho-43-anni-ho-provato-tutti-i-consigli-dei-guru-2026-09-18 (Andrea Giuliodori / EfficaceMente, 2026-09-18) - solo per le due contraddizioni segnalate: narrativa contro saggistica di crescita personale, e 85% contro azione massiva.</li>
+</ul>
+<script>
+window.SB = (function () {
+  var API = 'https://brain-sync.tramitemarketing-it.workers.dev';
+  function url() { return API + '/state'; }
+  return {
+    attivo: !!API,
+    prendi: function () {
+      if (!API) return Promise.resolve(null);
+      return fetch(url(), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    },
+    manda: function (page, n, b, finale) {
+      if (!API) return;
+      var dati = JSON.stringify({ page: page, n: n, b: b });
+      try {
+        fetch(url(), {
+          method: 'POST', body: dati, keepalive: !!finale,
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(function () {});
+      } catch (e) {}
+    },
+    commenta: function (testo) {
+      if (!API) return Promise.resolve(false);
+      return fetch(API + '/commenti', {
+        method: 'POST',
+        body: JSON.stringify({ slug: location.pathname, testo: testo }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+  };
+})();
+
+
+(function () {
+  var KEY = 'sb2:' + location.pathname;
+  var WPS = 4;             // parole al secondo (~240 wpm)
+  var MIN = 0.7, MAX = 6;  // secondi per blocco: minimo e tetto
+  var PASS = 0.5;          // se l'ho letto almeno a metà e sono andato oltre, conta
+  var IDLE = 120000;       // fermo da 2 min = non sta leggendo
+  var DONE = 0.9;          // 90% dei contenuti = letto
+
+  var nodes = [].slice.call(document.querySelectorAll('p, li, blockquote'))
+    .filter(function (n) { return !n.closest('.topbar') && n.textContent.trim().length > 1; });
+  if (nodes.length < 3) return;
+
+  var words = nodes.map(function (n) {
+    return Math.max(1, n.textContent.trim().split(/\s+/).length);
+  });
+  var need = words.map(function (w) {
+    return Math.min(MAX, Math.max(MIN, w / WPS));
+  });
+  var total = words.reduce(function (a, b) { return a + b; }, 0);
+  var acc = words.map(function () { return 0; });
+  var read = words.map(function () { return false; });
+
+  // ripristina lo stato salvato (se la pagina non è cambiata)
+  try {
+    var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (s && s.n === nodes.length && typeof s.b === 'string') {
+      for (var i = 0; i < nodes.length; i++) read[i] = s.b.charAt(i) === '1';
+    }
+  } catch (e) {}
+
+  var bar = document.createElement('div'); bar.id = 'rp';
+  var dot = document.createElement('div'); dot.id = 'rd';
+  document.body.appendChild(bar); document.body.appendChild(dot);
+
+  // spunte di sezione: ogni h2 governa i blocchi fino all'h2 successivo
+  var secs = [];
+  var heads = [].slice.call(document.querySelectorAll('h2'));
+  heads.forEach(function (h) {
+    var idx = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (h.compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var prev = null;
+        for (var k = 0; k < heads.length; k++) {
+          if (heads[k].compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) prev = heads[k];
+        }
+        if (prev === h) idx.push(i);
+      }
+    }
+    if (!idx.length) return;
+    var b = document.createElement('button');
+    b.className = 'sec'; b.type = 'button';
+    b.title = 'Segna questa sezione come letta / non letta';
+    h.appendChild(b);
+    var sec = { el: b, idx: idx };
+    b.addEventListener('click', function () {
+      var allRead = idx.every(function (i) { return read[i]; });
+      idx.forEach(function (i) { read[i] = !allRead; acc[i] = allRead ? 0 : need[i]; });
+      paint(); save();
+    });
+    secs.push(sec);
+  });
+
+  function pct() {
+    var w = 0;
+    for (var i = 0; i < nodes.length; i++) if (read[i]) w += words[i];
+    return w / total;
+  }
+  function paint() {
+    var p = pct();
+    bar.style.width = (p * 100).toFixed(1) + '%';
+    var done = p >= DONE;
+    dot.textContent = done ? '✓ Letto' : Math.round(p * 100) + '%';
+    dot.className = done ? 'done' : '';
+    secs.forEach(function (s) {
+      var ok = s.idx.every(function (i) { return read[i]; });
+      s.el.className = ok ? 'sec ok' : 'sec';
+      s.el.textContent = ok ? '✓' : '○';
+    });
+  }
+  function bits() {
+    var b = '';
+    for (var i = 0; i < nodes.length; i++) b += read[i] ? '1' : '0';
+    return b;
+  }
+  var saveT = 0, syncT = 0, ultimo = '';
+  function save(finale) {
+    var b = bits();
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          v: 2, n: nodes.length, b: b, p: Math.round(pct() * 100), t: Date.now()
+        }));
+      } catch (e) {}
+    }, 400);
+    // verso il server: di rado, per non consumare la quota gratuita
+    if (!window.SB || !SB.attivo || b === ultimo) return;
+    if (finale) { ultimo = b; SB.manda(location.pathname, nodes.length, b, true); return; }
+    clearTimeout(syncT);
+    syncT = setTimeout(function () {
+      ultimo = b;
+      SB.manda(location.pathname, nodes.length, b, false);
+    }, 8000);
+  }
+
+  // all'apertura: unisco i progressi già fatti su altri dispositivi
+  if (window.SB && SB.attivo) {
+    SB.prendi().then(function (st) {
+      if (!st || !st.pages) return;
+      var r = st.pages[location.pathname];
+      if (!r || r.n !== nodes.length) return;
+      var cambiato = false;
+      for (var i = 0; i < nodes.length; i++) {
+        if (r.b.charAt(i) === '1' && !read[i]) { read[i] = true; acc[i] = need[i]; cambiato = true; }
+      }
+      if (cambiato) { paint(); save(); }
+    });
+  }
+
+  // quali blocchi sono nella fascia centrale dello schermo (dove si legge davvero)
+  var visible = Object.create(null);
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = nodes.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) visible[i] = 1; else delete visible[i];
+    });
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  nodes.forEach(function (n) { io.observe(n); });
+
+  var last = Date.now();
+  ['scroll', 'mousemove', 'keydown', 'touchstart', 'wheel', 'click'].forEach(function (ev) {
+    addEventListener(ev, function () { last = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function () {
+    if (document.hidden || Date.now() - last > IDLE) return;
+    var changed = false, i;
+    for (i in visible) {
+      i = +i;
+      if (read[i]) continue;
+      acc[i] += 0.25;
+      if (acc[i] >= need[i]) { read[i] = true; changed = true; }
+    }
+    // blocco letto almeno a metà e ormai scorso sopra la fascia di lettura:
+    // è il comportamento di chi legge un paragrafo e prosegue.
+    for (i = 0; i < nodes.length; i++) {
+      if (read[i] || acc[i] < need[i] * PASS) continue;
+      if (nodes[i].getBoundingClientRect().bottom < innerHeight * 0.25) {
+        read[i] = true; changed = true;
+      }
+    }
+    if (changed) { paint(); save(); }
+  }, 250);
+
+  dot.addEventListener('click', function () {
+    var all = pct() >= DONE;
+    for (var i = 0; i < nodes.length; i++) { read[i] = !all; acc[i] = all ? 0 : need[i]; }
+    paint(); save();
+  });
+  dot.title = 'Tocca per segnare tutto come letto / non letto';
+
+  paint();
+  addEventListener('beforeunload', function () { save(true); });
+  addEventListener('visibilitychange', function () { if (document.hidden) save(true); });
+})();
+
+(function () {
+  if (!window.SB || !SB.attivo || !SB.commenta) return;
+  var btn = document.createElement('button');
+  btn.textContent = '💬';
+  btn.title = 'Lascia un commento-istruzione per Claude';
+  btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:24px;border:none;font-size:22px;background:#2b6cb0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer';
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;right:16px;bottom:72px;z-index:60;display:none;width:min(92vw,340px);background:#1c2733;border:1px solid #33475b;border-radius:12px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+  box.innerHTML = '<textarea rows="4" placeholder="Scrivi a Claude: es. salva questo prompt come prompt-XXX e aggiungilo alla skill prompt" style="width:100%;box-sizing:border-box;background:#111a22;color:#eee;border:1px solid #33475b;border-radius:8px;padding:8px;font:inherit"></textarea>' +
+    '<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center">' +
+    '<span data-esito style="font-size:13px;color:#9fb3c8"></span>' +
+    '<button data-invia style="background:#2b6cb0;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit">Invia</button></div>';
+  document.body.appendChild(btn); document.body.appendChild(box);
+  var ta = box.querySelector('textarea'), esito = box.querySelector('[data-esito]');
+  btn.onclick = function () {
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'block') ta.focus();
+  };
+  box.querySelector('[data-invia]').onclick = function () {
+    var t = ta.value.trim(); if (!t) return;
+    esito.textContent = '…';
+    SB.commenta(t).then(function (ok) {
+      esito.textContent = ok ? 'Salvato ✓ Claude lo legge al prossimo /watch' : 'Errore, riprova';
+      if (ok) ta.value = '';
+    });
+  };
+})();
+</script>
+</body>
+</html>
