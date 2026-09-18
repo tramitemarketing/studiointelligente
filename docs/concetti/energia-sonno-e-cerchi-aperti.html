@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Energia su due piani: sonno e cerchi aperti</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%2260%22%20height%3D%2242%22%20rx%3D%2211%22%20fill%3D%22%23e8262d%22/%3E%3Cpath%20d%3D%22M26%2022.5%2044%2032%2026%2041.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E">
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1.1rem 1.1rem 4rem;
+  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 44rem; margin-inline: auto; color: #1a1a1a; background: #fbfbfa; }
+
+a { color: #1a5fb4; text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: .2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .6rem; } h3 { font-size: 1.1rem; margin: 1.4rem 0 .5rem; }
+p { margin: .7rem 0; }
+blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid #d0d0d0; color: #555; }
+code { background: #ececec; padding: .1rem .35rem; border-radius: .3rem; font-size: .9em; }
+hr { border: none; border-top: 1px solid #e2e2e2; margin: 2rem 0; }
+ul, ol { margin: .7rem 0; padding-left: 1.4rem; } li { margin: .25rem 0; }
+.topbar { margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #e2e2e2; }
+.topbar a { font-weight: 600; }
+.muted { color: #6b7075; font-size: .92rem; }
+.tag { display: inline-block; background: #eceff3; color: #4a5560; font-size: .72rem;
+  font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .12rem .45rem; border-radius: .4rem; margin-bottom: .35rem; }
+.card { display: block; border: 1px solid #e6e6e6; background: #fff; border-radius: .7rem;
+  padding: .9rem 1rem; margin: .7rem 0; }
+.card:hover { text-decoration: none; border-color: #9ab8e0; }
+.card h2 { margin: 0 0 .2rem; font-size: 1.15rem; } .card .muted { display: block; }
+.card .desc { margin: .35rem 0 0; }
+.btn { display: inline-block; margin: .5rem 0; padding: .55rem 1rem; background: #1a5fb4;
+  color: #fff !important; border-radius: .5rem; font-weight: 600; font-size: .95rem; }
+.btn:hover { background: #154c92; text-decoration: none; }
+
+/* --- tendina "lo so gia": contenuto ripiegato, si apre se serve --- */
+details.gia { border: 1px solid #e6e6e6; border-radius: .6rem; background: #fafafa;
+  padding: .1rem .9rem; margin: 1rem 0; }
+details.gia > summary { cursor: pointer; padding: .6rem 0; font-weight: 600;
+  font-size: .95rem; color: #6b7075; list-style: none; }
+details.gia > summary::-webkit-details-marker { display: none; }
+details.gia > summary::before { content: "▸ "; color: #9aa0a6; }
+details.gia[open] > summary::before { content: "▾ "; }
+details.gia > summary:hover { color: #1a5fb4; }
+details.gia[open] { background: transparent; }
+details.gia > *:last-child { margin-bottom: .8rem; }
+/* --- copertine dei video --- */
+.cover { display: block; width: 100%; max-width: 100%; border-radius: .7rem;
+  margin: 0 0 1.2rem; background: #ececec; aspect-ratio: 16/9; object-fit: cover; }
+.card { display: flex; gap: .85rem; align-items: flex-start; }
+.card .thumb { flex: 0 0 6.6rem; width: 6.6rem; aspect-ratio: 16/9; border-radius: .45rem;
+  object-fit: cover; background: #ececec; }
+.card .txt { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 30rem) { .card .thumb { flex-basis: 5.2rem; width: 5.2rem; } }
+.tw { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { border: 1px solid #e2e2e2; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 700; }
+
+/* --- lettura: barra di avanzamento, pillola, spunte di sezione --- */
+#rp { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: #1a5fb4; z-index: 50; transition: width .3s ease; }
+#rd { position: fixed; right: .8rem; bottom: .8rem; z-index: 50;
+  background: rgba(255,255,255,.94); border: 1px solid #e2e2e2; border-radius: 2rem;
+  padding: .4rem .8rem; font-size: .82rem; font-weight: 700; color: #4a5560;
+  box-shadow: 0 2px 10px rgba(0,0,0,.09); cursor: pointer; user-select: none; }
+#rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.sec { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 700;
+  color: #6b7075; padding: .1rem .45rem; margin-left: .5rem; border-radius: 1rem;
+  vertical-align: middle; }
+.sec:hover { background: #eceff3; color: #4a5560; }
+.sec.ok { color: #1a7f37; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  padding: .1rem .45rem; border-radius: 1rem; margin-left: .4rem; vertical-align: middle;
+  background: #eceff3; color: #4a5560; }
+.pill.done { background: #1a7f37; color: #fff; }
+.card.read { opacity: .72; }
+/* i temi scuri vanno DOPO le regole chiare: a parita' di peso vince
+   l'ultima scritta, altrimenti il chiaro le sovrascrive tutte */
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e6e6; background: #17181a; }
+  a { color: #7db3ff; } blockquote { border-color: #3a3d42; color: #b8bcc2; }
+  code { background: #2a2c30; } hr { border-color: #2a2c30; }
+  .card { background: #1e2023; border-color: #2a2c30; } .muted { color: #9aa0a6; }
+  .tag { background: #2a2c30; color: #cbd0d6; }
+  .btn { background: #2b6fd6 !important; } .btn:hover { background: #3f7fe0 !important; }
+  details.gia { border-color: #2a2c30; background: #1c1e21; }
+  details.gia > summary { color: #9aa0a6; }
+  details.gia > summary:hover { color: #7db3ff; }
+  details.gia[open] { background: transparent; }
+  th, td { border-color: #2a2c30; } th { background: #24262a; } }
+@media (prefers-color-scheme: dark) {
+  #rd { background: rgba(30,32,35,.94); border-color: #2a2c30; color: #cbd0d6; }
+  #rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+  .sec { color: #9aa0a6; } .sec:hover { background: #2a2c30; color: #cbd0d6; }
+  .sec.ok { color: #4ac26b; } .pill { background: #2a2c30; color: #cbd0d6; }
+  .pill.done { background: #1a7f37; color: #fff; } }
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← Concetti</a> · <a href="../index.html">Home</a></div>
+<h1>Energia su due piani: sonno e cerchi aperti</h1>
+<p><strong>Gist:</strong> l'energia si perde su due piani e vanno riparati entrambi. Sul <strong>piano fisico</strong> quasi nessuno ha un problema di sonno: ha <strong>giornate costruite male</strong> che presentano il conto la notte — «nel 99% dei casi non abbiamo dei veri e propri problemi di sonno o di bassa energia. Abbiamo piuttosto delle giornate che sono costruite male». Sul <strong>piano mentale</strong> l'energia non finisce, viene <strong>occupata</strong>: «non hai finito la tua energia, la stai semplicemente occupando con le cose sbagliate». Ogni attività iniziata e non chiusa è un <strong>cerchio aperto</strong> che gira in background come un'app che consuma batteria. In tutti e due i casi la mossa è la stessa chiave di lettura delle <a href="otto-abitudini-persone-super-produttive.html">otto-abitudini-persone-super-produttive</a>: <strong>togliere</strong>, non aggiungere. «Più che aggiungere altra roba, dobbiamo togliere.»</p>
+<h2>Piano fisico: i cinque errori che costruiscono male la giornata</h2>
+<p>Premessa di metodo, e vale contro mezzo mercato del benessere: dopo dieci anni di insonnia e di test su integratori, app, suoni binaurali, tisane alla valeriana e spray alla lavanda sulla federa, la conclusione è che «non esistono integratori magici, tool particolari o device che miracolosamente migliorano il nostro sonno. Alla base di tutto ci sono sempre le nostre abitudini: è una questione comportamentale». La qualità del sonno non si costruisce alle 23:00, si costruisce dalle sette del mattino. Stessa diffidenza verso gli strumenti che governa anti-fuffa-e-reference-group.</p>
+<h3>1. Gestire male la fame di sonno</h3>
+<p>La <strong>sleep pressure</strong> — la pressione del sonno — funziona come la fame: «se fai colazione alle 8:00, uno spuntino alle 10:00, un panino alle 11:30 e uno snack a mezzogiorno, poi è normale arrivare a pranzo e non avere fame». Da qui il consiglio più controintuitivo: <strong>dopo una notte disastrosa, alzati all'ora di sempre</strong>. Posticipare la sveglia o fare un pisolone di due ore fa doppio danno — il sonno di tarda mattinata o pomeridiano ha qualità peggiore di quello di notte fonda, e scarica la pressione accumulata, così si arriva a sera «tutti pimpanti ed energici» e si rovina anche la notte successiva. Se si è davvero a secco: <strong>pisolino di 20 minuti</strong>, oppure <strong>NSDR</strong> (<em>non-sleep deep rest</em>), una forma di meditazione o training autogeno di <strong>10-20 minuti</strong> che recupera energia senza intaccare troppo la sleep pressure.</p>
+<h3>2. Usare la luce al contrario</h3>
+<p><strong>Luce solare nei primi 10-20 minuti dal risveglio</strong>: fuori, in terrazza, in giardino. «Uscire all'aria aperta ed esporci alla luce solare ci risveglia meglio di un caffè», e soprattutto fa partire un <strong>conto alla rovescia di circa 12-14 ore</strong> per l'orologio interno; quando scade, addormentarsi è più facile. La sera si fa l'opposto: <strong>meno luci possibili e calde</strong>, nello spettro del giallo o del rosso, evitando «come la peste» il blu di smartphone, computer e televisione. Dettaglio che quasi nessuno applica: le luci vanno prese <strong>all'altezza degli occhi, non dall'alto</strong> — niente plafoniere fredde, meglio lampade da pavimento o sui comodini. La giornata media fa esattamente il contrario: sveglia in una stanza buia col telefono come unica fonte di luce, metropolitana o abitacolo, <strong>almeno 8 ore</strong> sotto «lo sfarfallio impercettibile di una luce al neon artificiale», e poi un mega schermo la sera.</p>
+<h3>3. La regolarità conta più della quantità</h3>
+<p>«Nel <strong>2024</strong> è stato condotto uno studio enorme su <strong>più di 60.000 persone</strong>» (<em>nel video non vengono mai pronunciati autori, istituto né titolo: il dato è riportato come lo dà lui, non verificato</em>). Risultato: <strong>la regolarità del sonno predice salute e longevità meglio della quantità</strong>. «Conta di più per il nostro benessere svegliarci sempre alla stessa ora, piuttosto che dormire sempre 8 ore a notte» — con la precisazione che le ore contano comunque: «a parità di ore, chi tiene orari regolari sta molto meglio rispetto a chi fa lo yo-yo». Operativamente: <strong>una sveglia fissa, weekend compresi</strong>. Per chi fa i turni e non può essere regolare con l'orario, si è regolari con la <strong>sequenza</strong>: un rituale pre-sonno sempre identico (doccia calda, luci basse, 10 pagine di un libro, mascherina, tappi), che vale uguale alle 21:00 dopo il turno di giorno o alle 9:00 del mattino dopo quello di notte.</p>
+<blockquote>WARN: <a href="otto-abitudini-persone-super-produttive.html">otto-abitudini-persone-super-produttive</a> (Kruse, abitudine 7) spinge sulla QUANTITÀ di sonno — «un'ora di sonno in più che rende anche solo il 20% più produttivi» — mentre <code>perche-sei-sempre-stanco-5-errori-che-stai-facendo</code> sostiene, citando lo studio 2024, che la REGOLARITÀ predice salute e durata della vita meglio della quantità - verificare (lo studio è citato senza autori né titolo).</blockquote>
+<h3>4. Ignorare la temperatura corporea</h3>
+<p>Per far partire il sonno «la nostra temperatura interna deve scendere di circa <strong>1°</strong>. È come se avessimo un vero e proprio interruttore fisico dentro di noi» (<em>soglia data senza fonte</em>). Quello che si fa nelle <strong>ultime 2-3 ore</strong> decide se l'interruttore scatta. Tre leve: <strong>ultimo pasto tre ore prima</strong>, perché digerire produce calore — «per trasformare il cibo in energia, il nostro corpo produce calore come in una centrale elettrica a gas», e cenare alle 22:00 «è come se accendessimo un termosifone interno»; <strong>stanza intorno ai 20 gradi</strong>, visto che sopra i <strong>22-24°C</strong> la qualità peggiora e i nostri antenati hanno dormito per decine di migliaia di anni in caverne stabili sui <strong>18°C</strong>, su superfici fresche e non su memory foam che assorbe il calore e lo restituisce tutta la notte; <strong>doccia calda un'ora prima</strong>, che è controintuitiva solo in apparenza — il calore è superficiale, e mentre ci si asciuga la temperatura interna scende.</p>
+<h3>5. Muoversi poco, o tutto insieme la sera</h3>
+<p><strong>Un allenamento al giorno più snack di movimento</strong>: un buon allenamento al mattino o prima di pranzo, poi micro-movimenti distribuiti — passeggiata dopo i pasti, esercizi brevi tra una sessione di lavoro e l'altra, scale al posto dell'ascensore. Concentrare tutto in un allenamento intenso serale peggiora il sonno: alza cortisolo e temperatura corporea proprio quando devono scendere. La combinazione peggiore è la giornata seduti davanti a uno schermo: «mentalmente scarichi ma fisicamente non abbiamo generato la giusta pressione del sonno», da cui scrolling, binge watching, <strong>5-6 ore di sonno</strong> e un giorno dopo ancora peggiore — lo stesso comportamento che spettatore-o-regista misura sul piano esistenziale. I consigli si incastrano: uscire a camminare appena alzati vale insieme come primo snack di movimento e come esposizione solare mattutina.</p>
+<h2>Piano mentale: i cerchi aperti</h2>
+<p><strong>Bluma Zeigarnik</strong>, dottoranda lituana a <strong>Berlino negli anni Venti</strong>, nota in un caffè affollato che il cameriere tiene a mente tutte le ordinazioni piatto per piatto per un'ora intera — e le cancella nell'istante esatto in cui il conto viene saldato. Torna in laboratorio, assegna a dei partecipanti <strong>una ventina di compiti semplici</strong> (puzzle, aritmetica, lavoretti manuali) e ne interrompe alcuni a metà: i compiti interrotti vengono ricordati <strong>quasi il doppio</strong> di quelli completati. <strong>Nel 1927</strong> il fenomeno viene battezzato <strong>effetto Zeigarnik</strong>. Netflix ci ha costruito sopra un impero: ogni episodio si interrompe sul più bello.</p>
+<p>Due innesti sopra questo. <strong>Sophie Leroy</strong>, 2009, dimostra il <strong>residuo di attenzione</strong> (<em>attention residue</em>): quando lasci un'attività incompiuta e passi alla successiva, un pezzo di attenzione resta attaccato alla precedente — scrivi il report ma un pezzo di te è sulla telefonata al meccanico, sei a cena col partner ma un pezzo di te è ancora sul report (<em>nome ricostruito a orecchio dai sottotitoli automatici, che lo rendono «Sopilero Roy»: da verificare</em>). Vedi anche attenzione-focus-e-lettura. E <strong>Gregory Berns</strong>, 2006, su <em>Science</em>: ai partecipanti veniva data la scelta tra una <strong>scossa elettrica forte subito</strong> e <strong>una più leggera dopo un'attesa</strong>; una parte significativa sceglieva quella più forte pur di non aspettare. «Preferivano più dolore adesso piuttosto che meno dolore dopo»: <strong>l'incertezza prolungata fa più male del disagio immediato</strong> (<em>nome ricostruito dai sottotitoli, «Gregory Burns»: da verificare</em>).</p>
+<p>La notizia buona arriva da <strong>Masicampo e Baumeister, 2011</strong>, studio dal titolo <em>Consider It Done</em>: per spegnere l'intrusione mentale di un cerchio aperto <strong>non serve chiuderlo</strong>, basta <strong>un piano specifico e credibile</strong> — cosa farai, quando, dove. «Il nostro cervello non pretende che chiudiamo tutti i nostri cerchi aperti subito: lo rendiamo contento dicendogli che ci occuperemo concretamente di quel piano.» Con l'avvertenza esplicita che questo non significa parcheggiarli «in naftalina in qualche to-do list chilometrica che forse riprenderemo tra 6 mesi» (<em>cognomi ricostruiti dai sottotitoli, «Masicampo e Baumister»; il titolo</em> Consider It Done <em>esce pulito</em>).</p>
+<h3>Il metodo in tre passi</h3>
+<p>Il <strong>passo 1 è il brain dump</strong>: carta e penna o un file di testo, e si scarica a terra tutto quello che si ha in testa, senza filtri di importanza, dal latte da comprare all'idea che «ci svolterà la vita». Già solo questo dà «un sollievo che probabilmente non provavi da mesi».</p>
+<p>Il <strong>passo 2 è il "quadriage"</strong> (neologismo suo, voluto): per ogni voce una sola di quattro scelte.</p>
+<ul>
+<li><strong>Chiudi subito</strong> — sotto i <strong>2 minuti</strong> si fa adesso: pagare la bolletta, mandare quel messaggio, disdire l'abbonamento. «Non starlo neanche a scrivere nella tua to-do list o nel tuo calendario.» È la regola del <strong>singolo tocco</strong> di Kruse applicata all'inventario.</li>
+<li><strong>Pianifica sul serio</strong> — sopra i 2 minuti va <strong>in calendario</strong>, con un box della durata reale, giorno e ora precisi: mezz'ora lunedì alle 9:30, «chiamata al commercialista». «Solo se siamo specifici, la nostra mente lascia andare quel cerchio aperto.» Stessa azione dell'abitudine 3 di Kruse, ma con un meccanismo causale diverso: non «il calendario non mente mai», bensì lo studio <em>Consider It Done</em>.</li>
+<li><strong>Lascia andare</strong> — «spesso è questa la decisione più liberatoria». Alcuni cerchi vanno cancellati, non chiusi: il progetto che non interessa più, il libro fermo a pagina 40 da un anno, l'impegno preso per far contento qualcuno. «Ti devi dare il permesso di non fare tutto.» Questa scelta non è eseguibile senza quanto sta in assertivita-e-regole-relazionali.</li>
+<li><strong>Ingabbia i ricorrenti</strong> — pulire casa, rispondere alle mail, fare la spesa non si chiudono mai ma si <strong>contengono</strong> in un contenitore fisso: «il venerdì alle 18:00 oppure la domenica mattina». Se la mente sa che la lavatrice si fa sempre la domenica mattina, smette di tenerla in background.</li>
+</ul>
+<p>Il <strong>passo 3</strong> è affrontarli uno alla volta, partendo da quello che ronza in testa da più tempo — quello che ha consumato più batteria. Regola: <strong>non negoziare con le proprie emozioni</strong>; se è in lista, si fa quando si era deciso.</p>
+<h3>L'avvertenza che salva il metodo</h3>
+<p>Chiudere cerchi dà quasi dipendenza, e il rischio è una <strong>procrastinazione sofisticata</strong>: si chiudono dieci microattività facili e si rimanda per sempre quella ostica. Rimedio: <strong>la giornata si apre "ingoiando il rospo"</strong>, cioè con un blocco di lavoro profondo sul progetto più importante; i cerchi piccoli si chiudono <strong>dopo</strong>. È l'abitudine 2 di Kruse — le prime due ore alla cosa che conta — riletta come antidoto, e il cugino diretto di <a href="procrastinazione-resistenza-e-avvio.html">procrastinazione-resistenza-e-avvio</a>.</p>
+<h2>Dove i due piani si toccano</h2>
+<p>Le due metà si tengono: il piano fisico toglie cinque errori comportamentali invece di aggiungere integratori, il piano mentale toglie cinquanta app in background invece di aggiungere una to-do list più lunga. E chiudono con la stessa filosofia: «i cerchi aperti, le attività in cui siamo impegnati, i progetti che vorremmo realizzare non sono l'ostacolo tra noi e la nostra vita, sono letteralmente la nostra vita. Non esistono prove generali. La vita è un atto unico». La chiusura cita <strong>Marie-Louise von Franz</strong> — «abbiamo la strana sensazione che la nostra vita reale non sia ancora iniziata» — e conia la <strong>«sindrome della felicità rinviata»</strong> (<em>la citazione è resa in italiano e la fonte originale non è data</em>): è porta a porta con la sala d'attesa esistenziale di spettatore-o-regista.</p>
+<h2>Fonti</h2>
+<ul>
+<li>perche-sei-sempre-stanco-5-errori-che-stai-facendo-2026-09-18 (Andrea Giuliodori / EfficaceMente, 2026-09-18) — il piano fisico: sleep pressure e perché recuperare peggiora, NSDR e pisolino da 20 minuti, luce mattutina e luci calde serali, lo studio 2024 su oltre 60.000 persone sulla regolarità, temperatura corporea (cena 3h prima, stanza ~20°C, doccia calda), movimento distribuito contro allenamento serale, la sfida dei 30 giorni. Nomi e dati: lo studio 2024 è citato senza autori né titolo; lo smart bed nominato resta non identificato nei sottotitoli.</li>
+<li>lo-odierai-ma-fara-esplodere-i-tuoi-livelli-di-energia-2026-09-18 (Andrea Giuliodori / EfficaceMente, 2026-09-18) — il piano mentale: effetto Zeigarnik con origine, esperimento e data (1927), residuo di attenzione, l'esperimento sulle scosse, <em>Consider It Done</em>, brain dump, quadriage a quattro scelte, l'avvertenza sul blocco di lavoro profondo, la chiusura su von Franz. Nomi ricostruiti dai sottotitoli automatici e da verificare: Sophie Leroy, Gregory Berns, Masicampo e Baumeister.</li>
+</ul>
+<script>
+window.SB = (function () {
+  var API = 'https://brain-sync.tramitemarketing-it.workers.dev';
+  function url() { return API + '/state'; }
+  return {
+    attivo: !!API,
+    prendi: function () {
+      if (!API) return Promise.resolve(null);
+      return fetch(url(), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    },
+    manda: function (page, n, b, finale) {
+      if (!API) return;
+      var dati = JSON.stringify({ page: page, n: n, b: b });
+      try {
+        fetch(url(), {
+          method: 'POST', body: dati, keepalive: !!finale,
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(function () {});
+      } catch (e) {}
+    },
+    commenta: function (testo) {
+      if (!API) return Promise.resolve(false);
+      return fetch(API + '/commenti', {
+        method: 'POST',
+        body: JSON.stringify({ slug: location.pathname, testo: testo }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+  };
+})();
+
+
+(function () {
+  var KEY = 'sb2:' + location.pathname;
+  var WPS = 4;             // parole al secondo (~240 wpm)
+  var MIN = 0.7, MAX = 6;  // secondi per blocco: minimo e tetto
+  var PASS = 0.5;          // se l'ho letto almeno a metà e sono andato oltre, conta
+  var IDLE = 120000;       // fermo da 2 min = non sta leggendo
+  var DONE = 0.9;          // 90% dei contenuti = letto
+
+  var nodes = [].slice.call(document.querySelectorAll('p, li, blockquote'))
+    .filter(function (n) { return !n.closest('.topbar') && n.textContent.trim().length > 1; });
+  if (nodes.length < 3) return;
+
+  var words = nodes.map(function (n) {
+    return Math.max(1, n.textContent.trim().split(/\s+/).length);
+  });
+  var need = words.map(function (w) {
+    return Math.min(MAX, Math.max(MIN, w / WPS));
+  });
+  var total = words.reduce(function (a, b) { return a + b; }, 0);
+  var acc = words.map(function () { return 0; });
+  var read = words.map(function () { return false; });
+
+  // ripristina lo stato salvato (se la pagina non è cambiata)
+  try {
+    var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (s && s.n === nodes.length && typeof s.b === 'string') {
+      for (var i = 0; i < nodes.length; i++) read[i] = s.b.charAt(i) === '1';
+    }
+  } catch (e) {}
+
+  var bar = document.createElement('div'); bar.id = 'rp';
+  var dot = document.createElement('div'); dot.id = 'rd';
+  document.body.appendChild(bar); document.body.appendChild(dot);
+
+  // spunte di sezione: ogni h2 governa i blocchi fino all'h2 successivo
+  var secs = [];
+  var heads = [].slice.call(document.querySelectorAll('h2'));
+  heads.forEach(function (h) {
+    var idx = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (h.compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var prev = null;
+        for (var k = 0; k < heads.length; k++) {
+          if (heads[k].compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) prev = heads[k];
+        }
+        if (prev === h) idx.push(i);
+      }
+    }
+    if (!idx.length) return;
+    var b = document.createElement('button');
+    b.className = 'sec'; b.type = 'button';
+    b.title = 'Segna questa sezione come letta / non letta';
+    h.appendChild(b);
+    var sec = { el: b, idx: idx };
+    b.addEventListener('click', function () {
+      var allRead = idx.every(function (i) { return read[i]; });
+      idx.forEach(function (i) { read[i] = !allRead; acc[i] = allRead ? 0 : need[i]; });
+      paint(); save();
+    });
+    secs.push(sec);
+  });
+
+  function pct() {
+    var w = 0;
+    for (var i = 0; i < nodes.length; i++) if (read[i]) w += words[i];
+    return w / total;
+  }
+  function paint() {
+    var p = pct();
+    bar.style.width = (p * 100).toFixed(1) + '%';
+    var done = p >= DONE;
+    dot.textContent = done ? '✓ Letto' : Math.round(p * 100) + '%';
+    dot.className = done ? 'done' : '';
+    secs.forEach(function (s) {
+      var ok = s.idx.every(function (i) { return read[i]; });
+      s.el.className = ok ? 'sec ok' : 'sec';
+      s.el.textContent = ok ? '✓' : '○';
+    });
+  }
+  function bits() {
+    var b = '';
+    for (var i = 0; i < nodes.length; i++) b += read[i] ? '1' : '0';
+    return b;
+  }
+  var saveT = 0, syncT = 0, ultimo = '';
+  function save(finale) {
+    var b = bits();
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          v: 2, n: nodes.length, b: b, p: Math.round(pct() * 100), t: Date.now()
+        }));
+      } catch (e) {}
+    }, 400);
+    // verso il server: di rado, per non consumare la quota gratuita
+    if (!window.SB || !SB.attivo || b === ultimo) return;
+    if (finale) { ultimo = b; SB.manda(location.pathname, nodes.length, b, true); return; }
+    clearTimeout(syncT);
+    syncT = setTimeout(function () {
+      ultimo = b;
+      SB.manda(location.pathname, nodes.length, b, false);
+    }, 8000);
+  }
+
+  // all'apertura: unisco i progressi già fatti su altri dispositivi
+  if (window.SB && SB.attivo) {
+    SB.prendi().then(function (st) {
+      if (!st || !st.pages) return;
+      var r = st.pages[location.pathname];
+      if (!r || r.n !== nodes.length) return;
+      var cambiato = false;
+      for (var i = 0; i < nodes.length; i++) {
+        if (r.b.charAt(i) === '1' && !read[i]) { read[i] = true; acc[i] = need[i]; cambiato = true; }
+      }
+      if (cambiato) { paint(); save(); }
+    });
+  }
+
+  // quali blocchi sono nella fascia centrale dello schermo (dove si legge davvero)
+  var visible = Object.create(null);
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = nodes.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) visible[i] = 1; else delete visible[i];
+    });
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  nodes.forEach(function (n) { io.observe(n); });
+
+  var last = Date.now();
+  ['scroll', 'mousemove', 'keydown', 'touchstart', 'wheel', 'click'].forEach(function (ev) {
+    addEventListener(ev, function () { last = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function () {
+    if (document.hidden || Date.now() - last > IDLE) return;
+    var changed = false, i;
+    for (i in visible) {
+      i = +i;
+      if (read[i]) continue;
+      acc[i] += 0.25;
+      if (acc[i] >= need[i]) { read[i] = true; changed = true; }
+    }
+    // blocco letto almeno a metà e ormai scorso sopra la fascia di lettura:
+    // è il comportamento di chi legge un paragrafo e prosegue.
+    for (i = 0; i < nodes.length; i++) {
+      if (read[i] || acc[i] < need[i] * PASS) continue;
+      if (nodes[i].getBoundingClientRect().bottom < innerHeight * 0.25) {
+        read[i] = true; changed = true;
+      }
+    }
+    if (changed) { paint(); save(); }
+  }, 250);
+
+  dot.addEventListener('click', function () {
+    var all = pct() >= DONE;
+    for (var i = 0; i < nodes.length; i++) { read[i] = !all; acc[i] = all ? 0 : need[i]; }
+    paint(); save();
+  });
+  dot.title = 'Tocca per segnare tutto come letto / non letto';
+
+  paint();
+  addEventListener('beforeunload', function () { save(true); });
+  addEventListener('visibilitychange', function () { if (document.hidden) save(true); });
+})();
+
+(function () {
+  if (!window.SB || !SB.attivo || !SB.commenta) return;
+  var btn = document.createElement('button');
+  btn.textContent = '💬';
+  btn.title = 'Lascia un commento-istruzione per Claude';
+  btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:24px;border:none;font-size:22px;background:#2b6cb0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer';
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;right:16px;bottom:72px;z-index:60;display:none;width:min(92vw,340px);background:#1c2733;border:1px solid #33475b;border-radius:12px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+  box.innerHTML = '<textarea rows="4" placeholder="Scrivi a Claude: es. salva questo prompt come prompt-XXX e aggiungilo alla skill prompt" style="width:100%;box-sizing:border-box;background:#111a22;color:#eee;border:1px solid #33475b;border-radius:8px;padding:8px;font:inherit"></textarea>' +
+    '<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center">' +
+    '<span data-esito style="font-size:13px;color:#9fb3c8"></span>' +
+    '<button data-invia style="background:#2b6cb0;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit">Invia</button></div>';
+  document.body.appendChild(btn); document.body.appendChild(box);
+  var ta = box.querySelector('textarea'), esito = box.querySelector('[data-esito]');
+  btn.onclick = function () {
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'block') ta.focus();
+  };
+  box.querySelector('[data-invia]').onclick = function () {
+    var t = ta.value.trim(); if (!t) return;
+    esito.textContent = '…';
+    SB.commenta(t).then(function (ok) {
+      esito.textContent = ok ? 'Salvato ✓ Claude lo legge al prossimo /watch' : 'Errore, riprova';
+      if (ok) ta.value = '';
+    });
+  };
+})();
+</script>
+</body>
+</html>

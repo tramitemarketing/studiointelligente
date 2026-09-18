@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>3 strategie pratiche per leggere piu libri (anche se hai poco tempo)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%2260%22%20height%3D%2242%22%20rx%3D%2211%22%20fill%3D%22%23e8262d%22/%3E%3Cpath%20d%3D%22M26%2022.5%2044%2032%2026%2041.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E">
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1.1rem 1.1rem 4rem;
+  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 44rem; margin-inline: auto; color: #1a1a1a; background: #fbfbfa; }
+
+a { color: #1a5fb4; text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: .2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .6rem; } h3 { font-size: 1.1rem; margin: 1.4rem 0 .5rem; }
+p { margin: .7rem 0; }
+blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid #d0d0d0; color: #555; }
+code { background: #ececec; padding: .1rem .35rem; border-radius: .3rem; font-size: .9em; }
+hr { border: none; border-top: 1px solid #e2e2e2; margin: 2rem 0; }
+ul, ol { margin: .7rem 0; padding-left: 1.4rem; } li { margin: .25rem 0; }
+.topbar { margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #e2e2e2; }
+.topbar a { font-weight: 600; }
+.muted { color: #6b7075; font-size: .92rem; }
+.tag { display: inline-block; background: #eceff3; color: #4a5560; font-size: .72rem;
+  font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .12rem .45rem; border-radius: .4rem; margin-bottom: .35rem; }
+.card { display: block; border: 1px solid #e6e6e6; background: #fff; border-radius: .7rem;
+  padding: .9rem 1rem; margin: .7rem 0; }
+.card:hover { text-decoration: none; border-color: #9ab8e0; }
+.card h2 { margin: 0 0 .2rem; font-size: 1.15rem; } .card .muted { display: block; }
+.card .desc { margin: .35rem 0 0; }
+.btn { display: inline-block; margin: .5rem 0; padding: .55rem 1rem; background: #1a5fb4;
+  color: #fff !important; border-radius: .5rem; font-weight: 600; font-size: .95rem; }
+.btn:hover { background: #154c92; text-decoration: none; }
+
+/* --- tendina "lo so gia": contenuto ripiegato, si apre se serve --- */
+details.gia { border: 1px solid #e6e6e6; border-radius: .6rem; background: #fafafa;
+  padding: .1rem .9rem; margin: 1rem 0; }
+details.gia > summary { cursor: pointer; padding: .6rem 0; font-weight: 600;
+  font-size: .95rem; color: #6b7075; list-style: none; }
+details.gia > summary::-webkit-details-marker { display: none; }
+details.gia > summary::before { content: "▸ "; color: #9aa0a6; }
+details.gia[open] > summary::before { content: "▾ "; }
+details.gia > summary:hover { color: #1a5fb4; }
+details.gia[open] { background: transparent; }
+details.gia > *:last-child { margin-bottom: .8rem; }
+/* --- copertine dei video --- */
+.cover { display: block; width: 100%; max-width: 100%; border-radius: .7rem;
+  margin: 0 0 1.2rem; background: #ececec; aspect-ratio: 16/9; object-fit: cover; }
+.card { display: flex; gap: .85rem; align-items: flex-start; }
+.card .thumb { flex: 0 0 6.6rem; width: 6.6rem; aspect-ratio: 16/9; border-radius: .45rem;
+  object-fit: cover; background: #ececec; }
+.card .txt { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 30rem) { .card .thumb { flex-basis: 5.2rem; width: 5.2rem; } }
+.tw { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { border: 1px solid #e2e2e2; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 700; }
+
+/* --- lettura: barra di avanzamento, pillola, spunte di sezione --- */
+#rp { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: #1a5fb4; z-index: 50; transition: width .3s ease; }
+#rd { position: fixed; right: .8rem; bottom: .8rem; z-index: 50;
+  background: rgba(255,255,255,.94); border: 1px solid #e2e2e2; border-radius: 2rem;
+  padding: .4rem .8rem; font-size: .82rem; font-weight: 700; color: #4a5560;
+  box-shadow: 0 2px 10px rgba(0,0,0,.09); cursor: pointer; user-select: none; }
+#rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.sec { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 700;
+  color: #6b7075; padding: .1rem .45rem; margin-left: .5rem; border-radius: 1rem;
+  vertical-align: middle; }
+.sec:hover { background: #eceff3; color: #4a5560; }
+.sec.ok { color: #1a7f37; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  padding: .1rem .45rem; border-radius: 1rem; margin-left: .4rem; vertical-align: middle;
+  background: #eceff3; color: #4a5560; }
+.pill.done { background: #1a7f37; color: #fff; }
+.card.read { opacity: .72; }
+/* i temi scuri vanno DOPO le regole chiare: a parita' di peso vince
+   l'ultima scritta, altrimenti il chiaro le sovrascrive tutte */
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e6e6; background: #17181a; }
+  a { color: #7db3ff; } blockquote { border-color: #3a3d42; color: #b8bcc2; }
+  code { background: #2a2c30; } hr { border-color: #2a2c30; }
+  .card { background: #1e2023; border-color: #2a2c30; } .muted { color: #9aa0a6; }
+  .tag { background: #2a2c30; color: #cbd0d6; }
+  .btn { background: #2b6fd6 !important; } .btn:hover { background: #3f7fe0 !important; }
+  details.gia { border-color: #2a2c30; background: #1c1e21; }
+  details.gia > summary { color: #9aa0a6; }
+  details.gia > summary:hover { color: #7db3ff; }
+  details.gia[open] { background: transparent; }
+  th, td { border-color: #2a2c30; } th { background: #24262a; } }
+@media (prefers-color-scheme: dark) {
+  #rd { background: rgba(30,32,35,.94); border-color: #2a2c30; color: #cbd0d6; }
+  #rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+  .sec { color: #9aa0a6; } .sec:hover { background: #2a2c30; color: #cbd0d6; }
+  .sec.ok { color: #4ac26b; } .pill { background: #2a2c30; color: #cbd0d6; }
+  .pill.done { background: #1a7f37; color: #fff; } }
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← Tutti i riassunti</a></div>
+<img class="cover" loading="lazy" alt="3 strategie pratiche per leggere piu libri (anche se hai poco tempo)" src="https://i.ytimg.com/vi/GrvbFf3cfy4/hqdefault.jpg"><p><strong>In sintesi:</strong> per tornare a leggere non servono lettura veloce, audiolibri a 2x o app che riassumono i libri. Servono tre cose: mezz'ora al giorno sottratta allo scroll (che basta matematicamente per 25-30 libri all'anno), il permesso di leggere solo ciò che ti piace davvero anche se è "basso", e la rinuncia alla lettura come metrica da esibire. Il paradosso finale è che chi legge lentamente, lasciandosi coinvolgere, finisce per leggere di più.</p>
+<h2>Il punto di partenza: una confessione, non un vanto</h2>
+<p>Giuliodori apre ammettendo di aver letto <strong>40-50 libri all'anno</strong> per anni — non, precisa, per vincere "il premio Sei figo solo tu", ma perché ha sempre adorato leggere. Definisce la lettura <strong>la singola abitudine che più di ogni altra ha impattato la sua carriera e la sua crescita finanziaria</strong>.</p>
+<p>Poi arriva la parte scomoda: più o meno <strong>dal 2020</strong> ha fatto più fatica, e fino all'anno scorso la sua media era scesa drasticamente. Il video nasce da lì — sono le tre strategie che dall'inizio di quest'anno gli hanno fatto ritrovare il piacere di leggere. E stabilisce subito il perimetro: niente tecniche di lettura veloce, niente audiolibri a doppia velocità, niente app che sintetizzano i libri. Alcuni di quegli approcci hanno una loro utilità, dice, altri sono inutili se non dannosi. Qui si parla di lettura vera, non di challenge social: tornare a godersi la prosa di autori meravigliosi e "la quiete di una mente ben nutrita".</p>
+<h2>Strategia uno: una pagina al giorno, e la domanda giusta</h2>
+<p>Il primo consiglio è banale e lui lo sa: <strong>leggi ogni giorno, anche fosse una sola pagina</strong>. La ragione non è la quantità ma la struttura — "non cambierà mai nulla nella nostra vita se non cambiamo qualcosa che facciamo ogni singolo giorno".</p>
+<p>Poi fa il conto. Un adulto medio legge <strong>circa 240 parole al minuto</strong>. Prendi mezz'ora al giorno: non un ritiro letterario di una settimana, mezz'ora. Quelle parole al minuto per trenta minuti producono, nel calcolo che presenta, una media di <strong>25-30 libri all'anno</strong>. E siccome più si legge più la velocità cresce, quei 30 libri possono tranquillamente diventare <strong>35 o 40</strong> senza cambiare niente della mezz'ora.</p>
+<p>Il passaggio decisivo però è un altro. La domanda non è dove trovare mezz'ora — quella la troviamo tutti. La domanda vera, dice, è: <strong>"a chi sto regalando in questo momento quella mezz'ora ogni singolo giorno?"</strong> E la risposta ce l'ha: in Italia trascorriamo in media <strong>quattro ore al giorno a scrollare</strong> sullo smartphone. Immagina come cambierebbe la tua vita, propone, se passassi <strong>tre ore e mezzo</strong> con la tua "mattonella elettronica" e <strong>mezz'ora</strong> con un libro. Non devi cambiare nient'altro nelle tue giornate.</p>
+<p>La sua applicazione personale è concreta: da inizio anno ha <strong>bannato lo smartphone nei primi 60 minuti dal risveglio</strong> e si prende <strong>dieci minuti ogni mattina per leggere in giardino</strong>; poi la sera, prima di dormire, altri <strong>venti o trenta</strong>, invece di guardare Netflix fino all'ultimo. Mezz'ora recuperata, senza sacrifici altrove.</p>
+<p>È onesto sulla difficoltà. All'inizio la vivi come una costrizione: scrollare è semplice, non ha frizioni, dà quella dolce impressione di farti staccare il cervello, mentre leggere richiede sempre un minimo di impegno. Ma dopo qualche settimana ti accorgi di essere <strong>più sereno e di concentrarti meglio</strong>; i contenuti dopaminici non ti mancano più di tanto, e la lettura diventa insostituibile. La descrive come "risvegliarsi da un lungo coma e tornare finalmente ad avere un cervello funzionante".</p>
+<h2>Strategia due: leggi solo quello che ti piace davvero</h2>
+<p>Il secondo consiglio attacca la colpa. Se leggere diventa <strong>"l'ennesima doverizzazione"</strong> della nostra vita, prima o poi smetteremo. Molti di noi hanno una vocina interiore — trasmessa magari dal prof delle medie o da quell'amica laureata in lettere — che ci obbliga ai libri impegnati: i classici che tutti dovrebbero leggere almeno una volta, i mattonazzi di filosofia, i grandi romanzi della storia. Più le diamo ascolto, meno leggiamo.</p>
+<p>Il rimedio è ripartire da ciò che incuriosisce davvero, soprattutto se è da tempo che non si legge: <strong>il giallo della scrittrice islandese, il fantasy con i draghi, il manga, il romanzo rosa che non ammetteresti di star leggendo nemmeno sotto tortura</strong>. Non i libri che ti farebbero fare bella figura a una cena di business. Perché "conta di più la pagina che girerai oggi stesso rispetto a quella che lasci che prenda polvere".</p>
+<h3>L'obiezione: tanto vale guardare una serie</h3>
+<p>Giuliodori si fa l'obiezione da solo: se devo leggere libricini commerciali per puro intrattenimento, tanto vale Netflix o lo scroll. La risposta è che <strong>la lettura in sé è ginnastica mentale</strong>, qualunque sia il materiale — "anche degli ingredienti dello shampoo che hai in bagno". Leggendo alleni attenzione e immaginazione, perché <strong>leggere non è un'attività passiva: ti costringe a costruire significato</strong>. Una frase non si anima da sola, una pagina non ti trascina con un montaggio frenetico, una parola non ha colonna sonora. Leggere significa rallentare abbastanza da trasformare segni astratti in immagini mentali, connessioni, domande, intuizioni. È cognitivamente più faticoso, e proprio per questo è allenante.</p>
+<h3>La regola del 100 meno l'età</h3>
+<p>Da qui il permesso di abbandonare. Se un libro dalla copertina fantastica non ti prende, lascialo andare — e c'è una regola curiosa per decidere quando: <strong>100 meno la tua età</strong>. Quello è il numero di pagine da leggere prima di scegliere se continuare o mollare. L'idea sottostante è che più invecchiamo, meno tempo abbiamo da regalare ai libri che non ci catturano subito. Lui personalmente dà una chance a molti libri, ma se un testo non lo prende dopo <strong>una cinquantina o sessantina di pagine</strong> lo lascia andare senza patemi.</p>
+<h2>Strategia tre: con intenzione, non con pressione</h2>
+<p>Il terzo consiglio è quello che definisce più scomodo, perché va contro tutta la cultura online della lettura. I social sono pieni di <strong>reading challenge</strong> — 50 libri all'anno, 100 libri all'anno. La libreria virtuale su Goodreads è diventata un trofeo da esibire, e il sottobosco dei video TikTok dedicati ai libri crea hype su <strong>mattoni da 800 pagine letti in tre giorni</strong>.</p>
+<p>Non fa il moralista: se quelle sfide ti spingono a leggere, benvengano. Ma il problema arriva quando <strong>la metrica dei libri e delle pagine diventa l'unica cosa che conta: finisci per leggere sempre di più e comprendere sempre di meno</strong>. La lettura, dice, non può essere l'ennesima pratica performativa — è meditazione, contemplazione, immersione.</p>
+<p>Leggere con intenzione significa una cosa precisa: restare presenti davanti alle parole che hai sotto gli occhi e allo stesso tempo ascoltare ciò che quelle parole muovono dentro di te. In pratica: <strong>fermarti su una frase che ti spacca il cuore e rileggerla più volte; sottolineare; piegare l'angolo della pagina</strong> (sì, anche se alle elementari ti hanno insegnato che è un crimine); <strong>chiudere il libro per cinque minuti, guardare fuori dalla finestra e chiederti perché quel passaggio ti ha colpito così tanto</strong>.</p>
+<p>E all'obiezione ovvia — "così al massimo leggo mezzo libro all'anno" — risponde con quello che chiama <strong>il paradosso del lettore lento</strong>: chi legge più lentamente tende, alla fine, a leggere di più. Perché la lentezza produce maggiore coinvolgimento emotivo e migliora la memoria, e quando un libro ti entra dentro davvero non vedi l'ora di tornarci. Non è il contatore delle pagine a far venire voglia di leggere: è il legame che costruisci con i libri, e quel legame richiede tempo e intenzionalità.</p>
+<h2>Il riepilogo</h2>
+<p>Tre mosse: <strong>apri un libro ogni singolo giorno</strong>, anche per una pagina sola; <strong>scegli libri che ti accendano</strong> davvero, non quelli che pensi di dover leggere; e <strong>quando leggi, leggi con attenzione vera</strong>, senza l'ansia di arrivare a una quota. Il segreto per leggere di più, chiude, è tornare a innamorarsi di una pratica antica che da secoli alimenta le menti più brillanti.</p>
+<h2>Fonti e note</h2>
+<ul>
+<li>Video: <a href="https://www.youtube.com/watch?v=GrvbFf3cfy4" target="_blank" rel="noopener">3 strategie pratiche per leggere piu libri (anche se hai poco tempo)</a> — Andrea Giuliodori (EfficaceMente), 10:43</li>
+<li>report grezzo</li>
+</ul>
+<p><strong>Cosa è stato omesso, onestamente:</strong></p>
+<ul>
+<li>Il <strong>lead magnet</strong> a [07:16]: l'invito a scaricare dal link in descrizione la lista dei suoi <em>64 libri di crescita personale preferiti</em>, "i libri che più mi hanno cambiato negli ultimi 20 anni". È l'unico blocco promozionale del video.</li>
+<li>La <strong>chiusura di canale</strong> ("Buone letture, noi ci rivediamo al prossimo libro. Ciao").</li>
+<li>Alcune interpellazioni retoriche ripetute e gli stacchi musicali.</li>
+</ul>
+<p><strong>Numeri e nomi da maneggiare con cautela:</strong></p>
+<ul>
+<li>Nel calcolo dei 30 minuti i sottotitoli riportano <strong>"72.200 parole al giorno"</strong>, mentre il conto dichiarato (30 minuti × 240 parole/minuto) darebbe 7.200. Non è possibile stabilire dalla sola trascrizione se l'errore sia dell'autore o dei sottotitoli automatici; nel riassunto il numero intermedio è stato omesso e si è tenuto solo il risultato che lui ne trae (25-30 libri all'anno), che è coerente con 7.200.</li>
+<li>La statistica delle <strong>4 ore al giorno di scroll in Italia</strong> è enunciata senza fonte.</li>
+<li>Il <strong>"paradosso del lettore lento"</strong> è presentato come se avesse un nome tecnico, ma non viene citato alcuno studio: va trattato come affermazione dell'autore.</li>
+<li>La regola <strong>"100 meno la tua età"</strong> è attribuita genericamente a "una regola meravigliosa, molto curiosa", senza autore.</li>
+</ul>
+<p><strong>Nomi ricostruiti dai sottotitoli automatici:</strong></p>
+<ul>
+<li><strong>Goodreads</strong> compare come "Goodrid" — ricostruito dal contesto ("la nostra libreria virtuale... è diventata un trofeo da esibire").</li>
+<li><strong>BookTok</strong> compare come "bookc" — nel riassunto è stato reso con la perifrasi che usa lui stesso ("i video TikTok dedicati ai libri"), senza forzare la grafia.</li>
+<li>L'autore si fa chiamare <strong>"Andre"</strong> nelle obiezioni immaginarie: probabile troncamento di "Andrea" nel parlato o nei sottotitoli.</li>
+</ul>
+<script>
+window.SB = (function () {
+  var API = 'https://brain-sync.tramitemarketing-it.workers.dev';
+  function url() { return API + '/state'; }
+  return {
+    attivo: !!API,
+    prendi: function () {
+      if (!API) return Promise.resolve(null);
+      return fetch(url(), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    },
+    manda: function (page, n, b, finale) {
+      if (!API) return;
+      var dati = JSON.stringify({ page: page, n: n, b: b });
+      try {
+        fetch(url(), {
+          method: 'POST', body: dati, keepalive: !!finale,
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(function () {});
+      } catch (e) {}
+    },
+    commenta: function (testo) {
+      if (!API) return Promise.resolve(false);
+      return fetch(API + '/commenti', {
+        method: 'POST',
+        body: JSON.stringify({ slug: location.pathname, testo: testo }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+  };
+})();
+
+
+(function () {
+  var KEY = 'sb2:' + location.pathname;
+  var WPS = 4;             // parole al secondo (~240 wpm)
+  var MIN = 0.7, MAX = 6;  // secondi per blocco: minimo e tetto
+  var PASS = 0.5;          // se l'ho letto almeno a metà e sono andato oltre, conta
+  var IDLE = 120000;       // fermo da 2 min = non sta leggendo
+  var DONE = 0.9;          // 90% dei contenuti = letto
+
+  var nodes = [].slice.call(document.querySelectorAll('p, li, blockquote'))
+    .filter(function (n) { return !n.closest('.topbar') && n.textContent.trim().length > 1; });
+  if (nodes.length < 3) return;
+
+  var words = nodes.map(function (n) {
+    return Math.max(1, n.textContent.trim().split(/\s+/).length);
+  });
+  var need = words.map(function (w) {
+    return Math.min(MAX, Math.max(MIN, w / WPS));
+  });
+  var total = words.reduce(function (a, b) { return a + b; }, 0);
+  var acc = words.map(function () { return 0; });
+  var read = words.map(function () { return false; });
+
+  // ripristina lo stato salvato (se la pagina non è cambiata)
+  try {
+    var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (s && s.n === nodes.length && typeof s.b === 'string') {
+      for (var i = 0; i < nodes.length; i++) read[i] = s.b.charAt(i) === '1';
+    }
+  } catch (e) {}
+
+  var bar = document.createElement('div'); bar.id = 'rp';
+  var dot = document.createElement('div'); dot.id = 'rd';
+  document.body.appendChild(bar); document.body.appendChild(dot);
+
+  // spunte di sezione: ogni h2 governa i blocchi fino all'h2 successivo
+  var secs = [];
+  var heads = [].slice.call(document.querySelectorAll('h2'));
+  heads.forEach(function (h) {
+    var idx = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (h.compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var prev = null;
+        for (var k = 0; k < heads.length; k++) {
+          if (heads[k].compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) prev = heads[k];
+        }
+        if (prev === h) idx.push(i);
+      }
+    }
+    if (!idx.length) return;
+    var b = document.createElement('button');
+    b.className = 'sec'; b.type = 'button';
+    b.title = 'Segna questa sezione come letta / non letta';
+    h.appendChild(b);
+    var sec = { el: b, idx: idx };
+    b.addEventListener('click', function () {
+      var allRead = idx.every(function (i) { return read[i]; });
+      idx.forEach(function (i) { read[i] = !allRead; acc[i] = allRead ? 0 : need[i]; });
+      paint(); save();
+    });
+    secs.push(sec);
+  });
+
+  function pct() {
+    var w = 0;
+    for (var i = 0; i < nodes.length; i++) if (read[i]) w += words[i];
+    return w / total;
+  }
+  function paint() {
+    var p = pct();
+    bar.style.width = (p * 100).toFixed(1) + '%';
+    var done = p >= DONE;
+    dot.textContent = done ? '✓ Letto' : Math.round(p * 100) + '%';
+    dot.className = done ? 'done' : '';
+    secs.forEach(function (s) {
+      var ok = s.idx.every(function (i) { return read[i]; });
+      s.el.className = ok ? 'sec ok' : 'sec';
+      s.el.textContent = ok ? '✓' : '○';
+    });
+  }
+  function bits() {
+    var b = '';
+    for (var i = 0; i < nodes.length; i++) b += read[i] ? '1' : '0';
+    return b;
+  }
+  var saveT = 0, syncT = 0, ultimo = '';
+  function save(finale) {
+    var b = bits();
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          v: 2, n: nodes.length, b: b, p: Math.round(pct() * 100), t: Date.now()
+        }));
+      } catch (e) {}
+    }, 400);
+    // verso il server: di rado, per non consumare la quota gratuita
+    if (!window.SB || !SB.attivo || b === ultimo) return;
+    if (finale) { ultimo = b; SB.manda(location.pathname, nodes.length, b, true); return; }
+    clearTimeout(syncT);
+    syncT = setTimeout(function () {
+      ultimo = b;
+      SB.manda(location.pathname, nodes.length, b, false);
+    }, 8000);
+  }
+
+  // all'apertura: unisco i progressi già fatti su altri dispositivi
+  if (window.SB && SB.attivo) {
+    SB.prendi().then(function (st) {
+      if (!st || !st.pages) return;
+      var r = st.pages[location.pathname];
+      if (!r || r.n !== nodes.length) return;
+      var cambiato = false;
+      for (var i = 0; i < nodes.length; i++) {
+        if (r.b.charAt(i) === '1' && !read[i]) { read[i] = true; acc[i] = need[i]; cambiato = true; }
+      }
+      if (cambiato) { paint(); save(); }
+    });
+  }
+
+  // quali blocchi sono nella fascia centrale dello schermo (dove si legge davvero)
+  var visible = Object.create(null);
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = nodes.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) visible[i] = 1; else delete visible[i];
+    });
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  nodes.forEach(function (n) { io.observe(n); });
+
+  var last = Date.now();
+  ['scroll', 'mousemove', 'keydown', 'touchstart', 'wheel', 'click'].forEach(function (ev) {
+    addEventListener(ev, function () { last = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function () {
+    if (document.hidden || Date.now() - last > IDLE) return;
+    var changed = false, i;
+    for (i in visible) {
+      i = +i;
+      if (read[i]) continue;
+      acc[i] += 0.25;
+      if (acc[i] >= need[i]) { read[i] = true; changed = true; }
+    }
+    // blocco letto almeno a metà e ormai scorso sopra la fascia di lettura:
+    // è il comportamento di chi legge un paragrafo e prosegue.
+    for (i = 0; i < nodes.length; i++) {
+      if (read[i] || acc[i] < need[i] * PASS) continue;
+      if (nodes[i].getBoundingClientRect().bottom < innerHeight * 0.25) {
+        read[i] = true; changed = true;
+      }
+    }
+    if (changed) { paint(); save(); }
+  }, 250);
+
+  dot.addEventListener('click', function () {
+    var all = pct() >= DONE;
+    for (var i = 0; i < nodes.length; i++) { read[i] = !all; acc[i] = all ? 0 : need[i]; }
+    paint(); save();
+  });
+  dot.title = 'Tocca per segnare tutto come letto / non letto';
+
+  paint();
+  addEventListener('beforeunload', function () { save(true); });
+  addEventListener('visibilitychange', function () { if (document.hidden) save(true); });
+})();
+
+(function () {
+  if (!window.SB || !SB.attivo || !SB.commenta) return;
+  var btn = document.createElement('button');
+  btn.textContent = '💬';
+  btn.title = 'Lascia un commento-istruzione per Claude';
+  btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:24px;border:none;font-size:22px;background:#2b6cb0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer';
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;right:16px;bottom:72px;z-index:60;display:none;width:min(92vw,340px);background:#1c2733;border:1px solid #33475b;border-radius:12px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+  box.innerHTML = '<textarea rows="4" placeholder="Scrivi a Claude: es. salva questo prompt come prompt-XXX e aggiungilo alla skill prompt" style="width:100%;box-sizing:border-box;background:#111a22;color:#eee;border:1px solid #33475b;border-radius:8px;padding:8px;font:inherit"></textarea>' +
+    '<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center">' +
+    '<span data-esito style="font-size:13px;color:#9fb3c8"></span>' +
+    '<button data-invia style="background:#2b6cb0;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit">Invia</button></div>';
+  document.body.appendChild(btn); document.body.appendChild(box);
+  var ta = box.querySelector('textarea'), esito = box.querySelector('[data-esito]');
+  btn.onclick = function () {
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'block') ta.focus();
+  };
+  box.querySelector('[data-invia]').onclick = function () {
+    var t = ta.value.trim(); if (!t) return;
+    esito.textContent = '…';
+    SB.commenta(t).then(function (ok) {
+      esito.textContent = ok ? 'Salvato ✓ Claude lo legge al prossimo /watch' : 'Errore, riprova';
+      if (ok) ta.value = '';
+    });
+  };
+})();
+</script>
+</body>
+</html>

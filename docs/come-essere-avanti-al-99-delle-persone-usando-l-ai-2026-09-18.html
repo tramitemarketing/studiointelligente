@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Come essere avanti al 99% delle persone usando l&#x27;AI</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%2260%22%20height%3D%2242%22%20rx%3D%2211%22%20fill%3D%22%23e8262d%22/%3E%3Cpath%20d%3D%22M26%2022.5%2044%2032%2026%2041.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E">
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1.1rem 1.1rem 4rem;
+  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 44rem; margin-inline: auto; color: #1a1a1a; background: #fbfbfa; }
+
+a { color: #1a5fb4; text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: .2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .6rem; } h3 { font-size: 1.1rem; margin: 1.4rem 0 .5rem; }
+p { margin: .7rem 0; }
+blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid #d0d0d0; color: #555; }
+code { background: #ececec; padding: .1rem .35rem; border-radius: .3rem; font-size: .9em; }
+hr { border: none; border-top: 1px solid #e2e2e2; margin: 2rem 0; }
+ul, ol { margin: .7rem 0; padding-left: 1.4rem; } li { margin: .25rem 0; }
+.topbar { margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #e2e2e2; }
+.topbar a { font-weight: 600; }
+.muted { color: #6b7075; font-size: .92rem; }
+.tag { display: inline-block; background: #eceff3; color: #4a5560; font-size: .72rem;
+  font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .12rem .45rem; border-radius: .4rem; margin-bottom: .35rem; }
+.card { display: block; border: 1px solid #e6e6e6; background: #fff; border-radius: .7rem;
+  padding: .9rem 1rem; margin: .7rem 0; }
+.card:hover { text-decoration: none; border-color: #9ab8e0; }
+.card h2 { margin: 0 0 .2rem; font-size: 1.15rem; } .card .muted { display: block; }
+.card .desc { margin: .35rem 0 0; }
+.btn { display: inline-block; margin: .5rem 0; padding: .55rem 1rem; background: #1a5fb4;
+  color: #fff !important; border-radius: .5rem; font-weight: 600; font-size: .95rem; }
+.btn:hover { background: #154c92; text-decoration: none; }
+
+/* --- tendina "lo so gia": contenuto ripiegato, si apre se serve --- */
+details.gia { border: 1px solid #e6e6e6; border-radius: .6rem; background: #fafafa;
+  padding: .1rem .9rem; margin: 1rem 0; }
+details.gia > summary { cursor: pointer; padding: .6rem 0; font-weight: 600;
+  font-size: .95rem; color: #6b7075; list-style: none; }
+details.gia > summary::-webkit-details-marker { display: none; }
+details.gia > summary::before { content: "▸ "; color: #9aa0a6; }
+details.gia[open] > summary::before { content: "▾ "; }
+details.gia > summary:hover { color: #1a5fb4; }
+details.gia[open] { background: transparent; }
+details.gia > *:last-child { margin-bottom: .8rem; }
+/* --- copertine dei video --- */
+.cover { display: block; width: 100%; max-width: 100%; border-radius: .7rem;
+  margin: 0 0 1.2rem; background: #ececec; aspect-ratio: 16/9; object-fit: cover; }
+.card { display: flex; gap: .85rem; align-items: flex-start; }
+.card .thumb { flex: 0 0 6.6rem; width: 6.6rem; aspect-ratio: 16/9; border-radius: .45rem;
+  object-fit: cover; background: #ececec; }
+.card .txt { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 30rem) { .card .thumb { flex-basis: 5.2rem; width: 5.2rem; } }
+.tw { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { border: 1px solid #e2e2e2; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 700; }
+
+/* --- lettura: barra di avanzamento, pillola, spunte di sezione --- */
+#rp { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: #1a5fb4; z-index: 50; transition: width .3s ease; }
+#rd { position: fixed; right: .8rem; bottom: .8rem; z-index: 50;
+  background: rgba(255,255,255,.94); border: 1px solid #e2e2e2; border-radius: 2rem;
+  padding: .4rem .8rem; font-size: .82rem; font-weight: 700; color: #4a5560;
+  box-shadow: 0 2px 10px rgba(0,0,0,.09); cursor: pointer; user-select: none; }
+#rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.sec { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 700;
+  color: #6b7075; padding: .1rem .45rem; margin-left: .5rem; border-radius: 1rem;
+  vertical-align: middle; }
+.sec:hover { background: #eceff3; color: #4a5560; }
+.sec.ok { color: #1a7f37; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  padding: .1rem .45rem; border-radius: 1rem; margin-left: .4rem; vertical-align: middle;
+  background: #eceff3; color: #4a5560; }
+.pill.done { background: #1a7f37; color: #fff; }
+.card.read { opacity: .72; }
+/* i temi scuri vanno DOPO le regole chiare: a parita' di peso vince
+   l'ultima scritta, altrimenti il chiaro le sovrascrive tutte */
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e6e6; background: #17181a; }
+  a { color: #7db3ff; } blockquote { border-color: #3a3d42; color: #b8bcc2; }
+  code { background: #2a2c30; } hr { border-color: #2a2c30; }
+  .card { background: #1e2023; border-color: #2a2c30; } .muted { color: #9aa0a6; }
+  .tag { background: #2a2c30; color: #cbd0d6; }
+  .btn { background: #2b6fd6 !important; } .btn:hover { background: #3f7fe0 !important; }
+  details.gia { border-color: #2a2c30; background: #1c1e21; }
+  details.gia > summary { color: #9aa0a6; }
+  details.gia > summary:hover { color: #7db3ff; }
+  details.gia[open] { background: transparent; }
+  th, td { border-color: #2a2c30; } th { background: #24262a; } }
+@media (prefers-color-scheme: dark) {
+  #rd { background: rgba(30,32,35,.94); border-color: #2a2c30; color: #cbd0d6; }
+  #rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+  .sec { color: #9aa0a6; } .sec:hover { background: #2a2c30; color: #cbd0d6; }
+  .sec.ok { color: #4ac26b; } .pill { background: #2a2c30; color: #cbd0d6; }
+  .pill.done { background: #1a7f37; color: #fff; } }
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← Tutti i riassunti</a></div>
+<img class="cover" loading="lazy" alt="Come essere avanti al 99% delle persone usando l&#x27;AI" src="https://i.ytimg.com/vi/sgwcQCtmy_0/hqdefault.jpg"><p><strong>In sintesi:</strong> l'intelligenza artificiale non rende né più stupidi né più intelligenti: <strong>amplifica la direzione che scegli tu</strong>. Usata come stampella — le deleghi il pensiero e copi il risultato — fa accumulare quello che i ricercatori dell'MIT hanno chiamato <strong>debito cognitivo</strong>, e le capacità si atrofizzano come una gamba ingessata. Usata come amplificatore fa un salto di scala, ma solo su competenze che già esistono: zero moltiplicato per mille resta zero. Il metodo proposto sta in due mosse — delegare all'AI solo le <strong>attività soffitto</strong> (l'acronimo <strong>CIAO</strong>) e imparare a parlarle dandole contesto, chiedendole il ragionamento e facendosi interrogare invece di farsi rispondere.</p>
+<h2>Il problema: stiamo usando l'AI al contrario</h2>
+<p>L'apertura è un colpo secco: «l'intelligenza artificiale ti sta rendendo stupido». Il problema, precisa subito <strong>Andrea Giuliodori</strong> — che si presenta come ingegnere, ex manager e founder di <strong>EfficaceMente</strong> —, non è l'AI ma il modo in cui la usiamo: «la maggior parte di noi sta usando l'intelligenza artificiale al contrario, trasformandola un prompt alla volta nel sostituto del proprio cervello». La formula che riassume la tesi arriva nei primi quindici secondi: <strong>«non saranno i robot a rubarci il lavoro, siamo noi che glielo stiamo dando gratis»</strong>.</p>
+<p>Esistono due modi opposti di usarla. Il primo è la <strong>stampella</strong>: «scrivimi questa email», «riassumimi questo documento», «dammi la risposta al perché dell'universo». Le diamo un compito e le chiediamo di pensare al posto nostro; al massimo leggiamo il risultato, spesso nemmeno quello — copiamo e incolliamo. È il modo più diffuso oggi: comodo, veloce, a fatica zero. Il secondo è l'<strong>amplificatore</strong>, dove l'AI diventa una leva per moltiplicare conoscenza e risultati. C'è però un vincolo strutturale: un amplificatore può amplificare solo qualcosa che già esiste. Se le tue capacità valgono 10, imparando a usarla bene possono arrivare a 100 o a 1000; ma chi non ha capacità ha poco da moltiplicare, perché <strong>zero moltiplicato per cento fa sempre zero</strong>. Da qui il rischio della stampella: più deleghiamo pensiero, scrittura e abilità cognitive di base, più quelle capacità si atrofizzano — e una volta disimparato tutto, all'AI non resta niente da moltiplicare.</p>
+<h3>Lo studio dell'MIT e il debito cognitivo</h3>
+<p>Il supporto empirico è uno studio del <strong>2025</strong>. Dei ricercatori — nei sottotitoli automatici il nome dell'istituto è storpiato, ma altrove il video dice esplicitamente <strong>MIT</strong> — hanno messo ai volontari una cuffia con <strong>32 elettrodi</strong> per osservare in diretta l'attività cerebrale mentre scrivevano. I partecipanti sono stati divisi in <strong>tre gruppi</strong> con lo stesso compito, scrivere un breve saggio: il primo poteva usare <strong>ChatGPT</strong>, il secondo un motore di ricerca, il terzo doveva cavarsela da solo senza alcun aiuto tecnologico.</p>
+<p>Il primo risultato è prevedibile: il gruppo ChatGPT ha mostrato <strong>le connessioni neurali più deboli</strong> — meno sforzo, meno attività, meno neuroni accesi. Il secondo è quello che colpisce. Pochi minuti dopo la consegna, ai partecipanti è stato chiesto di citare <strong>una frase qualsiasi</strong> di quanto avevano appena scritto: nel gruppo ChatGPT <strong>8 persone su 10 non ci sono riuscite</strong>, cioè <strong>l'80%</strong> non ricordava neanche una riga del proprio saggio. Negli altri due gruppi la stessa percentuale è stata <strong>inferiore al 10%</strong>. I ricercatori hanno chiamato il fenomeno <strong>debito cognitivo</strong>: ogni volta che deleghiamo il pensiero «è come se firmassimo una piccola cambiale» — lì per lì non costa nulla, anzi risparmiamo fatica, «però poi il conto arriva, e arriva sempre».</p>
+<p>Giuliodori mette da solo il freno: è un singolo studio, su un compito molto specifico, senza un campione di migliaia di persone. Ma conferma un'intuizione che tutti stiamo iniziando a fare, e che ha una metafora perfetta nel <strong>gesso</strong>. Il gesso è un'invenzione meravigliosa, quasi un salvavita quando serve; però chiunque l'abbia portato ricorda com'era quel braccio o quella gamba un mese dopo — «praticamente era la metà dell'altro». Il corpo segue una regola semplicissima: <strong>quello che non usiamo lo smantella</strong>. E questa regola vale anche per la mente. Milioni di persone oggi usano l'AI «come un gesso messo su una gamba che in realtà è perfettamente sana».</p>
+<h2>Cosa delegare: attività soffitto e attività cielo</h2>
+<p>La domanda diventa quindi operativa: cosa si può dare all'AI senza pagare il debito? La risposta è una classificazione delle attività in due famiglie.</p>
+<p>Le <strong>attività soffitto</strong> sono quelle in cui, arrivati a un certo punto, ogni sforzo in più non aggiunge nulla — «è un po' come sbattere contro un soffitto». Formattare le slide di una riunione interna, compilare le note spese, rispondere all'email del dipartimento logistico, riordinare i dati di un foglio Excel: puoi metterci il doppio del tempo per renderle perfette e non cambierà niente. La formula è netta: «se le hai fatte abbastanza bene, le hai già fatte alla perfezione».</p>
+<p>Le <strong>attività cielo</strong> non hanno tetto: ogni grammo in più di impegno e di attenzione produce risultati incrementali. Sono i colloqui con clienti e futuri clienti, i contenuti di marketing, le ore dedicate alla formazione e allo sviluppo di nuove competenze, il tempo con le persone che ami — in generale tutto ciò che contribuisce alla crescita personale e professionale. La regola che ne discende è una sola: <strong>all'AI si delegano le attività soffitto, tu ti concentri su quelle cielo, mai il contrario</strong>.</p>
+<h3>La trappola della fatica</h3>
+<p>C'è un criterio sbagliato che quasi tutti usano per decidere cosa delegare: la fatica. Il fatto che una cosa sia difficile o faticosa non significa affatto che vada data all'AI, perché <strong>la fatica non è tutta uguale</strong>. C'è una <strong>fatica che consuma</strong> — le attività ripetitive, meccaniche, sempre uguali a se stesse, che hai già fatto cento volte e farai altre cento nello stesso identico modo: niente da imparare, niente da decidere, niente da rischiare; «ti prosciugano e basta». E c'è una <strong>fatica che rafforza</strong> — le attività complesse, creative, mai uguali, che non hai mai fatto prima o non così, e che ogni volta ti chiedono qualcosa in più: «ti stancano, sì, ma ti allenano anche». Solo la prima è candidabile alla delega.</p>
+<h3>L'acronimo CIAO</h3>
+<p>Il video compita quattro categorie concrete di attività soffitto, le quattro a cui «dire ciao». <strong>C</strong> sta per <strong>Canovacci</strong>: le prime bozze. Il momento più duro di qualsiasi lavoro è il foglio bianco, il passaggio da zero a uno; l'AI in trenta secondi produce un canovaccio che «sarà brutto, sarà banale, sarà senza anima», ma è un punto di partenza — e lavorare su una bozza da correggere è mille volte più facile che partire da zero. <strong>I</strong> sta per <strong>Indagini</strong>: ricerche, raccolta di informazioni, confronto di fonti, riassunti di documenti chilometrici. Giuliodori porta il suo caso: da consulente, una ricerca di mercato richiedeva giornate intere di lavoro, mentre oggi le funzioni di <strong>deep research</strong> consegnano un report completo in una decina di minuti. Con un'avvertenza: bisogna <strong>trattare l'AI come uno stagista alle prime armi</strong> e non fidarsi mai fino in fondo dei suoi risultati. <strong>A</strong> sta per <strong>Analisi</strong>: trovare schemi ricorrenti dentro moli di dati è una delle cose in cui gli LLM moderni eccellono — ma se quegli schemi abbiano senso deve deciderlo un umano. <strong>O</strong> sta per <strong>Operazioni ripetitive</strong>: formattare, tradurre, riordinare, convertire, pulire, cioè «tutta quella manovalanza digitale che ci ha sempre mangiato ore senza restituirci niente», da delegare costruendo skill, file MD e prompt.</p>
+<p>Tutto il resto resta nostro: <strong>se un'attività richiede giudizio personale, scelte di gusto, decisioni strategiche o interazione umana, «ce la dobbiamo tenere stretta, e guai a chi ce la tocca»</strong>.</p>
+<h3>Il metodo prima degli strumenti</h3>
+<p>C'è una scelta consapevole nel video, che l'autore esplicita: in tutta la spiegazione non ha mai parlato di prompt, agenti, workflow o tool. Approcciare l'intelligenza artificiale partendo dagli strumenti — che cambiano ogni sei mesi — o dai «trucchetti per ChatGPT» è, testuale, <strong>«pura masturbazione mentale»</strong>. Prima dei tool serve un metodo, e CIAO è un esempio di metodo.</p>
+<h2>Come parlarle: tre mosse</h2>
+<p>La premessa è che <strong>l'AI non è una calcolatrice</strong>: con la calcolatrice 2 + 2 fa sempre 4, mentre l'AI è — semplificando — un <strong>motore probabilistico</strong>. Fai la stessa domanda due volte e ottieni due risposte leggermente diverse; e quando non sa una cosa, nella maggior parte dei casi non lo dice: «se la inventa, e spesso lo fa con una sicurezza invidiabile». È come <strong>il genio della lampada delle barzellette</strong>: potentissimo, ma «esaudisce alla lettera quello che dici, non quello che intendi davvero» — e se formuli male il desiderio sono guai.</p>
+<p><strong>La prima mossa</strong> è smettere di esprimere desideri: quelli, al massimo, nella letterina per Babbo Natale. Chi scrive «fammi un post per LinkedIn» si becca inevitabilmente «la solita minestra riscaldata che potrebbe aver scritto chiunque». Al genio vanno date due cose: <strong>il contesto e gli esempi</strong>. Non «scrivi un post», ma: scrivi un post su questo tema, ecco tre miei post precedenti da usare come riferimento per stile e tono, il mio pubblico è questo, l'obiettivo è quest'altro. Più materiale vero gli dai, meno il genio inventa. E se sembra troppa roba da scrivere, l'obiezione si scioglie da sé: all'AI <strong>non devi scrivere, devi parlare</strong>. Gli strumenti di dettatura intelligente — cita "Whisper Flow" — permettono di comunicare <strong>dalle due alle tre volte più velocemente</strong> rispetto alla tastiera.</p>
+<p><strong>La seconda mossa</strong> è farsi sempre mostrare il ragionamento. Prima di accettare qualsiasi risposta, soprattutto su temi importanti o delicati, va aggiunta la richiesta: <strong>«spiegami passo passo come sei arrivato a questa conclusione»</strong>. Serve a due cose. La prima è che le risposte migliorano e le invenzioni diminuiscono. La seconda, «ancora più preziosa», è che vedere il ragionamento fa imparare qualcosa anche a te — e i muscoli mentali, invece di atrofizzarsi, crescono.</p>
+<p><strong>La terza mossa</strong>, quella che l'autore indica come preferita, è <strong>ribaltare i ruoli</strong>: invece di chiedere risposte, chiedere domande. Se stai studiando un argomento, preparando un colloquio, un esame o una presentazione, il prompt suggerito è letterale: «interrogami su questo argomento; parti da domande semplici e a ogni mia risposta corretta aumenta il livello di difficoltà; se è necessario incalzami come farebbe un professore severo». E poi: usa le mie risposte, e il modo in cui ho spiegato i concetti, per costruire insieme il post o la presentazione. Con questo uso <strong>non accumuli debito cognitivo: sviluppi capacità cognitive</strong>.</p>
+<h2>La chiusura</h2>
+<p>Il riepilogo finale ricompone tutto in una frase sola: <strong>«l'intelligenza artificiale non ti rende né più stupido né più intelligente, semplicemente amplifica la direzione che scegli tu»</strong>. Usata da stampella, accresce il debito cognitivo misurato dai ricercatori dell'MIT. Usata da amplificatore, cioè delegandole le attività soffitto dell'acronimo CIAO e parlandole con contesto, richiesta di ragionamento e ribaltamento dei ruoli, restituisce «più tempo, più energie e muscoli mentali molto più allenati di prima».</p>
+<h2>Fonti e note</h2>
+<ul>
+<li>Video: <a href="https://www.youtube.com/watch?v=sgwcQCtmy_0" target="_blank" rel="noopener">Come essere avanti al 99% delle persone usando l'AI</a> — Andrea Giuliodori / EfficaceMente, 17:30, visto il 18 settembre 2026.</li>
+<li>report grezzo (tesi, insegnamenti azionabili con timestamp, numeri esatti, citazioni verbatim, trascrizione completa).</li>
+<li><strong>Lavorato solo sulla trascrizione</strong>: nessun frame estratto, quindi niente sul montaggio, sulle grafiche o su cosa si vede a schermo.</li>
+</ul>
+<p><strong>Cosa è stato omesso, onestamente:</strong></p>
+<ul>
+<li>Il blocco promozionale della <strong>Creatempo Week</strong> [11:44-12:18]: tre serate live gratuite il 15, 16 e 17 settembre 2026 sul «modello delle tre intelligenze temporali», registrazione dal link in descrizione o nel primo commento pinnato, piattaforma con «un massimo di 10.000 partecipanti connessi insieme». È lo stesso blocco già registrato nel riassunto del video sulle otto abitudini di Kevin Kruse, e viene ripetuto in chiusura [16:44-17:23]. L'unico contenuto non promozionale di quel passaggio — la tesi che nessuna app o agenda risolve da sola il problema del tempo, perché serve un sistema che non dipenda dal singolo strumento — è riportato sopra nella sezione sul metodo.</li>
+<li>L'autopresentazione del canale [01:20] e la chiusura «ci vediamo al prossimo video».</li>
+<li>Tolti ripetizioni e intercalari del parlato. Nessun esempio, numero, studio o citazione sostanziale è stato lasciato fuori.</li>
+</ul>
+<blockquote>⚠️ <strong>Avvertenze sulla fonte.</strong> La trascrizione viene dai <strong>sottotitoli automatici</strong> di YouTube, che su questo video sono particolarmente maltrattati perché confondono sistematicamente «l'AI» con «lei» (rese come «Leiai», «l'EI», «l'I», «Leia», «le Yai», «l'Eso»): le ho normalizzate. Nomi ricostruiti a orecchio: «dell'IT» e «i ricercatori di Boston» → <strong>MIT</strong> (il video stesso dice «dell MIT» a 16:20, ma titolo e autori dello studio non vengono mai pronunciati e non li ho verificati); «Efficac Menti» → <strong>EfficaceMente</strong>; «CHG GPT» / «CG GPT» → <strong>ChatGPT</strong>. Lo strumento di dettatura citato come <strong>«Whisper Flow»</strong> è <strong>un nome incerto</strong>: probabilmente <em>Wispr Flow</em>, ma «Whisper» è anche il modello di trascrizione di OpenAI — non verificato in sessione. I numeri (studio 2025, 32 elettrodi, 8 su 10, 80%, meno del 10%, 2-3× la velocità di battitura) sono riportati come li dice il video, senza verifica indipendente.</blockquote>
+<script>
+window.SB = (function () {
+  var API = 'https://brain-sync.tramitemarketing-it.workers.dev';
+  function url() { return API + '/state'; }
+  return {
+    attivo: !!API,
+    prendi: function () {
+      if (!API) return Promise.resolve(null);
+      return fetch(url(), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    },
+    manda: function (page, n, b, finale) {
+      if (!API) return;
+      var dati = JSON.stringify({ page: page, n: n, b: b });
+      try {
+        fetch(url(), {
+          method: 'POST', body: dati, keepalive: !!finale,
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(function () {});
+      } catch (e) {}
+    },
+    commenta: function (testo) {
+      if (!API) return Promise.resolve(false);
+      return fetch(API + '/commenti', {
+        method: 'POST',
+        body: JSON.stringify({ slug: location.pathname, testo: testo }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+  };
+})();
+
+
+(function () {
+  var KEY = 'sb2:' + location.pathname;
+  var WPS = 4;             // parole al secondo (~240 wpm)
+  var MIN = 0.7, MAX = 6;  // secondi per blocco: minimo e tetto
+  var PASS = 0.5;          // se l'ho letto almeno a metà e sono andato oltre, conta
+  var IDLE = 120000;       // fermo da 2 min = non sta leggendo
+  var DONE = 0.9;          // 90% dei contenuti = letto
+
+  var nodes = [].slice.call(document.querySelectorAll('p, li, blockquote'))
+    .filter(function (n) { return !n.closest('.topbar') && n.textContent.trim().length > 1; });
+  if (nodes.length < 3) return;
+
+  var words = nodes.map(function (n) {
+    return Math.max(1, n.textContent.trim().split(/\s+/).length);
+  });
+  var need = words.map(function (w) {
+    return Math.min(MAX, Math.max(MIN, w / WPS));
+  });
+  var total = words.reduce(function (a, b) { return a + b; }, 0);
+  var acc = words.map(function () { return 0; });
+  var read = words.map(function () { return false; });
+
+  // ripristina lo stato salvato (se la pagina non è cambiata)
+  try {
+    var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (s && s.n === nodes.length && typeof s.b === 'string') {
+      for (var i = 0; i < nodes.length; i++) read[i] = s.b.charAt(i) === '1';
+    }
+  } catch (e) {}
+
+  var bar = document.createElement('div'); bar.id = 'rp';
+  var dot = document.createElement('div'); dot.id = 'rd';
+  document.body.appendChild(bar); document.body.appendChild(dot);
+
+  // spunte di sezione: ogni h2 governa i blocchi fino all'h2 successivo
+  var secs = [];
+  var heads = [].slice.call(document.querySelectorAll('h2'));
+  heads.forEach(function (h) {
+    var idx = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (h.compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var prev = null;
+        for (var k = 0; k < heads.length; k++) {
+          if (heads[k].compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) prev = heads[k];
+        }
+        if (prev === h) idx.push(i);
+      }
+    }
+    if (!idx.length) return;
+    var b = document.createElement('button');
+    b.className = 'sec'; b.type = 'button';
+    b.title = 'Segna questa sezione come letta / non letta';
+    h.appendChild(b);
+    var sec = { el: b, idx: idx };
+    b.addEventListener('click', function () {
+      var allRead = idx.every(function (i) { return read[i]; });
+      idx.forEach(function (i) { read[i] = !allRead; acc[i] = allRead ? 0 : need[i]; });
+      paint(); save();
+    });
+    secs.push(sec);
+  });
+
+  function pct() {
+    var w = 0;
+    for (var i = 0; i < nodes.length; i++) if (read[i]) w += words[i];
+    return w / total;
+  }
+  function paint() {
+    var p = pct();
+    bar.style.width = (p * 100).toFixed(1) + '%';
+    var done = p >= DONE;
+    dot.textContent = done ? '✓ Letto' : Math.round(p * 100) + '%';
+    dot.className = done ? 'done' : '';
+    secs.forEach(function (s) {
+      var ok = s.idx.every(function (i) { return read[i]; });
+      s.el.className = ok ? 'sec ok' : 'sec';
+      s.el.textContent = ok ? '✓' : '○';
+    });
+  }
+  function bits() {
+    var b = '';
+    for (var i = 0; i < nodes.length; i++) b += read[i] ? '1' : '0';
+    return b;
+  }
+  var saveT = 0, syncT = 0, ultimo = '';
+  function save(finale) {
+    var b = bits();
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          v: 2, n: nodes.length, b: b, p: Math.round(pct() * 100), t: Date.now()
+        }));
+      } catch (e) {}
+    }, 400);
+    // verso il server: di rado, per non consumare la quota gratuita
+    if (!window.SB || !SB.attivo || b === ultimo) return;
+    if (finale) { ultimo = b; SB.manda(location.pathname, nodes.length, b, true); return; }
+    clearTimeout(syncT);
+    syncT = setTimeout(function () {
+      ultimo = b;
+      SB.manda(location.pathname, nodes.length, b, false);
+    }, 8000);
+  }
+
+  // all'apertura: unisco i progressi già fatti su altri dispositivi
+  if (window.SB && SB.attivo) {
+    SB.prendi().then(function (st) {
+      if (!st || !st.pages) return;
+      var r = st.pages[location.pathname];
+      if (!r || r.n !== nodes.length) return;
+      var cambiato = false;
+      for (var i = 0; i < nodes.length; i++) {
+        if (r.b.charAt(i) === '1' && !read[i]) { read[i] = true; acc[i] = need[i]; cambiato = true; }
+      }
+      if (cambiato) { paint(); save(); }
+    });
+  }
+
+  // quali blocchi sono nella fascia centrale dello schermo (dove si legge davvero)
+  var visible = Object.create(null);
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = nodes.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) visible[i] = 1; else delete visible[i];
+    });
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  nodes.forEach(function (n) { io.observe(n); });
+
+  var last = Date.now();
+  ['scroll', 'mousemove', 'keydown', 'touchstart', 'wheel', 'click'].forEach(function (ev) {
+    addEventListener(ev, function () { last = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function () {
+    if (document.hidden || Date.now() - last > IDLE) return;
+    var changed = false, i;
+    for (i in visible) {
+      i = +i;
+      if (read[i]) continue;
+      acc[i] += 0.25;
+      if (acc[i] >= need[i]) { read[i] = true; changed = true; }
+    }
+    // blocco letto almeno a metà e ormai scorso sopra la fascia di lettura:
+    // è il comportamento di chi legge un paragrafo e prosegue.
+    for (i = 0; i < nodes.length; i++) {
+      if (read[i] || acc[i] < need[i] * PASS) continue;
+      if (nodes[i].getBoundingClientRect().bottom < innerHeight * 0.25) {
+        read[i] = true; changed = true;
+      }
+    }
+    if (changed) { paint(); save(); }
+  }, 250);
+
+  dot.addEventListener('click', function () {
+    var all = pct() >= DONE;
+    for (var i = 0; i < nodes.length; i++) { read[i] = !all; acc[i] = all ? 0 : need[i]; }
+    paint(); save();
+  });
+  dot.title = 'Tocca per segnare tutto come letto / non letto';
+
+  paint();
+  addEventListener('beforeunload', function () { save(true); });
+  addEventListener('visibilitychange', function () { if (document.hidden) save(true); });
+})();
+
+(function () {
+  if (!window.SB || !SB.attivo || !SB.commenta) return;
+  var btn = document.createElement('button');
+  btn.textContent = '💬';
+  btn.title = 'Lascia un commento-istruzione per Claude';
+  btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:24px;border:none;font-size:22px;background:#2b6cb0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer';
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;right:16px;bottom:72px;z-index:60;display:none;width:min(92vw,340px);background:#1c2733;border:1px solid #33475b;border-radius:12px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+  box.innerHTML = '<textarea rows="4" placeholder="Scrivi a Claude: es. salva questo prompt come prompt-XXX e aggiungilo alla skill prompt" style="width:100%;box-sizing:border-box;background:#111a22;color:#eee;border:1px solid #33475b;border-radius:8px;padding:8px;font:inherit"></textarea>' +
+    '<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center">' +
+    '<span data-esito style="font-size:13px;color:#9fb3c8"></span>' +
+    '<button data-invia style="background:#2b6cb0;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit">Invia</button></div>';
+  document.body.appendChild(btn); document.body.appendChild(box);
+  var ta = box.querySelector('textarea'), esito = box.querySelector('[data-esito]');
+  btn.onclick = function () {
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'block') ta.focus();
+  };
+  box.querySelector('[data-invia]').onclick = function () {
+    var t = ta.value.trim(); if (!t) return;
+    esito.textContent = '…';
+    SB.commenta(t).then(function (ok) {
+      esito.textContent = ok ? 'Salvato ✓ Claude lo legge al prossimo /watch' : 'Errore, riprova';
+      if (ok) ta.value = '';
+    });
+  };
+})();
+</script>
+</body>
+</html>

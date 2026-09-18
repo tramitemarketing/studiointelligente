@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Come essere avanti al 99% delle persone</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%2260%22%20height%3D%2242%22%20rx%3D%2211%22%20fill%3D%22%23e8262d%22/%3E%3Cpath%20d%3D%22M26%2022.5%2044%2032%2026%2041.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E">
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1.1rem 1.1rem 4rem;
+  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 44rem; margin-inline: auto; color: #1a1a1a; background: #fbfbfa; }
+
+a { color: #1a5fb4; text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: .2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .6rem; } h3 { font-size: 1.1rem; margin: 1.4rem 0 .5rem; }
+p { margin: .7rem 0; }
+blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid #d0d0d0; color: #555; }
+code { background: #ececec; padding: .1rem .35rem; border-radius: .3rem; font-size: .9em; }
+hr { border: none; border-top: 1px solid #e2e2e2; margin: 2rem 0; }
+ul, ol { margin: .7rem 0; padding-left: 1.4rem; } li { margin: .25rem 0; }
+.topbar { margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #e2e2e2; }
+.topbar a { font-weight: 600; }
+.muted { color: #6b7075; font-size: .92rem; }
+.tag { display: inline-block; background: #eceff3; color: #4a5560; font-size: .72rem;
+  font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .12rem .45rem; border-radius: .4rem; margin-bottom: .35rem; }
+.card { display: block; border: 1px solid #e6e6e6; background: #fff; border-radius: .7rem;
+  padding: .9rem 1rem; margin: .7rem 0; }
+.card:hover { text-decoration: none; border-color: #9ab8e0; }
+.card h2 { margin: 0 0 .2rem; font-size: 1.15rem; } .card .muted { display: block; }
+.card .desc { margin: .35rem 0 0; }
+.btn { display: inline-block; margin: .5rem 0; padding: .55rem 1rem; background: #1a5fb4;
+  color: #fff !important; border-radius: .5rem; font-weight: 600; font-size: .95rem; }
+.btn:hover { background: #154c92; text-decoration: none; }
+
+/* --- tendina "lo so gia": contenuto ripiegato, si apre se serve --- */
+details.gia { border: 1px solid #e6e6e6; border-radius: .6rem; background: #fafafa;
+  padding: .1rem .9rem; margin: 1rem 0; }
+details.gia > summary { cursor: pointer; padding: .6rem 0; font-weight: 600;
+  font-size: .95rem; color: #6b7075; list-style: none; }
+details.gia > summary::-webkit-details-marker { display: none; }
+details.gia > summary::before { content: "▸ "; color: #9aa0a6; }
+details.gia[open] > summary::before { content: "▾ "; }
+details.gia > summary:hover { color: #1a5fb4; }
+details.gia[open] { background: transparent; }
+details.gia > *:last-child { margin-bottom: .8rem; }
+/* --- copertine dei video --- */
+.cover { display: block; width: 100%; max-width: 100%; border-radius: .7rem;
+  margin: 0 0 1.2rem; background: #ececec; aspect-ratio: 16/9; object-fit: cover; }
+.card { display: flex; gap: .85rem; align-items: flex-start; }
+.card .thumb { flex: 0 0 6.6rem; width: 6.6rem; aspect-ratio: 16/9; border-radius: .45rem;
+  object-fit: cover; background: #ececec; }
+.card .txt { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 30rem) { .card .thumb { flex-basis: 5.2rem; width: 5.2rem; } }
+.tw { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { border: 1px solid #e2e2e2; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 700; }
+
+/* --- lettura: barra di avanzamento, pillola, spunte di sezione --- */
+#rp { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: #1a5fb4; z-index: 50; transition: width .3s ease; }
+#rd { position: fixed; right: .8rem; bottom: .8rem; z-index: 50;
+  background: rgba(255,255,255,.94); border: 1px solid #e2e2e2; border-radius: 2rem;
+  padding: .4rem .8rem; font-size: .82rem; font-weight: 700; color: #4a5560;
+  box-shadow: 0 2px 10px rgba(0,0,0,.09); cursor: pointer; user-select: none; }
+#rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.sec { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 700;
+  color: #6b7075; padding: .1rem .45rem; margin-left: .5rem; border-radius: 1rem;
+  vertical-align: middle; }
+.sec:hover { background: #eceff3; color: #4a5560; }
+.sec.ok { color: #1a7f37; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  padding: .1rem .45rem; border-radius: 1rem; margin-left: .4rem; vertical-align: middle;
+  background: #eceff3; color: #4a5560; }
+.pill.done { background: #1a7f37; color: #fff; }
+.card.read { opacity: .72; }
+/* i temi scuri vanno DOPO le regole chiare: a parita' di peso vince
+   l'ultima scritta, altrimenti il chiaro le sovrascrive tutte */
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e6e6; background: #17181a; }
+  a { color: #7db3ff; } blockquote { border-color: #3a3d42; color: #b8bcc2; }
+  code { background: #2a2c30; } hr { border-color: #2a2c30; }
+  .card { background: #1e2023; border-color: #2a2c30; } .muted { color: #9aa0a6; }
+  .tag { background: #2a2c30; color: #cbd0d6; }
+  .btn { background: #2b6fd6 !important; } .btn:hover { background: #3f7fe0 !important; }
+  details.gia { border-color: #2a2c30; background: #1c1e21; }
+  details.gia > summary { color: #9aa0a6; }
+  details.gia > summary:hover { color: #7db3ff; }
+  details.gia[open] { background: transparent; }
+  th, td { border-color: #2a2c30; } th { background: #24262a; } }
+@media (prefers-color-scheme: dark) {
+  #rd { background: rgba(30,32,35,.94); border-color: #2a2c30; color: #cbd0d6; }
+  #rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+  .sec { color: #9aa0a6; } .sec:hover { background: #2a2c30; color: #cbd0d6; }
+  .sec.ok { color: #4ac26b; } .pill { background: #2a2c30; color: #cbd0d6; }
+  .pill.done { background: #1a7f37; color: #fff; } }
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← Tutti i riassunti</a></div>
+<img class="cover" loading="lazy" alt="Come essere avanti al 99% delle persone" src="https://i.ytimg.com/vi/k956F5LpYVU/hqdefault.jpg"><p><strong>In sintesi:</strong> tutti conoscono l'epifania di <strong>Haruki Murakami</strong> allo stadio — 1 aprile 1978, sdraiato sull'erba con una birra in mano, il rumore di una mazza da baseball e il pensiero «forse posso scrivere un romanzo». Quasi nessuno conosce il metodo attorno a quel lampo, ed è lì che sta tutto: un <strong>vincolo scelto da sé</strong>, <strong>quattro anni di terreno preparato prima</strong> dell'intuizione, e una <strong>routine quotidiana ossessiva per i decenni dopo</strong>. La tesi di Giuliodori è che chi sta avanti al 99% delle persone non ha avuto un'idea migliore: ha pagato il biglietto prima e ha continuato a martellare dopo.</p>
+<h2>La storia che tutti raccontano a metà</h2>
+<p>A <strong>29 anni</strong> Murakami era pieno di debiti, lavava bicchieri fino a notte fonda nel suo jazz bar e non aveva mai scritto un libro in vita sua — non ci aveva nemmeno mai pensato. <strong>Quattro anni dopo</strong> aveva vinto il premio letterario più prestigioso del Giappone; oggi i suoi libri sono tradotti in <strong>50 lingue</strong> e hanno venduto milioni di copie, da <em>Norwegian Wood</em> a <em>Kafka sulla spiaggia</em>.</p>
+<p>Il momento della svolta è diventato leggendario. Primo aprile 1978, Tokyo, <strong>stadio Jingu</strong>, partita inaugurale della squadra di casa. Sulla collinetta del settore esterno c'è un ventinovenne con i capelli lunghi, la barba incolta e lo sguardo stanco di chi non dorme abbastanza e quando dorme sogna solo preoccupazioni. Quattro anni prima ha aperto con la moglie un piccolo jazz bar chiamato <strong>Peter Cat</strong>, come il gatto che i due abbracciavano di notte per scaldarsi in un appartamento con i termosifoni sempre troppo bassi; i soldi glieli ha prestati il suocero. Le sue giornate sono dietro al bancone: lavare bicchieri, scegliere i dischi, preparare da bere, chiudere a notte fonda.</p>
+<p>Poi il giocatore americano <strong>Dave Hilton</strong> entra in battuta, colpisce la palla in pieno, e il rumore della mazza rimbomba in tutto lo stadio. In quell'istante l'uomo sull'erba ha un pensiero che non c'entra niente con la partita: <em>forse posso scrivere un romanzo</em>.</p>
+<p>Di solito la storia si ferma qui — hai avuto l'epifania, ci hai creduto, ce l'hai fatta, e vissero tutti felici e contenti. Giuliodori sostiene che la parte interessante sia esattamente quello che è successo <strong>prima</strong> e <strong>dopo</strong>.</p>
+<h2>Il vincolo: la gabbia che ti costruisci da solo</h2>
+<p>Quella sera Murakami torna al bar, serve l'ultimo cliente e a notte fonda si siede al tavolo della cucina con carta e penna. Va avanti così per <strong>dieci mesi</strong>: di giorno il locale, di notte scrivere. Poi rilegge, e il verdetto è impietoso — «queste pagine sembrano scritte da uno che vuole far finta di essere uno scrittore, non c'è anima, è tutto troppo formale, non funziona».</p>
+<p>È qui che fa la mossa che diventerà la prima chiave del metodo. Tira fuori dal ripostiglio una vecchia macchina da scrivere <strong>Olivetti</strong> e ricomincia lo stesso romanzo da capo — ma <strong>in inglese</strong>. Una lingua che conosceva senza padroneggiarla, il che lo costringeva a frasi corte, vocabolario limitato, nessuna costruzione complicata. Finito un capitolo in inglese, lo <strong>trapiantava</strong> indietro in giapponese: non lo traduceva, lo riscriveva, tenendo però quello stile asciutto e lineare. Il risultato non somigliava a niente di quello che si pubblicava in Giappone in quegli anni. Murakami stesso l'ha descritto con un'immagine bellissima: <strong>«era come fare ginnastica con dei vestiti che non mi stavano bene»</strong>.</p>
+<p>Il punto controintuitivo è questo. Siamo convinti che per realizzare i nostri sogni serva la <strong>massima libertà</strong>, e usiamo gli impegni familiari, professionali e personali come motivazioni perfettamente razionali per non lavorare ai progetti che ci appassionano. In realtà i vincoli possono essere alleati enormi — a patto che siamo <strong>noi a sceglierli invece di subirli</strong>. Nel momento in cui Murakami si è deliberatamente privato di qualcosa, la sua scrittura ci ha guadagnato: non dovendosi più preoccupare degli ornamenti stilistici, ha potuto concentrarsi su ciò che voleva dire davvero. È il messaggio arrivato forte e chiaro ai lettori a partire dal romanzo d'esordio, <em>La canzone del vento</em>.</p>
+<p>Giuliodori traduce il principio in vincoli operativi. Vuoi scrivere quel libro che rimandi da anni? <strong>500 parole al giorno, e finché non le hai scritte non puoi toccare lo smartphone.</strong> Vuoi costruire un'attività mentre sei ancora dipendente? <strong>Due pomodori</strong> — due intervalli da 25 minuti di lavoro focalizzato — ogni mattina prima di andare in ufficio; è esattamente il vincolo con cui lui ha costruito EfficaceMente quando lavorava ancora come manager a Milano. Vuoi tornare in forma dopo anni di sedentarietà? Sotto i tre piani, sempre le scale.</p>
+<p>La formula che riassume tutto: <strong>Murakami non ha trovato il suo stile mentre era libero di scrivere come voleva, l'ha trovato dentro la gabbia che si era costruito da solo.</strong> Quindi la prossima volta che ti senti bloccato su un progetto, la domanda giusta non è <em>cosa dovrei avere in più per partire</em>, ma <strong>cosa devo togliere, quale vincolo mi devo dare per iniziare</strong>.</p>
+<h3>Il prezzo pagato dal debutto</h3>
+<p>Vale la pena notare che la scelta controcorrente non fu accolta bene. Murakami manda il suo unico manoscritto al <strong>premio Gunzō</strong>, il più prestigioso riconoscimento per esordienti giapponesi — Giuliodori lo paragona a «una specie di Premio Strega» — e vince. Ma quando il libro esce, il mondo letterario giapponese gli si scaglia contro: lo accusano di essere un <strong>batakusai</strong>, letteralmente «uno che puzza di burro», espressione che risale agli inizi dell'Ottocento per indicare qualcuno talmente occidentalizzato da non sembrare più giapponese. Anni dopo Murakami dirà di essersi sentito «un pochettino la pecora nera del mondo letterario giapponese». Eppure è proprio ogni singola scelta controcorrente ad essere stata alla base del suo successo.</p>
+<h2>Il biglietto pagato: perché le epifanie non capitano a tutti</h2>
+<p>Il secondo passo smonta il romanticismo della scena allo stadio. Quando Murakami decide di fare sul serio, ha <strong>già alle spalle quattro anni passati a spaccarsi la schiena</strong> in un jazz bar aperto accollandosi un sacco di debiti — e lo aveva aperto perché si rifiutava di essere un <strong>salaryman</strong>, un uomo stipendiato. Voleva essere un uomo libero, in grado di decidere il proprio destino, e aveva già dimostrato di essere disposto a <strong>pagare il prezzo di quella libertà</strong>.</p>
+<p>Non solo: fin da giovanissimo aveva letto migliaia di libri, e nel poco tempo libero che gli restava aveva perfino iniziato a tradurre in giapponese le opere di <strong>Francis Scott Fitzgerald</strong> e <strong>Truman Capote</strong>, per puro piacere personale. L'epifania del primo aprile è arrivata e gli ha cambiato la vita <strong>perché il suo terreno mentale era già fertile</strong>.</p>
+<p>Da qui la lezione centrale del video: <strong>le epifanie non capitano alle persone passive, capitano alle persone che si stanno già muovendo verso i propri obiettivi</strong> — anche quando non conoscono ancora il sentiero preciso e si limitano a incamminarsi nella direzione giusta. È vero che molta della nostra vita dipende dalla fortuna, ma esistono modi per essere più fortunati, e il più efficace è <strong>aumentare l'area della nostra fortuna</strong>: creare più occasioni perché i nostri sogni possano realizzarsi. Murakami, per quattro anni, non ha fatto altro che questo.</p>
+<h2>Quello che fai nei quindici anni successivi</h2>
+<p>Il terzo elemento è quello che Giuliodori dichiara più vicino alla filosofia del suo progetto. Lo cita Murakami stesso in <em>Il mestiere dello scrittore</em>: <strong>«scrivere un romanzo non è poi così difficile, quasi tutti potrebbero farlo; la cosa difficile è continuare a scriverne uno dopo l'altro per anni e anni di fila»</strong>.</p>
+<p>C'è un'idea molto romantica secondo cui artisti e scrittori lavorerebbero quando una musa sussurra nell'orecchio o quando arriva l'intuizione geniale alle due del mattino. Non funziona così: alcuni dei creativi più famosi, contemporanei e storici, hanno <strong>routine estremamente rigide</strong>. Quella di Murakami, dice Giuliodori, «farebbe impallidire qualsiasi biohacker o guru dello sviluppo personale». Sveglia alle <strong>4:00</strong>, subito a scrivere, obiettivo <strong>10 pagine</strong> — che ci sia il sole o piova, che sia ispirato o non lo sia — finché il romanzo non è finito. Nel pomeriggio <strong>10 km di corsa oppure 1500 metri a nuoto</strong>, a volte entrambe le cose. La sera legge, ascolta jazz, e va a dormire <strong>alle 21:00</strong>. Questa routine la ripete religiosamente per settimane, per mesi, a volte per anni interi quando sta scrivendo un'opera complessa.</p>
+<p>C'è anche un consiglio di lettura: <em>L'arte di correre</em>, dove Murakami fa una disamina quasi filosofica della corsa e spiega perché per lui <strong>scrivere un romanzo e preparare una maratona sono più o meno la stessa cosa</strong>. Entrambe richiedono di alzarsi tutti i giorni e fare un pezzettino anche quando non se ne ha voglia. Entrambe ti puniscono se salti troppi giorni di fila. E soprattutto <strong>entrambe non si possono fingere</strong>: o le hai fatte o non le hai fatte. Nella corsa come nella scrittura, talento e tecnica contano nei primi chilometri; ma quando sei al <strong>35° km</strong> di una maratona o al penultimo capitolo di un libro, a contare è solo la pratica accumulata nei mesi precedenti.</p>
+<p>Tutti vorremmo l'epifania che ci cambia la vita, ma in pochi sono disposti ad andare a dormire presto ogni sera e svegliarsi all'alba per scrivere dieci pagine o correre dieci chilometri anche quando non c'è ispirazione né motivazione. Il momento magico possiamo averlo tutti; quello che conta davvero <strong>non è il singolo evento fortunato, ma quello che ne facciamo nei 12 mesi, nei 5 anni, nei 15 anni successivi</strong>.</p>
+<h3>L'esempio che Giuliodori fa su di sé</h3>
+<p>Ricorda ancora il momento in cui ha comprato il dominio di EfficaceMente: <strong>settembre 2008</strong>, un'intuizione sul nome che all'epoca gli sembrava geniale. Quel dominio sarebbe potuto restare a prendere polvere per mesi. Invece dopo qualche giorno ha pubblicato il primo articolo, e poi <strong>altri 500 senza mai saltare una settimana</strong>. Oggi, <strong>quasi diciotto anni dopo</strong>, il progetto produce contenuti di sviluppo personale su tutte le principali piattaforme. Se si fosse fermato all'intuizione del settembre 2008, non sarebbe cambiato nulla — perché <strong>«è quello che fai un giorno sì e l'altro anche che ti trasforma l'esistenza»</strong>.</p>
+<h2>La chiusura</h2>
+<p>Il video si chiude compattando il metodo in tre gesti: <strong>datti un vincolo</strong>, <strong>assicurati di aver pagato il biglietto</strong>, e quando l'epifania arriverà <strong>ricordati che è solo il punto di partenza</strong> — «continua a martellare finché non avrai scritto il tuo capolavoro».</p>
+<h2>Fonti e note</h2>
+<ul>
+<li>Video: <a href="https://www.youtube.com/watch?v=k956F5LpYVU" target="_blank" rel="noopener">Come essere avanti al 99% delle persone</a> — Andrea Giuliodori / EfficaceMente, pubblicato il 14 maggio 2026, ~147.000 visualizzazioni al 18 settembre 2026. I metadati YouTube danno la durata come 14:52.</li>
+<li>report grezzo (tesi, insegnamenti con timestamp, numeri, citazioni, trascrizione completa).</li>
+<li>Analisi condotta <strong>solo sulla trascrizione</strong>: nessun frame estratto, quindi nulla è stato ricavato dal montaggio, dalle immagini o dai testi a schermo.</li>
+</ul>
+<p><strong>Cosa è stato omesso, onestamente:</strong></p>
+<ul>
+<li>Il «seguimi» di apertura e il «noi ci vediamo al prossimo video» di chiusura.</li>
+<li>La coda autopromozionale sul volume di produzione attuale del canale («centinaia di contenuti ogni anno su tutte le principali piattaforme»). L'aneddoto del dominio del 2008 con i 500 articoli è invece riportato per intero, perché è l'esempio di costanza con i numeri.</li>
+<li>Il video non contiene sponsor, giveaway né rimandi a corsi a pagamento. I due libri consigliati (<em>Il mestiere dello scrittore</em>, <em>L'arte di correre</em>) sono di Murakami e sono fonti del contenuto, non prodotti dell'autore del video: tenuti.</li>
+<li>Tolti intercalari e ripetizioni del parlato; nessun esempio, numero, nome o citazione sostanziale è rimasto fuori.</li>
+</ul>
+<blockquote>⚠️ <strong>Avvertenze sulla fonte.</strong> La trascrizione viene dai <strong>sottotitoli automatici</strong> di YouTube, che in questo video storpiano i nomi in modo pesante. Ricostruiti a orecchio e <strong>non verificati in sessione</strong>: «Aruki Murakami» / «Muracami» / «Muragami» / «Muracani» / «Muraami» / «metodo Mura» → <strong>Haruki Murakami</strong> (sei grafie diverse in quattordici minuti); «jet bar» → <strong>jazz bar</strong>; «dischi di jetsz» e «ascolta Jez» → <strong>jazz</strong>; «Norvegian Wood» → <strong>Norwegian Wood</strong>; «premio Gunz» → <strong>premio Gunzō</strong>; «Fitzger Gerald» → <strong>Francis Scott Fitzgerald</strong>; «Truman Capode» → <strong>Truman Capote</strong>; «salariman» → <strong>salaryman</strong>; «Batakusai» → <strong>bata-kusai</strong>. Il nome <strong>Dave Hilton</strong> esce pulito dai sottotitoli ma non è stato verificato. Il titolo italiano corrente del romanzo d'esordio è <em>Ascolta la canzone del vento</em>; nel video è detto senza «Ascolta». Refusi minori corretti in lettura: «notti insny» → notti insonni, «sull'erma» → sull'erba, «inizi dell'ottocente» → inizi dell'Ottocento, «fame internazionale» → fama internazionale. I numeri (50 lingue, 10 pagine al giorno, 10 km, 1500 m, 500 articoli) sono riportati come li dice il video, senza verifica indipendente.</blockquote>
+<script>
+window.SB = (function () {
+  var API = 'https://brain-sync.tramitemarketing-it.workers.dev';
+  function url() { return API + '/state'; }
+  return {
+    attivo: !!API,
+    prendi: function () {
+      if (!API) return Promise.resolve(null);
+      return fetch(url(), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    },
+    manda: function (page, n, b, finale) {
+      if (!API) return;
+      var dati = JSON.stringify({ page: page, n: n, b: b });
+      try {
+        fetch(url(), {
+          method: 'POST', body: dati, keepalive: !!finale,
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(function () {});
+      } catch (e) {}
+    },
+    commenta: function (testo) {
+      if (!API) return Promise.resolve(false);
+      return fetch(API + '/commenti', {
+        method: 'POST',
+        body: JSON.stringify({ slug: location.pathname, testo: testo }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+  };
+})();
+
+
+(function () {
+  var KEY = 'sb2:' + location.pathname;
+  var WPS = 4;             // parole al secondo (~240 wpm)
+  var MIN = 0.7, MAX = 6;  // secondi per blocco: minimo e tetto
+  var PASS = 0.5;          // se l'ho letto almeno a metà e sono andato oltre, conta
+  var IDLE = 120000;       // fermo da 2 min = non sta leggendo
+  var DONE = 0.9;          // 90% dei contenuti = letto
+
+  var nodes = [].slice.call(document.querySelectorAll('p, li, blockquote'))
+    .filter(function (n) { return !n.closest('.topbar') && n.textContent.trim().length > 1; });
+  if (nodes.length < 3) return;
+
+  var words = nodes.map(function (n) {
+    return Math.max(1, n.textContent.trim().split(/\s+/).length);
+  });
+  var need = words.map(function (w) {
+    return Math.min(MAX, Math.max(MIN, w / WPS));
+  });
+  var total = words.reduce(function (a, b) { return a + b; }, 0);
+  var acc = words.map(function () { return 0; });
+  var read = words.map(function () { return false; });
+
+  // ripristina lo stato salvato (se la pagina non è cambiata)
+  try {
+    var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (s && s.n === nodes.length && typeof s.b === 'string') {
+      for (var i = 0; i < nodes.length; i++) read[i] = s.b.charAt(i) === '1';
+    }
+  } catch (e) {}
+
+  var bar = document.createElement('div'); bar.id = 'rp';
+  var dot = document.createElement('div'); dot.id = 'rd';
+  document.body.appendChild(bar); document.body.appendChild(dot);
+
+  // spunte di sezione: ogni h2 governa i blocchi fino all'h2 successivo
+  var secs = [];
+  var heads = [].slice.call(document.querySelectorAll('h2'));
+  heads.forEach(function (h) {
+    var idx = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (h.compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var prev = null;
+        for (var k = 0; k < heads.length; k++) {
+          if (heads[k].compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) prev = heads[k];
+        }
+        if (prev === h) idx.push(i);
+      }
+    }
+    if (!idx.length) return;
+    var b = document.createElement('button');
+    b.className = 'sec'; b.type = 'button';
+    b.title = 'Segna questa sezione come letta / non letta';
+    h.appendChild(b);
+    var sec = { el: b, idx: idx };
+    b.addEventListener('click', function () {
+      var allRead = idx.every(function (i) { return read[i]; });
+      idx.forEach(function (i) { read[i] = !allRead; acc[i] = allRead ? 0 : need[i]; });
+      paint(); save();
+    });
+    secs.push(sec);
+  });
+
+  function pct() {
+    var w = 0;
+    for (var i = 0; i < nodes.length; i++) if (read[i]) w += words[i];
+    return w / total;
+  }
+  function paint() {
+    var p = pct();
+    bar.style.width = (p * 100).toFixed(1) + '%';
+    var done = p >= DONE;
+    dot.textContent = done ? '✓ Letto' : Math.round(p * 100) + '%';
+    dot.className = done ? 'done' : '';
+    secs.forEach(function (s) {
+      var ok = s.idx.every(function (i) { return read[i]; });
+      s.el.className = ok ? 'sec ok' : 'sec';
+      s.el.textContent = ok ? '✓' : '○';
+    });
+  }
+  function bits() {
+    var b = '';
+    for (var i = 0; i < nodes.length; i++) b += read[i] ? '1' : '0';
+    return b;
+  }
+  var saveT = 0, syncT = 0, ultimo = '';
+  function save(finale) {
+    var b = bits();
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          v: 2, n: nodes.length, b: b, p: Math.round(pct() * 100), t: Date.now()
+        }));
+      } catch (e) {}
+    }, 400);
+    // verso il server: di rado, per non consumare la quota gratuita
+    if (!window.SB || !SB.attivo || b === ultimo) return;
+    if (finale) { ultimo = b; SB.manda(location.pathname, nodes.length, b, true); return; }
+    clearTimeout(syncT);
+    syncT = setTimeout(function () {
+      ultimo = b;
+      SB.manda(location.pathname, nodes.length, b, false);
+    }, 8000);
+  }
+
+  // all'apertura: unisco i progressi già fatti su altri dispositivi
+  if (window.SB && SB.attivo) {
+    SB.prendi().then(function (st) {
+      if (!st || !st.pages) return;
+      var r = st.pages[location.pathname];
+      if (!r || r.n !== nodes.length) return;
+      var cambiato = false;
+      for (var i = 0; i < nodes.length; i++) {
+        if (r.b.charAt(i) === '1' && !read[i]) { read[i] = true; acc[i] = need[i]; cambiato = true; }
+      }
+      if (cambiato) { paint(); save(); }
+    });
+  }
+
+  // quali blocchi sono nella fascia centrale dello schermo (dove si legge davvero)
+  var visible = Object.create(null);
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = nodes.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) visible[i] = 1; else delete visible[i];
+    });
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  nodes.forEach(function (n) { io.observe(n); });
+
+  var last = Date.now();
+  ['scroll', 'mousemove', 'keydown', 'touchstart', 'wheel', 'click'].forEach(function (ev) {
+    addEventListener(ev, function () { last = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function () {
+    if (document.hidden || Date.now() - last > IDLE) return;
+    var changed = false, i;
+    for (i in visible) {
+      i = +i;
+      if (read[i]) continue;
+      acc[i] += 0.25;
+      if (acc[i] >= need[i]) { read[i] = true; changed = true; }
+    }
+    // blocco letto almeno a metà e ormai scorso sopra la fascia di lettura:
+    // è il comportamento di chi legge un paragrafo e prosegue.
+    for (i = 0; i < nodes.length; i++) {
+      if (read[i] || acc[i] < need[i] * PASS) continue;
+      if (nodes[i].getBoundingClientRect().bottom < innerHeight * 0.25) {
+        read[i] = true; changed = true;
+      }
+    }
+    if (changed) { paint(); save(); }
+  }, 250);
+
+  dot.addEventListener('click', function () {
+    var all = pct() >= DONE;
+    for (var i = 0; i < nodes.length; i++) { read[i] = !all; acc[i] = all ? 0 : need[i]; }
+    paint(); save();
+  });
+  dot.title = 'Tocca per segnare tutto come letto / non letto';
+
+  paint();
+  addEventListener('beforeunload', function () { save(true); });
+  addEventListener('visibilitychange', function () { if (document.hidden) save(true); });
+})();
+
+(function () {
+  if (!window.SB || !SB.attivo || !SB.commenta) return;
+  var btn = document.createElement('button');
+  btn.textContent = '💬';
+  btn.title = 'Lascia un commento-istruzione per Claude';
+  btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:24px;border:none;font-size:22px;background:#2b6cb0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer';
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;right:16px;bottom:72px;z-index:60;display:none;width:min(92vw,340px);background:#1c2733;border:1px solid #33475b;border-radius:12px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+  box.innerHTML = '<textarea rows="4" placeholder="Scrivi a Claude: es. salva questo prompt come prompt-XXX e aggiungilo alla skill prompt" style="width:100%;box-sizing:border-box;background:#111a22;color:#eee;border:1px solid #33475b;border-radius:8px;padding:8px;font:inherit"></textarea>' +
+    '<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center">' +
+    '<span data-esito style="font-size:13px;color:#9fb3c8"></span>' +
+    '<button data-invia style="background:#2b6cb0;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit">Invia</button></div>';
+  document.body.appendChild(btn); document.body.appendChild(box);
+  var ta = box.querySelector('textarea'), esito = box.querySelector('[data-esito]');
+  btn.onclick = function () {
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'block') ta.focus();
+  };
+  box.querySelector('[data-invia]').onclick = function () {
+    var t = ta.value.trim(); if (!t) return;
+    esito.textContent = '…';
+    SB.commenta(t).then(function (ok) {
+      esito.textContent = ok ? 'Salvato ✓ Claude lo legge al prossimo /watch' : 'Errore, riprova';
+      if (ok) ta.value = '';
+    });
+  };
+})();
+</script>
+</body>
+</html>

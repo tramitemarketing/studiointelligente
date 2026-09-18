@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lo odierai, ma fara esplodere i tuoi livelli di energia</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%2260%22%20height%3D%2242%22%20rx%3D%2211%22%20fill%3D%22%23e8262d%22/%3E%3Cpath%20d%3D%22M26%2022.5%2044%2032%2026%2041.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E">
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1.1rem 1.1rem 4rem;
+  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 44rem; margin-inline: auto; color: #1a1a1a; background: #fbfbfa; }
+
+a { color: #1a5fb4; text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: .2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .6rem; } h3 { font-size: 1.1rem; margin: 1.4rem 0 .5rem; }
+p { margin: .7rem 0; }
+blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid #d0d0d0; color: #555; }
+code { background: #ececec; padding: .1rem .35rem; border-radius: .3rem; font-size: .9em; }
+hr { border: none; border-top: 1px solid #e2e2e2; margin: 2rem 0; }
+ul, ol { margin: .7rem 0; padding-left: 1.4rem; } li { margin: .25rem 0; }
+.topbar { margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #e2e2e2; }
+.topbar a { font-weight: 600; }
+.muted { color: #6b7075; font-size: .92rem; }
+.tag { display: inline-block; background: #eceff3; color: #4a5560; font-size: .72rem;
+  font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .12rem .45rem; border-radius: .4rem; margin-bottom: .35rem; }
+.card { display: block; border: 1px solid #e6e6e6; background: #fff; border-radius: .7rem;
+  padding: .9rem 1rem; margin: .7rem 0; }
+.card:hover { text-decoration: none; border-color: #9ab8e0; }
+.card h2 { margin: 0 0 .2rem; font-size: 1.15rem; } .card .muted { display: block; }
+.card .desc { margin: .35rem 0 0; }
+.btn { display: inline-block; margin: .5rem 0; padding: .55rem 1rem; background: #1a5fb4;
+  color: #fff !important; border-radius: .5rem; font-weight: 600; font-size: .95rem; }
+.btn:hover { background: #154c92; text-decoration: none; }
+
+/* --- tendina "lo so gia": contenuto ripiegato, si apre se serve --- */
+details.gia { border: 1px solid #e6e6e6; border-radius: .6rem; background: #fafafa;
+  padding: .1rem .9rem; margin: 1rem 0; }
+details.gia > summary { cursor: pointer; padding: .6rem 0; font-weight: 600;
+  font-size: .95rem; color: #6b7075; list-style: none; }
+details.gia > summary::-webkit-details-marker { display: none; }
+details.gia > summary::before { content: "▸ "; color: #9aa0a6; }
+details.gia[open] > summary::before { content: "▾ "; }
+details.gia > summary:hover { color: #1a5fb4; }
+details.gia[open] { background: transparent; }
+details.gia > *:last-child { margin-bottom: .8rem; }
+/* --- copertine dei video --- */
+.cover { display: block; width: 100%; max-width: 100%; border-radius: .7rem;
+  margin: 0 0 1.2rem; background: #ececec; aspect-ratio: 16/9; object-fit: cover; }
+.card { display: flex; gap: .85rem; align-items: flex-start; }
+.card .thumb { flex: 0 0 6.6rem; width: 6.6rem; aspect-ratio: 16/9; border-radius: .45rem;
+  object-fit: cover; background: #ececec; }
+.card .txt { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 30rem) { .card .thumb { flex-basis: 5.2rem; width: 5.2rem; } }
+.tw { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { border: 1px solid #e2e2e2; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 700; }
+
+/* --- lettura: barra di avanzamento, pillola, spunte di sezione --- */
+#rp { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: #1a5fb4; z-index: 50; transition: width .3s ease; }
+#rd { position: fixed; right: .8rem; bottom: .8rem; z-index: 50;
+  background: rgba(255,255,255,.94); border: 1px solid #e2e2e2; border-radius: 2rem;
+  padding: .4rem .8rem; font-size: .82rem; font-weight: 700; color: #4a5560;
+  box-shadow: 0 2px 10px rgba(0,0,0,.09); cursor: pointer; user-select: none; }
+#rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.sec { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 700;
+  color: #6b7075; padding: .1rem .45rem; margin-left: .5rem; border-radius: 1rem;
+  vertical-align: middle; }
+.sec:hover { background: #eceff3; color: #4a5560; }
+.sec.ok { color: #1a7f37; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  padding: .1rem .45rem; border-radius: 1rem; margin-left: .4rem; vertical-align: middle;
+  background: #eceff3; color: #4a5560; }
+.pill.done { background: #1a7f37; color: #fff; }
+.card.read { opacity: .72; }
+/* i temi scuri vanno DOPO le regole chiare: a parita' di peso vince
+   l'ultima scritta, altrimenti il chiaro le sovrascrive tutte */
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e6e6; background: #17181a; }
+  a { color: #7db3ff; } blockquote { border-color: #3a3d42; color: #b8bcc2; }
+  code { background: #2a2c30; } hr { border-color: #2a2c30; }
+  .card { background: #1e2023; border-color: #2a2c30; } .muted { color: #9aa0a6; }
+  .tag { background: #2a2c30; color: #cbd0d6; }
+  .btn { background: #2b6fd6 !important; } .btn:hover { background: #3f7fe0 !important; }
+  details.gia { border-color: #2a2c30; background: #1c1e21; }
+  details.gia > summary { color: #9aa0a6; }
+  details.gia > summary:hover { color: #7db3ff; }
+  details.gia[open] { background: transparent; }
+  th, td { border-color: #2a2c30; } th { background: #24262a; } }
+@media (prefers-color-scheme: dark) {
+  #rd { background: rgba(30,32,35,.94); border-color: #2a2c30; color: #cbd0d6; }
+  #rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+  .sec { color: #9aa0a6; } .sec:hover { background: #2a2c30; color: #cbd0d6; }
+  .sec.ok { color: #4ac26b; } .pill { background: #2a2c30; color: #cbd0d6; }
+  .pill.done { background: #1a7f37; color: #fff; } }
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← Tutti i riassunti</a></div>
+<img class="cover" loading="lazy" alt="Lo odierai, ma fara esplodere i tuoi livelli di energia" src="https://i.ytimg.com/vi/iug2M0FFrUM/hqdefault.jpg"><p><strong>In sintesi:</strong> non hai finito l'energia, la stai occupando con le cose sbagliate. Ogni cosa iniziata e non conclusa, ogni decisione in sospeso, ogni promessa non mantenuta è un <strong>cerchio aperto</strong> che consuma un pezzetto di energia mentale ogni giorno, anche mentre guardi il video. Il colpo di scena è che per spegnerli non serve completarli: basta un piano abbastanza specifico da convincere il cervello che ce ne occuperemo — e un metodo in tre passi per applicarlo a tutti insieme.</p>
+<h2>I cerchi aperti e perché pesano</h2>
+<p>La lista di apertura è volutamente banale: la bolletta non pagata, l'email non risposta, la visita medica rimandata, la decisione non presa, il libro iniziato e lasciato sul comodino. Sono tutte attività cominciate e non concluse, decisioni in sospeso, promesse fatte a sé stessi e non mantenute. Giuliodori li chiama <strong>cerchi aperti</strong> — <em>open loops</em> — e il punto è che ognuno di essi, per quanto piccolo, <strong>consuma energia mentale ogni giorno</strong>.</p>
+<p>La metafora che usa per spiegarlo è da ingegnere: i cerchi aperti sono le <strong>app in background</strong> dello smartphone. Non le usiamo, non le vediamo nemmeno, ma ciascuna si mangia un pezzetto di batteria. Una sola non fa danno; <strong>cinquanta</strong> e ti ritrovi con il telefono scarico già a metà pomeriggio.</p>
+<h3>L'osservazione di un cameriere a Berlino</h3>
+<p>L'origine scientifica è un aneddoto degli <strong>anni Venti del Novecento</strong>. In un caffè affollato vicino all'università di Berlino, un gruppo di psicologi pranza discutendo di esperimenti. Le ordinazioni sono tante, ma il cameriere non scrive niente: tiene tutto a mente, piatto per piatto, senza sbagliare un colpo. Al tavolo c'è una giovane dottoranda lituana che nota quello che a tutti gli altri era sfuggito: <strong>appena il conto viene saldato, il cameriere sembra cancellare tutto dalla memoria</strong>. Ordini ricordati alla perfezione per un'ora intera, spazzati via nel momento esatto in cui il cerchio si chiude.</p>
+<p>La dottoranda è <strong>Bluma Zeigarnik</strong>, e non si accontenta dell'osservazione. Torna in laboratorio, assegna ai partecipanti <strong>una ventina di compiti semplici</strong> — puzzle, problemi di aritmetica, lavoretti manuali — e ne <strong>interrompe alcuni a metà</strong>, lasciando completare gli altri. Poi chiede quali ricordino. Risultato: i soggetti ricordano i compiti interrotti <strong>quasi il doppio</strong> rispetto a quelli completati. <strong>Nel 1927</strong> il fenomeno viene battezzato <strong>effetto Zeigarnik</strong>: la mente ricorda l'incompiuto molto meglio del finito, e finché un compito resta aperto genera una tensione che non si spegne.</p>
+<p>Subiamo questo effetto quasi ogni sera senza accorgercene. Molte serie TV interrompono l'episodio «proprio sul più bello»: una storia incompiuta resta conficcata in testa e ci spinge al binge watching o a ricollegarci la settimana dopo. <strong>Netflix ha usato questa tecnica per costruire un impero multimiliardario</strong> — e l'idea del video è usarla al contrario, per riprendersi la propria vita.</p>
+<h3>Il residuo dell'attenzione</h3>
+<p>Nel <strong>2009</strong> la ricercatrice <strong>Sophie Leroy</strong> ha dimostrato l'esistenza del <strong>residuo dell'attenzione</strong>: quando lasciamo un'attività incompiuta e passiamo alla successiva, <strong>una parte dell'attenzione resta attaccata alla precedente</strong>. Stai scrivendo il report di lavoro ma un pezzo di mente è ancora sulla telefonata al meccanico che hai rimandato; sei a cena con il tuo partner ma un pezzo di mente è ancora sul report. È un loop che drena energia all'infinito, ed è il motivo per cui si arriva alla sera esausti <strong>pur avendo l'impressione di non aver concluso nulla</strong>. È proprio il non aver portato a compimento nessuna attività di valore che ci lascia svuotati.</p>
+<p>Vale anche al contrario. Quando ci si trasferisce in una casa nuova, si comincia un lavoro nuovo o si apre un anno nuovo arriva spesso una sferzata di energia: è il <strong>fresh start effect</strong>, e funziona perché il nuovo inizio <strong>spazza via in un colpo solo decine di vecchi cerchi aperti</strong>. Giuliodori mette però subito il paletto: non sta consigliando di aspettare il primo gennaio, di trasferirsi in un'altra città o di licenziarsi per sgomberare la testa.</p>
+<h2>Perché rimandare peggiora le cose</h2>
+<p>L'obiezione prevedibile è: «tengo aperti quei cerchi proprio perché adesso non ho tempo né forze; li chiuderò quando starò meglio». La risposta è che <strong>più rimandi, più ti logori</strong>.</p>
+<p>Nel <strong>2006</strong> il neuroscienziato <strong>Gregory Berns</strong> ha pubblicato su <em><strong>Science</strong></em> un esperimento che Giuliodori definisce «al limite del sadismo». I partecipanti potevano scegliere tra <strong>una scossa elettrica forte subito</strong> e <strong>una più leggera dopo un'attesa</strong>. Una parte significativa scelse <strong>la scossa più forte</strong> pur di non aspettare: preferivano più dolore adesso che meno dolore dopo. Sembra assurdo, ma quei cervelli avevano capito una cosa che il nostro si rifiuta di ammettere — <strong>l'incertezza prolungata fa più male del disagio immediato</strong>. Il conto in sospeso, la conversazione evitata, la decisione rimandata: aspettare non fa sparire l'impegno, lo moltiplica giorno dopo giorno.</p>
+<h2>Il colpo di scena: non devi chiuderli tutti</h2>
+<p>Seconda obiezione prevedibile: «i miei cerchi aperti sono decine, mi ci vorranno mesi». Qui arriva il ribaltamento.</p>
+<p>Nel <strong>2011</strong> i ricercatori <strong>Masicampo e Baumeister</strong> hanno pubblicato uno studio dal titolo eloquente, <em><strong>Consider It Done</strong></em> — consideralo fatto. La scoperta: per spegnere l'intrusione mentale di un cerchio aperto <strong>non serve completarlo</strong>. Basta <strong>un piano specifico e credibile</strong> di <em>cosa</em> farai, <em>quando</em> lo farai e <em>dove</em> lo farai. Il cervello non pretende che chiudiamo tutto subito: lo rendiamo contento dicendogli che ce ne occuperemo concretamente.</p>
+<p>Attenzione però alla trappola, che Giuliodori chiude esplicitamente: questo <strong>non</strong> significa che il segreto sia procrastinare, mettendo i cerchi «in naftalina in qualche to-do list chilometrica che forse riprenderemo tra sei mesi». Serve un approccio molto preciso.</p>
+<h2>Il metodo in tre passi</h2>
+<h3>Passo uno: l'inventario</h3>
+<p>Carta e penna, o un file di testo, e <strong>scaricare a terra tutto quello che si ha in testa</strong>. Tecnicamente si chiama <strong>brain dump</strong>, svuotamento. Ogni cerchio aperto che passa per la mente va messo per iscritto, senza filtri di importanza: dal latte da comprare al supermercato all'«idea strategico-finanziaria che ci svolterà la vita». Ogni pensiero che occupa <strong>RAM mentale</strong> va scaricato. Giuliodori anticipa che già solo questo passaggio darà «un sollievo che probabilmente non provavi da mesi».</p>
+<h3>Passo due: il "quadriage"</h3>
+<p>Per ogni voce va presa una decisione, e le opzioni sono quattro — da cui il neologismo che si inventa, <em>quadriage</em> invece di triage.</p>
+<p><strong>Chiudi subito.</strong> Se richiede <strong>meno di due minuti</strong> — pagare la bolletta, mandare quel messaggio, disdire l'abbonamento — si fa adesso. E non va nemmeno scritto in lista o in calendario: «toglitela dalle balle subito».</p>
+<p><strong>Pianifica, ma sul serio.</strong> Se richiede più di due minuti, va in <strong>calendario</strong> con un box corrispondente al tempo realmente necessario, in un giorno e un'ora precisi. L'esempio concreto: un appuntamento di mezz'ora su Google Calendar, lunedì mattina alle 9:30, con scritto «chiamata al commercialista». La regola dietro: <strong>solo se siamo specifici la mente lascia andare quel cerchio</strong>.</p>
+<p><strong>Lascia andare.</strong> È, dice, «spesso la decisione più liberatoria». Certi cerchi non vanno chiusi, vanno <strong>cancellati</strong>: il progetto che non interessa più e non sta andando da nessuna parte, il libro fermo a pagina 40 da più di un anno, l'impegno preso solo per far contento qualcuno. <strong>«Ti devi dare il permesso di non fare tutto.»</strong></p>
+<p><strong>Ingabbia i ricorrenti.</strong> Alcuni cerchi sono più subdoli perché non si chiudono mai: si riaprono di continuo — pulire casa, rispondere alle mail, fare la spesa. Non ce ne si può liberare, ma li si può <strong>contenere</strong> dando loro un posto fisso in agenda, «il venerdì alle 18:00 oppure la domenica mattina». Se la mente sa che la lavatrice si fa una volta a settimana e sempre la domenica mattina, smette di tenere quel pensiero in background.</p>
+<h3>Passo tre: uno alla volta</h3>
+<p>Dei cerchi sopravvissuti al quadriage ci si occupa <strong>uno alla volta</strong>, partendo da quello che ronza in testa da più tempo, quello che ha consumato più batteria mentale. La chiave è <strong>non negoziare con le proprie emozioni</strong>: se l'attività è ancora in lista, va fatta esattamente quando si era deciso di farla. «Il tuo io futuro ti ringrazierà.»</p>
+<h3>L'avvertenza: la procrastinazione sofisticata</h3>
+<p>Chiudere un cerchio dietro l'altro «diventa quasi una dipendenza», e qui nasce il rischio: concentrarsi sulle <strong>microattività</strong> facili da concludere lasciando sempre per ultime quelle ostiche, lunghe e complicate. Sarebbe l'ennesima forma, più sofisticata, di procrastinazione. Il rimedio è semplice: <strong>la giornata va iniziata ingoiando il rospo</strong>, cioè con un blocco di lavoro focalizzato sul progetto più importante. I cerchi piccoli si chiudono <strong>dopo</strong> il blocco di lavoro profondo, non prima.</p>
+<h2>La chiusura: la vita è un atto unico</h2>
+<p>L'ultima obiezione è la più onesta: «i cerchi aperti non finiscono mai, ne chiudo tre e me ne arrivano altri cinque, è una guerra persa in partenza». Giuliodori risponde su due piani.</p>
+<p>Il primo: se ci si sente <strong>sempre in ritardo e sempre in affanno</strong>, c'è un problema strutturale alla base — il sistema che usiamo per lavorare e vivere non funziona, o non ce l'abbiamo proprio un sistema.</p>
+<p>Il secondo è la verità con cui saluta. <strong>Anche con il più efficace dei sistemi di time management non arriverà mai il giorno in cui sarà tutto sistemato</strong> e non avremo più rotture di scatole. I cerchi aperti, le attività in cui siamo impegnati, i progetti che vorremmo realizzare <strong>non sono l'ostacolo tra noi e la nostra vita: sono letteralmente la nostra vita</strong>.</p>
+<p>A sostegno cita la psicanalista svizzera <strong>Marie-Louise von Franz</strong>: «abbiamo la strana sensazione che la nostra vita reale non sia ancora iniziata». Stiamo facendo questo lavoro, vivendo in questa città, frequentando queste persone, ma un angolo della mente è convinto che la vita <em>vera</em> arriverà in futuro. Giuliodori chiama questo atteggiamento <strong>sindrome della felicità rinviata</strong>: l'idea che l'esistenza attuale sia solo il preludio di un futuro idilliaco e senza problemi. È un miraggio che svanisce man mano che ci avviciniamo, rivelando che <strong>quello che pensavamo fosse un preludio era in realtà la nostra intera esistenza</strong>. Non esistono prove generali: <strong>la vita è un atto unico</strong>, sta accadendo proprio ora mentre aspettiamo che avvenga chissà cosa.</p>
+<h2>Fonti e note</h2>
+<ul>
+<li>Video: https://www.youtube.com/watch?v=iug2M0FFrUM (14:47)</li>
+<li>report grezzo — con la trascrizione completa e i timestamp</li>
+</ul>
+<p><strong>Cosa ho omesso:</strong> il rimando in apertura al suo prodotto <em>Riconquista il tuo tempo</em> (dove dice di aver coniato l'espressione "cerchi aperti"); il lancio commerciale di «Creatempo, il sistema operativo definitivo per gestire il nostro tempo e la nostra vita» con l'invito a registrarsi alla newsletter dal link in descrizione, piazzato a 12:25; la chiusura «ci rileggiamo nella newsletter del lunedì». Segnalo inoltre una <strong>promessa non mantenuta dall'autore</strong>: a 02:46 annuncia che a fine video svelerà «un effetto inaspettato del principio di Zeigarnik che può aiutarci a battere la procrastinazione», ma quell'effetto non viene poi presentato come tale — l'unico candidato plausibile è lo studio Masicampo–Baumeister, che però arriva a metà video. Non ho aggiunto nulla per colmare il buco.</p>
+<p><strong>Nomi ricostruiti dai sottotitoli automatici</strong> (da verificare): «Bluma Zigarmic» / «effetto zigarnic» / «principio di Zegarnik», tre grafie diverse nello stesso video → <strong>Bluma Zeigarnik</strong>; «Sopilero Roy» → <strong>Sophie Leroy</strong>, ricostruzione a orecchio da un nome completamente deformato; «Gregory Burns» → <strong>Gregory Berns</strong>; «Masicampo e Baumister» → <strong>Masicampo e Baumeister</strong> (il titolo <em>Consider It Done</em> esce invece pulito); «Marie Louis von Franz» → <strong>Marie-Louise von Franz</strong>. Della citazione di von Franz <strong>non ho la fonte originale</strong>: è resa in italiano nel video e non l'ho verificata. Anche i nomi dei prodotti dell'autore («Creatempo», «Riconquista il tuo tempo») sono trascritti a orecchio.</p>
+<p><strong>Nota per il vault:</strong> questo è il video a cui rimandava il riassunto sulle 24 ore quando citava l'effetto Zeigarnik dicendo di averne «già parlato in un video recente». Qui l'effetto ha finalmente origine, esperimento e data.</p>
+<script>
+window.SB = (function () {
+  var API = 'https://brain-sync.tramitemarketing-it.workers.dev';
+  function url() { return API + '/state'; }
+  return {
+    attivo: !!API,
+    prendi: function () {
+      if (!API) return Promise.resolve(null);
+      return fetch(url(), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    },
+    manda: function (page, n, b, finale) {
+      if (!API) return;
+      var dati = JSON.stringify({ page: page, n: n, b: b });
+      try {
+        fetch(url(), {
+          method: 'POST', body: dati, keepalive: !!finale,
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(function () {});
+      } catch (e) {}
+    },
+    commenta: function (testo) {
+      if (!API) return Promise.resolve(false);
+      return fetch(API + '/commenti', {
+        method: 'POST',
+        body: JSON.stringify({ slug: location.pathname, testo: testo }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+  };
+})();
+
+
+(function () {
+  var KEY = 'sb2:' + location.pathname;
+  var WPS = 4;             // parole al secondo (~240 wpm)
+  var MIN = 0.7, MAX = 6;  // secondi per blocco: minimo e tetto
+  var PASS = 0.5;          // se l'ho letto almeno a metà e sono andato oltre, conta
+  var IDLE = 120000;       // fermo da 2 min = non sta leggendo
+  var DONE = 0.9;          // 90% dei contenuti = letto
+
+  var nodes = [].slice.call(document.querySelectorAll('p, li, blockquote'))
+    .filter(function (n) { return !n.closest('.topbar') && n.textContent.trim().length > 1; });
+  if (nodes.length < 3) return;
+
+  var words = nodes.map(function (n) {
+    return Math.max(1, n.textContent.trim().split(/\s+/).length);
+  });
+  var need = words.map(function (w) {
+    return Math.min(MAX, Math.max(MIN, w / WPS));
+  });
+  var total = words.reduce(function (a, b) { return a + b; }, 0);
+  var acc = words.map(function () { return 0; });
+  var read = words.map(function () { return false; });
+
+  // ripristina lo stato salvato (se la pagina non è cambiata)
+  try {
+    var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (s && s.n === nodes.length && typeof s.b === 'string') {
+      for (var i = 0; i < nodes.length; i++) read[i] = s.b.charAt(i) === '1';
+    }
+  } catch (e) {}
+
+  var bar = document.createElement('div'); bar.id = 'rp';
+  var dot = document.createElement('div'); dot.id = 'rd';
+  document.body.appendChild(bar); document.body.appendChild(dot);
+
+  // spunte di sezione: ogni h2 governa i blocchi fino all'h2 successivo
+  var secs = [];
+  var heads = [].slice.call(document.querySelectorAll('h2'));
+  heads.forEach(function (h) {
+    var idx = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (h.compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var prev = null;
+        for (var k = 0; k < heads.length; k++) {
+          if (heads[k].compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) prev = heads[k];
+        }
+        if (prev === h) idx.push(i);
+      }
+    }
+    if (!idx.length) return;
+    var b = document.createElement('button');
+    b.className = 'sec'; b.type = 'button';
+    b.title = 'Segna questa sezione come letta / non letta';
+    h.appendChild(b);
+    var sec = { el: b, idx: idx };
+    b.addEventListener('click', function () {
+      var allRead = idx.every(function (i) { return read[i]; });
+      idx.forEach(function (i) { read[i] = !allRead; acc[i] = allRead ? 0 : need[i]; });
+      paint(); save();
+    });
+    secs.push(sec);
+  });
+
+  function pct() {
+    var w = 0;
+    for (var i = 0; i < nodes.length; i++) if (read[i]) w += words[i];
+    return w / total;
+  }
+  function paint() {
+    var p = pct();
+    bar.style.width = (p * 100).toFixed(1) + '%';
+    var done = p >= DONE;
+    dot.textContent = done ? '✓ Letto' : Math.round(p * 100) + '%';
+    dot.className = done ? 'done' : '';
+    secs.forEach(function (s) {
+      var ok = s.idx.every(function (i) { return read[i]; });
+      s.el.className = ok ? 'sec ok' : 'sec';
+      s.el.textContent = ok ? '✓' : '○';
+    });
+  }
+  function bits() {
+    var b = '';
+    for (var i = 0; i < nodes.length; i++) b += read[i] ? '1' : '0';
+    return b;
+  }
+  var saveT = 0, syncT = 0, ultimo = '';
+  function save(finale) {
+    var b = bits();
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          v: 2, n: nodes.length, b: b, p: Math.round(pct() * 100), t: Date.now()
+        }));
+      } catch (e) {}
+    }, 400);
+    // verso il server: di rado, per non consumare la quota gratuita
+    if (!window.SB || !SB.attivo || b === ultimo) return;
+    if (finale) { ultimo = b; SB.manda(location.pathname, nodes.length, b, true); return; }
+    clearTimeout(syncT);
+    syncT = setTimeout(function () {
+      ultimo = b;
+      SB.manda(location.pathname, nodes.length, b, false);
+    }, 8000);
+  }
+
+  // all'apertura: unisco i progressi già fatti su altri dispositivi
+  if (window.SB && SB.attivo) {
+    SB.prendi().then(function (st) {
+      if (!st || !st.pages) return;
+      var r = st.pages[location.pathname];
+      if (!r || r.n !== nodes.length) return;
+      var cambiato = false;
+      for (var i = 0; i < nodes.length; i++) {
+        if (r.b.charAt(i) === '1' && !read[i]) { read[i] = true; acc[i] = need[i]; cambiato = true; }
+      }
+      if (cambiato) { paint(); save(); }
+    });
+  }
+
+  // quali blocchi sono nella fascia centrale dello schermo (dove si legge davvero)
+  var visible = Object.create(null);
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = nodes.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) visible[i] = 1; else delete visible[i];
+    });
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  nodes.forEach(function (n) { io.observe(n); });
+
+  var last = Date.now();
+  ['scroll', 'mousemove', 'keydown', 'touchstart', 'wheel', 'click'].forEach(function (ev) {
+    addEventListener(ev, function () { last = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function () {
+    if (document.hidden || Date.now() - last > IDLE) return;
+    var changed = false, i;
+    for (i in visible) {
+      i = +i;
+      if (read[i]) continue;
+      acc[i] += 0.25;
+      if (acc[i] >= need[i]) { read[i] = true; changed = true; }
+    }
+    // blocco letto almeno a metà e ormai scorso sopra la fascia di lettura:
+    // è il comportamento di chi legge un paragrafo e prosegue.
+    for (i = 0; i < nodes.length; i++) {
+      if (read[i] || acc[i] < need[i] * PASS) continue;
+      if (nodes[i].getBoundingClientRect().bottom < innerHeight * 0.25) {
+        read[i] = true; changed = true;
+      }
+    }
+    if (changed) { paint(); save(); }
+  }, 250);
+
+  dot.addEventListener('click', function () {
+    var all = pct() >= DONE;
+    for (var i = 0; i < nodes.length; i++) { read[i] = !all; acc[i] = all ? 0 : need[i]; }
+    paint(); save();
+  });
+  dot.title = 'Tocca per segnare tutto come letto / non letto';
+
+  paint();
+  addEventListener('beforeunload', function () { save(true); });
+  addEventListener('visibilitychange', function () { if (document.hidden) save(true); });
+})();
+
+(function () {
+  if (!window.SB || !SB.attivo || !SB.commenta) return;
+  var btn = document.createElement('button');
+  btn.textContent = '💬';
+  btn.title = 'Lascia un commento-istruzione per Claude';
+  btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:24px;border:none;font-size:22px;background:#2b6cb0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer';
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;right:16px;bottom:72px;z-index:60;display:none;width:min(92vw,340px);background:#1c2733;border:1px solid #33475b;border-radius:12px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+  box.innerHTML = '<textarea rows="4" placeholder="Scrivi a Claude: es. salva questo prompt come prompt-XXX e aggiungilo alla skill prompt" style="width:100%;box-sizing:border-box;background:#111a22;color:#eee;border:1px solid #33475b;border-radius:8px;padding:8px;font:inherit"></textarea>' +
+    '<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center">' +
+    '<span data-esito style="font-size:13px;color:#9fb3c8"></span>' +
+    '<button data-invia style="background:#2b6cb0;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit">Invia</button></div>';
+  document.body.appendChild(btn); document.body.appendChild(box);
+  var ta = box.querySelector('textarea'), esito = box.querySelector('[data-esito]');
+  btn.onclick = function () {
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'block') ta.focus();
+  };
+  box.querySelector('[data-invia]').onclick = function () {
+    var t = ta.value.trim(); if (!t) return;
+    esito.textContent = '…';
+    SB.commenta(t).then(function (ok) {
+      esito.textContent = ok ? 'Salvato ✓ Claude lo legge al prossimo /watch' : 'Errore, riprova';
+      if (ok) ta.value = '';
+    });
+  };
+})();
+</script>
+</body>
+</html>

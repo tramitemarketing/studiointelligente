@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Perché le persone meno intelligenti hanno più successo (ecco cosa fanno di diverso)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%2260%22%20height%3D%2242%22%20rx%3D%2211%22%20fill%3D%22%23e8262d%22/%3E%3Cpath%20d%3D%22M26%2022.5%2044%2032%2026%2041.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E">
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1.1rem 1.1rem 4rem;
+  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 44rem; margin-inline: auto; color: #1a1a1a; background: #fbfbfa; }
+
+a { color: #1a5fb4; text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: .2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .6rem; } h3 { font-size: 1.1rem; margin: 1.4rem 0 .5rem; }
+p { margin: .7rem 0; }
+blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid #d0d0d0; color: #555; }
+code { background: #ececec; padding: .1rem .35rem; border-radius: .3rem; font-size: .9em; }
+hr { border: none; border-top: 1px solid #e2e2e2; margin: 2rem 0; }
+ul, ol { margin: .7rem 0; padding-left: 1.4rem; } li { margin: .25rem 0; }
+.topbar { margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #e2e2e2; }
+.topbar a { font-weight: 600; }
+.muted { color: #6b7075; font-size: .92rem; }
+.tag { display: inline-block; background: #eceff3; color: #4a5560; font-size: .72rem;
+  font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .12rem .45rem; border-radius: .4rem; margin-bottom: .35rem; }
+.card { display: block; border: 1px solid #e6e6e6; background: #fff; border-radius: .7rem;
+  padding: .9rem 1rem; margin: .7rem 0; }
+.card:hover { text-decoration: none; border-color: #9ab8e0; }
+.card h2 { margin: 0 0 .2rem; font-size: 1.15rem; } .card .muted { display: block; }
+.card .desc { margin: .35rem 0 0; }
+.btn { display: inline-block; margin: .5rem 0; padding: .55rem 1rem; background: #1a5fb4;
+  color: #fff !important; border-radius: .5rem; font-weight: 600; font-size: .95rem; }
+.btn:hover { background: #154c92; text-decoration: none; }
+
+/* --- tendina "lo so gia": contenuto ripiegato, si apre se serve --- */
+details.gia { border: 1px solid #e6e6e6; border-radius: .6rem; background: #fafafa;
+  padding: .1rem .9rem; margin: 1rem 0; }
+details.gia > summary { cursor: pointer; padding: .6rem 0; font-weight: 600;
+  font-size: .95rem; color: #6b7075; list-style: none; }
+details.gia > summary::-webkit-details-marker { display: none; }
+details.gia > summary::before { content: "▸ "; color: #9aa0a6; }
+details.gia[open] > summary::before { content: "▾ "; }
+details.gia > summary:hover { color: #1a5fb4; }
+details.gia[open] { background: transparent; }
+details.gia > *:last-child { margin-bottom: .8rem; }
+/* --- copertine dei video --- */
+.cover { display: block; width: 100%; max-width: 100%; border-radius: .7rem;
+  margin: 0 0 1.2rem; background: #ececec; aspect-ratio: 16/9; object-fit: cover; }
+.card { display: flex; gap: .85rem; align-items: flex-start; }
+.card .thumb { flex: 0 0 6.6rem; width: 6.6rem; aspect-ratio: 16/9; border-radius: .45rem;
+  object-fit: cover; background: #ececec; }
+.card .txt { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 30rem) { .card .thumb { flex-basis: 5.2rem; width: 5.2rem; } }
+.tw { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { border: 1px solid #e2e2e2; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 700; }
+
+/* --- lettura: barra di avanzamento, pillola, spunte di sezione --- */
+#rp { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: #1a5fb4; z-index: 50; transition: width .3s ease; }
+#rd { position: fixed; right: .8rem; bottom: .8rem; z-index: 50;
+  background: rgba(255,255,255,.94); border: 1px solid #e2e2e2; border-radius: 2rem;
+  padding: .4rem .8rem; font-size: .82rem; font-weight: 700; color: #4a5560;
+  box-shadow: 0 2px 10px rgba(0,0,0,.09); cursor: pointer; user-select: none; }
+#rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.sec { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 700;
+  color: #6b7075; padding: .1rem .45rem; margin-left: .5rem; border-radius: 1rem;
+  vertical-align: middle; }
+.sec:hover { background: #eceff3; color: #4a5560; }
+.sec.ok { color: #1a7f37; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  padding: .1rem .45rem; border-radius: 1rem; margin-left: .4rem; vertical-align: middle;
+  background: #eceff3; color: #4a5560; }
+.pill.done { background: #1a7f37; color: #fff; }
+.card.read { opacity: .72; }
+/* i temi scuri vanno DOPO le regole chiare: a parita' di peso vince
+   l'ultima scritta, altrimenti il chiaro le sovrascrive tutte */
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e6e6; background: #17181a; }
+  a { color: #7db3ff; } blockquote { border-color: #3a3d42; color: #b8bcc2; }
+  code { background: #2a2c30; } hr { border-color: #2a2c30; }
+  .card { background: #1e2023; border-color: #2a2c30; } .muted { color: #9aa0a6; }
+  .tag { background: #2a2c30; color: #cbd0d6; }
+  .btn { background: #2b6fd6 !important; } .btn:hover { background: #3f7fe0 !important; }
+  details.gia { border-color: #2a2c30; background: #1c1e21; }
+  details.gia > summary { color: #9aa0a6; }
+  details.gia > summary:hover { color: #7db3ff; }
+  details.gia[open] { background: transparent; }
+  th, td { border-color: #2a2c30; } th { background: #24262a; } }
+@media (prefers-color-scheme: dark) {
+  #rd { background: rgba(30,32,35,.94); border-color: #2a2c30; color: #cbd0d6; }
+  #rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+  .sec { color: #9aa0a6; } .sec:hover { background: #2a2c30; color: #cbd0d6; }
+  .sec.ok { color: #4ac26b; } .pill { background: #2a2c30; color: #cbd0d6; }
+  .pill.done { background: #1a7f37; color: #fff; } }
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← Tutti i riassunti</a></div>
+<img class="cover" loading="lazy" alt="Perché le persone meno intelligenti hanno più successo (ecco cosa fanno di diverso)" src="https://i.ytimg.com/vi/252Mk-6dZqA/hqdefault.jpg"><p><strong>In sintesi:</strong> dentro ognuno di noi convivono un <strong>architetto</strong> che progetta al sicuro e un <strong>muratore</strong> che costruisce esponendosi, e i risultati della nostra vita non sono la somma dei due: sono <strong>limitati dal più debole dei due</strong>. Scuola e università allenano solo l'architetto, così più siamo intelligenti più costruiamo strategie sofisticate che sotto pressione saturano la memoria di lavoro e ci bloccano — mentre chi si fa meno pippe mentali va avanti come un treno. L'antidoto non è un piano migliore: è agire nonostante le condizioni e tradurre i piani in <strong>istruzioni concrete sotto le dieci parole</strong>.</p>
+<h2>Le due figure che convivono dentro di noi</h2>
+<p>Il video si apre con una provocazione — «probabilmente sei troppo intelligente, e no, non è un complimento» — e con l'anticipazione di uno studio del <strong>2005</strong> secondo cui davanti a un progetto <strong>a bloccarsi per primi sono gli studenti più intelligenti</strong>: non nonostante la loro intelligenza, ma proprio a causa di essa.</p>
+<p>La metafora che regge tutto il ragionamento è quella del cantiere. L'<strong>architetto</strong> progetta, analizza, studia, ottimizza; lavora in studio, al caldo, con il caffè accanto. Nessun rischio, nessun giudizio, «solo il piacere di far tornare tutto sulla carta». Il <strong>muratore</strong> invece si sporca le mani e costruisce: lavora in cantiere, in mezzo ai macchinari e al rumore, in balia dei capricci del meteo, dove i rischi ci sono eccome — la fatica, gli imprevisti, e «i muri che tutti vedranno e giudicheranno».</p>
+<p>Entrambe le figure servono: gli obiettivi vanno progettati bene, devono stare in piedi e non crollare al primo alito di vento, ma prima o poi bisogna anche entrare nel cantiere e tirarli su. <strong>Il problema nasce quando vogliamo fare solo gli architetti</strong>: creiamo la visione, disegniamo i progetti, produciamo i rendering, e poi quando c'è da prendere in mano secchio e cazzuola ci scansiamo sistematicamente.</p>
+<p>La ragione di questo squilibrio è strutturale. <strong>Scuola e università sono ambienti che allenano l'architetto interiore</strong>: ogni anno di studio, ogni teoria appresa, ogni esame superato è un allenamento che rafforza la parte teorica. Per il muratore, invece, non esistono percorsi o approcci strutturati. Se si capita nell'ambiente di lavoro giusto si imparano anche moltissime competenze pratiche, ma non è affatto scontato. Alla radice c'è un sistema di premi distorto: negli anni scolastici «siamo stati premiati proprio perché sapevamo più cose, ma non necessariamente sapevamo fare più cose».</p>
+<h3>Il caso personale: architetto 9, muratore 1</h3>
+<p>Giuliodori racconta il proprio caso come prova. Nella sua vita precedente è stato <strong>consulente strategico per 7 anni a Milano</strong>, in una società di consulenza americana: già a 25 anni girava l'Italia su progetti per alcune delle più grandi aziende italiane e internazionali, consigliando amministratori delegati e dirigenti su come aprire nuovi mercati, aumentare il fatturato, ridurre i costi. «In teoria sapevo tutto di come si gestiva un'azienda.»</p>
+<p>Quando ha deciso di costruire nel tempo libero una sua attività — quella che poi sarebbe diventata <strong>EfficaceMente</strong> — ha passato <strong>diversi mesi</strong> a fare il business plan e il piano strategico perfetti: analisi dei competitor, analisi del mercato, studio dei prodotti. Non stava facendo la cosa più semplice, cioè sporcarsi le mani, e soprattutto non stava producendo nulla di valore per i suoi lettori e futuri clienti. <strong>La sua avventura imprenditoriale inizia davvero solo nel settembre del 2008</strong>, quando compra il dominio <em>efficacemente.com</em> e pubblica il primo articolo.</p>
+<p>Da qui la legge che dà il titolo al ragionamento: <strong>i risultati che otteniamo non derivano dalla somma delle capacità dell'architetto e del muratore interiori, ma sono limitati dal più debole dei due</strong>. Lui era un architetto di livello 9 e un muratore di livello 1, e i risultati dei primi mesi — quelli in cui non aveva tirato su neanche un muro — sono stati di livello 1. E più siamo intelligenti, razionali e competenti, più tendiamo a rafforzare l'architetto a scapito del muratore.</p>
+<h2>Lo studio del 2005: perché crollano i più intelligenti</h2>
+<p>La conferma sperimentale arriva da due ricercatori della <strong>Michigan State University</strong>. Hanno preso <strong>93 studenti</strong> e li hanno divisi in base alla <strong>memoria di lavoro</strong> — la capacità di tenere ed elaborare informazioni nella testa, che il video presenta come «un'ottima proxy della nostra intelligenza e del nostro quoziente intellettivo». Poi li hanno messi a risolvere problemi di matematica <strong>sotto pressione</strong>: telecamera accesa, giudizi continui da parte dei ricercatori e un premio in denaro che dipendeva anche dalle prestazioni.</p>
+<p>Il risultato ribalta le aspettative: <strong>a crollare non sono stati i meno dotati, ma proprio quelli con la memoria di lavoro più alta</strong>. La spiegazione trovata dai ricercatori è che chi ha più capacità mentale tende a usare <strong>strategie più sofisticate, che consumano proprio la memoria di lavoro</strong>. Nel momento in cui arriva una difficoltà, o la pressione, o semplicemente la fatica di sporcarsi le mani, non restano risorse per andare avanti e «il nostro castello di carte crolla».</p>
+<p>È esattamente quello che succede fuori dal laboratorio. Finché siamo nel nostro bello studio di architettura, tra progetti, disegni e rendering, va tutto bene. <strong>Nel momento dell'esecuzione, più siamo intelligenti più partono «le peggio pippe mentali»</strong>: la paura di fallire, la paura del giudizio degli altri, la paura di non essere all'altezza. E così ci si blocca anche davanti ad azioni banali — pubblicare il primo contenuto, mandare quell'email, fare quella telefonata. Non è che siamo diventati improvvisamente stupidi: è che la ricerca continua di strategie sofisticate e teoricamente avanzate satura in fretta la memoria di lavoro. Il paradosso finale: <strong>«le persone un po' meno intelligenti di noi, che si fanno molte meno pippe mentali, vanno avanti come dei treni e realizzano molto più di quello che realizziamo noi»</strong>.</p>
+<h3>La trappola della "fintazione"</h3>
+<p>C'è una seconda trappola, che l'autore battezza con un neologismo: la <strong>fintazione</strong>, cioè la finta azione. Nasce da un fatto: se è vero che più siamo intelligenti più evitiamo il cantiere, è altrettanto vero che come esseri umani non sopportiamo di stare fermi — abbiamo l'<strong>horror vacui</strong>, il terrore del vuoto. Così la mente inventa un gioco di prestigio.</p>
+<p>La scena è riconoscibile da chiunque. Ti siedi al computer per lavorare a quel progetto; prima di aprire il file noti un po' di disordine e passi <strong>dieci minuti</strong> a risistemare le cartelle. Apri il progetto e il font non ti convince, quindi lo cambi. Fai <strong>cinque minuti</strong> di lavoro vero, ti blocchi su un punto e decidi che ti serve un tutorial, «giusto per fare le cose fatte bene». Mentre guardi il tutorial noti un video intitolato <em>Come smettere di procrastinare</em> e apri anche quello. Passano le ore, la giornata è finita, e il paradosso è che sei pure mediamente soddisfatto, perché in fin dei conti hai fatto un sacco di cose. <strong>«Il problema è che hai fatto tutto tranne lavorare davvero sul tuo progetto.»</strong></p>
+<p>La fintazione è l'atteggiamento tipico dell'architetto: progettiamo, facciamo ricerche, troviamo un difetto nel progetto, lo aggiustiamo, lo riprogettiamo, facciamo altre ricerche, incastrati in un loop infinito. E il punto velenoso è che <strong>l'architetto interiore considera tutte queste attività lavoro legittimo</strong>. È per questo che ci si può ritrovare bloccati «non per giorni o settimane, ma addirittura per anni interi»: «lavoriamo, lavoriamo, lavoriamo, ma nella realtà dei fatti il vero cantiere non lo apriamo mai».</p>
+<h3>Perché le tecniche classiche di produttività peggiorano le cose</h3>
+<p>Ne discende un avvertimento che vale per tutta la letteratura del time management. <strong>Bullet journal, to-do list, agende «e compagnia bella» sono strumenti tipici dell'architetto interiore.</strong> Non sono inutili, hanno il loro ruolo; ma se già abbiamo una parte cognitiva e razionale dominante e un muratore che «a malapena riesce a mettere insieme tre mattoni», usare <em>solo</em> queste tecniche rafforza la parte già forte e può risultare <strong>controproducente</strong>.</p>
+<h2>La soluzione: il muratore, Baggio e le dieci parole</h2>
+<p>La prima cosa da portarsi a casa è la caratteristica essenziale del muratore: <strong>agisce nonostante le condizioni esterne e interne</strong>. Che ci siano 40 gradi all'ombra d'estate a mezzogiorno o meno dieci alle sei del mattino d'inverno, il muratore va in cantiere e tira su i suoi muri — e lo fa anche quando non si sente pronto, quando si sveglia col piede storto, quando non è motivato.</p>
+<p>Per fissare il concetto arriva la storia di <strong>Roberto Baggio</strong>. <strong>17 luglio 1994</strong>, stadio <strong>Rose Bowl di Pasadena</strong>, caldo asfissiante: è la finale dei Mondiali <strong>Italia-Brasile</strong> e si decide ai rigori. Sul dischetto va il <strong>Pallone d'Oro in carica</strong>, l'uomo che aveva trascinato l'Italia in finale praticamente da solo, uno che di rigori tra allenamenti e partite ne aveva tirati migliaia. La palla vola sopra la traversa e il Brasile prende la Coppa del Mondo. La lezione: se il giocatore più forte del mondo del 1994, sotto pressione, sbaglia un gesto di cui conosceva alla perfezione sia la teoria sia la pratica, allora <strong>la saturazione emotiva</strong> — cioè il dover performare anche quando dentro e fuori di noi capita di tutto — è un ostacolo permanente, con cui dovremo sempre fare i conti.</p>
+<p>Ma la parte della storia che quasi nessuno ricorda è quella decisiva: <strong>dopo quell'errore Baggio non smise di tirare rigori</strong>. Continuò puntualmente a presentarsi sul dischetto fino alla fine della carriera, che chiuse come uno dei rigoristi più forti del campionato italiano. Da qui la riformulazione: non solo bisogna agire nonostante le condizioni, ma bisogna <strong>vedere l'azione sotto pressione, o in condizioni imperfette, come la miglior forma di allenamento</strong>.</p>
+<h3>La regola delle dieci parole</h3>
+<p>Nella pratica, la soluzione è unire le forze delle due figure. Va bene spendere il giusto tempo per sviluppare piani e strategie efficaci; il salto è <strong>saperli tradurre in istruzioni semplici</strong>. La regola operativa: <strong>definisci quello che devi fare con immagini concrete in meno di dieci parole</strong>. L'immagine guida è di parlare «con un muratore bravissimo, ma che ha al massimo la quinta elementare», a cui spiegare le cose esattamente come stanno, senza giri di parole.</p>
+<p>Gli esempi sono tre. Se vuoi allenarti ma trovi sempre scuse: <strong>«alle 17 metto le scarpe ed esco dalla porta»</strong>. Se vuoi scrivere quel libro ma passi le serate a fare ricerche e sistemare appunti: <strong>«alle 7:30 apro il documento e scrivo la prima frase»</strong>. Se vuoi mangiare meglio ma la sera sgarri: <strong>«a cena riempio metà del piatto di verdure»</strong>.</p>
+<p>Se queste istruzioni sembrano troppo semplici o banali per «il tuo cervello dal quoziente elevato», è esattamente il momento di ricordarsi che <strong>non devono soddisfare l'ego dell'architetto</strong>: servono al muratore, che è lassù sull'impalcatura tra pioggia, vento e sole e sotto pressione non ha le risorse mentali per gestire un piano ultrasofisticato di 27 punti.</p>
+<p>L'ultima raccomandazione riguarda il modo. <strong>Al muratore interiore si deve portare rispetto</strong>: se sbaglia — come capita a chiunque si sporchi le mani nel mondo reale e non in quello ideale dei piani — <strong>zero processi</strong>. Servono istruzioni semplici, chiare e concrete e nessun giudizio quando le cose non vanno come ce le aspettavamo, «altrimenti il muratore lascia il cantiere e noi ci ritroviamo da soli con l'intelligentissimo architetto, che però il secchio e la cazzuola non li sa usare».</p>
+<p>Il compito finale chiude il cerchio: pensa al progetto o all'attività che stai rimandando da troppo tempo, nascondendoti dietro infiniti piani e finte azioni; scrivi <strong>in meno di dieci parole</strong> un'istruzione semplice, chiara e concreta per ripartire — e poi falla.</p>
+<h2>Fonti e note</h2>
+<ul>
+<li>Video: <a href="https://www.youtube.com/watch?v=252Mk-6dZqA" target="_blank" rel="noopener">Perché le persone meno intelligenti hanno più successo (ecco cosa fanno di diverso)</a> — Andrea Giuliodori / EfficaceMente, 17:20, visto il 18 settembre 2026.</li>
+<li>report grezzo (tesi, insegnamenti azionabili con timestamp, numeri esatti, citazioni verbatim, trascrizione completa).</li>
+<li><strong>Lavorato solo sulla trascrizione</strong>: nessun frame estratto, quindi niente su montaggio, grafiche o cosa si vede a schermo.</li>
+</ul>
+<p><strong>Cosa è stato omesso, onestamente:</strong></p>
+<ul>
+<li>Il blocco promozionale su <strong>Creatempo</strong> [10:15-11:10]: presentato come «non un corso di formazione ma un corso di esecuzione», tre settimane, lezioni live con interazione diretta, ogni lezione pensata «per installare insieme un nuovo sistema» con «risultati immediati». L'unica affermazione di metodo dentro quel blocco — che le tecniche classiche di time management lavorano su un solo livello — è riportata sopra.</li>
+<li>La <strong>Creatempo Week</strong> [11:10-11:35 e 16:41-17:15]: tre serate live gratuite il 15, 16 e 17 settembre 2026, «al massimo 10.000 partecipanti collegati», link in descrizione e nel primo commento pinnato.</li>
+<li>L'autopresentazione del canale [00:50], la chiusura «ci rivediamo al prossimo video», e l'invito a scrivere la propria istruzione nei commenti (ho tenuto l'esercizio, tolto il «vai nei commenti»).</li>
+<li>Il riferimento interno a un proprio video su come smettere di procrastinare fa parte dell'aneddoto sulla fintazione ed è riportato lì.</li>
+<li>Tolti ripetizioni e intercalari del parlato. Nessun esempio, numero, studio o citazione sostanziale è stato lasciato fuori.</li>
+</ul>
+<blockquote>⚠️ <strong>Avvertenze sulla fonte.</strong> La trascrizione viene dai <strong>sottotitoli automatici</strong> di YouTube. Nomi ricostruiti a orecchio: «Andrea Giulio Dori» → <strong>Andrea Giuliodori</strong>; «Efficace MTI» → <strong>EfficaceMente</strong>; «stadio Rosball di Pasadina» → <strong>Rose Bowl di Pasadena</strong>; «horror va vu» → <strong>horror vacui</strong>; «il tuo cervello dal quente elevato» → «dal <strong>quoziente</strong> elevato». Lo studio del <strong>2005</strong> è attribuito a «due ricercatori della <strong>Michigan State University</strong>» su <strong>93 studenti</strong>: la trascrizione dell'ateneo è pulita, ma <strong>i nomi dei ricercatori non vengono mai pronunciati</strong> e non ho verificato lo studio in modo indipendente. Anche il nome della società di consulenza americana non viene mai detto. Il termine <strong>«fintazione»</strong> è un neologismo dell'autore (crasi di «finta azione»): non so come lo scriva lui, l'ho reso come lo pronuncia.</blockquote>
+<script>
+window.SB = (function () {
+  var API = 'https://brain-sync.tramitemarketing-it.workers.dev';
+  function url() { return API + '/state'; }
+  return {
+    attivo: !!API,
+    prendi: function () {
+      if (!API) return Promise.resolve(null);
+      return fetch(url(), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    },
+    manda: function (page, n, b, finale) {
+      if (!API) return;
+      var dati = JSON.stringify({ page: page, n: n, b: b });
+      try {
+        fetch(url(), {
+          method: 'POST', body: dati, keepalive: !!finale,
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(function () {});
+      } catch (e) {}
+    },
+    commenta: function (testo) {
+      if (!API) return Promise.resolve(false);
+      return fetch(API + '/commenti', {
+        method: 'POST',
+        body: JSON.stringify({ slug: location.pathname, testo: testo }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+  };
+})();
+
+
+(function () {
+  var KEY = 'sb2:' + location.pathname;
+  var WPS = 4;             // parole al secondo (~240 wpm)
+  var MIN = 0.7, MAX = 6;  // secondi per blocco: minimo e tetto
+  var PASS = 0.5;          // se l'ho letto almeno a metà e sono andato oltre, conta
+  var IDLE = 120000;       // fermo da 2 min = non sta leggendo
+  var DONE = 0.9;          // 90% dei contenuti = letto
+
+  var nodes = [].slice.call(document.querySelectorAll('p, li, blockquote'))
+    .filter(function (n) { return !n.closest('.topbar') && n.textContent.trim().length > 1; });
+  if (nodes.length < 3) return;
+
+  var words = nodes.map(function (n) {
+    return Math.max(1, n.textContent.trim().split(/\s+/).length);
+  });
+  var need = words.map(function (w) {
+    return Math.min(MAX, Math.max(MIN, w / WPS));
+  });
+  var total = words.reduce(function (a, b) { return a + b; }, 0);
+  var acc = words.map(function () { return 0; });
+  var read = words.map(function () { return false; });
+
+  // ripristina lo stato salvato (se la pagina non è cambiata)
+  try {
+    var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (s && s.n === nodes.length && typeof s.b === 'string') {
+      for (var i = 0; i < nodes.length; i++) read[i] = s.b.charAt(i) === '1';
+    }
+  } catch (e) {}
+
+  var bar = document.createElement('div'); bar.id = 'rp';
+  var dot = document.createElement('div'); dot.id = 'rd';
+  document.body.appendChild(bar); document.body.appendChild(dot);
+
+  // spunte di sezione: ogni h2 governa i blocchi fino all'h2 successivo
+  var secs = [];
+  var heads = [].slice.call(document.querySelectorAll('h2'));
+  heads.forEach(function (h) {
+    var idx = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (h.compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var prev = null;
+        for (var k = 0; k < heads.length; k++) {
+          if (heads[k].compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) prev = heads[k];
+        }
+        if (prev === h) idx.push(i);
+      }
+    }
+    if (!idx.length) return;
+    var b = document.createElement('button');
+    b.className = 'sec'; b.type = 'button';
+    b.title = 'Segna questa sezione come letta / non letta';
+    h.appendChild(b);
+    var sec = { el: b, idx: idx };
+    b.addEventListener('click', function () {
+      var allRead = idx.every(function (i) { return read[i]; });
+      idx.forEach(function (i) { read[i] = !allRead; acc[i] = allRead ? 0 : need[i]; });
+      paint(); save();
+    });
+    secs.push(sec);
+  });
+
+  function pct() {
+    var w = 0;
+    for (var i = 0; i < nodes.length; i++) if (read[i]) w += words[i];
+    return w / total;
+  }
+  function paint() {
+    var p = pct();
+    bar.style.width = (p * 100).toFixed(1) + '%';
+    var done = p >= DONE;
+    dot.textContent = done ? '✓ Letto' : Math.round(p * 100) + '%';
+    dot.className = done ? 'done' : '';
+    secs.forEach(function (s) {
+      var ok = s.idx.every(function (i) { return read[i]; });
+      s.el.className = ok ? 'sec ok' : 'sec';
+      s.el.textContent = ok ? '✓' : '○';
+    });
+  }
+  function bits() {
+    var b = '';
+    for (var i = 0; i < nodes.length; i++) b += read[i] ? '1' : '0';
+    return b;
+  }
+  var saveT = 0, syncT = 0, ultimo = '';
+  function save(finale) {
+    var b = bits();
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          v: 2, n: nodes.length, b: b, p: Math.round(pct() * 100), t: Date.now()
+        }));
+      } catch (e) {}
+    }, 400);
+    // verso il server: di rado, per non consumare la quota gratuita
+    if (!window.SB || !SB.attivo || b === ultimo) return;
+    if (finale) { ultimo = b; SB.manda(location.pathname, nodes.length, b, true); return; }
+    clearTimeout(syncT);
+    syncT = setTimeout(function () {
+      ultimo = b;
+      SB.manda(location.pathname, nodes.length, b, false);
+    }, 8000);
+  }
+
+  // all'apertura: unisco i progressi già fatti su altri dispositivi
+  if (window.SB && SB.attivo) {
+    SB.prendi().then(function (st) {
+      if (!st || !st.pages) return;
+      var r = st.pages[location.pathname];
+      if (!r || r.n !== nodes.length) return;
+      var cambiato = false;
+      for (var i = 0; i < nodes.length; i++) {
+        if (r.b.charAt(i) === '1' && !read[i]) { read[i] = true; acc[i] = need[i]; cambiato = true; }
+      }
+      if (cambiato) { paint(); save(); }
+    });
+  }
+
+  // quali blocchi sono nella fascia centrale dello schermo (dove si legge davvero)
+  var visible = Object.create(null);
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = nodes.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) visible[i] = 1; else delete visible[i];
+    });
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  nodes.forEach(function (n) { io.observe(n); });
+
+  var last = Date.now();
+  ['scroll', 'mousemove', 'keydown', 'touchstart', 'wheel', 'click'].forEach(function (ev) {
+    addEventListener(ev, function () { last = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function () {
+    if (document.hidden || Date.now() - last > IDLE) return;
+    var changed = false, i;
+    for (i in visible) {
+      i = +i;
+      if (read[i]) continue;
+      acc[i] += 0.25;
+      if (acc[i] >= need[i]) { read[i] = true; changed = true; }
+    }
+    // blocco letto almeno a metà e ormai scorso sopra la fascia di lettura:
+    // è il comportamento di chi legge un paragrafo e prosegue.
+    for (i = 0; i < nodes.length; i++) {
+      if (read[i] || acc[i] < need[i] * PASS) continue;
+      if (nodes[i].getBoundingClientRect().bottom < innerHeight * 0.25) {
+        read[i] = true; changed = true;
+      }
+    }
+    if (changed) { paint(); save(); }
+  }, 250);
+
+  dot.addEventListener('click', function () {
+    var all = pct() >= DONE;
+    for (var i = 0; i < nodes.length; i++) { read[i] = !all; acc[i] = all ? 0 : need[i]; }
+    paint(); save();
+  });
+  dot.title = 'Tocca per segnare tutto come letto / non letto';
+
+  paint();
+  addEventListener('beforeunload', function () { save(true); });
+  addEventListener('visibilitychange', function () { if (document.hidden) save(true); });
+})();
+
+(function () {
+  if (!window.SB || !SB.attivo || !SB.commenta) return;
+  var btn = document.createElement('button');
+  btn.textContent = '💬';
+  btn.title = 'Lascia un commento-istruzione per Claude';
+  btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:24px;border:none;font-size:22px;background:#2b6cb0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer';
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;right:16px;bottom:72px;z-index:60;display:none;width:min(92vw,340px);background:#1c2733;border:1px solid #33475b;border-radius:12px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+  box.innerHTML = '<textarea rows="4" placeholder="Scrivi a Claude: es. salva questo prompt come prompt-XXX e aggiungilo alla skill prompt" style="width:100%;box-sizing:border-box;background:#111a22;color:#eee;border:1px solid #33475b;border-radius:8px;padding:8px;font:inherit"></textarea>' +
+    '<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center">' +
+    '<span data-esito style="font-size:13px;color:#9fb3c8"></span>' +
+    '<button data-invia style="background:#2b6cb0;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit">Invia</button></div>';
+  document.body.appendChild(btn); document.body.appendChild(box);
+  var ta = box.querySelector('textarea'), esito = box.querySelector('[data-esito]');
+  btn.onclick = function () {
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'block') ta.focus();
+  };
+  box.querySelector('[data-invia]').onclick = function () {
+    var t = ta.value.trim(); if (!t) return;
+    esito.textContent = '…';
+    SB.commenta(t).then(function (ok) {
+      esito.textContent = ok ? 'Salvato ✓ Claude lo legge al prossimo /watch' : 'Errore, riprova';
+      if (ok) ta.value = '';
+    });
+  };
+})();
+</script>
+</body>
+</html>

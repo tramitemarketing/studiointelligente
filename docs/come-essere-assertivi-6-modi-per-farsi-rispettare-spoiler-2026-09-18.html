@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Come essere assertivi: 6 modi per farsi rispettare (spoiler: sei troppo gentile)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%2260%22%20height%3D%2242%22%20rx%3D%2211%22%20fill%3D%22%23e8262d%22/%3E%3Cpath%20d%3D%22M26%2022.5%2044%2032%2026%2041.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E">
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1.1rem 1.1rem 4rem;
+  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 44rem; margin-inline: auto; color: #1a1a1a; background: #fbfbfa; }
+
+a { color: #1a5fb4; text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: .2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .6rem; } h3 { font-size: 1.1rem; margin: 1.4rem 0 .5rem; }
+p { margin: .7rem 0; }
+blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid #d0d0d0; color: #555; }
+code { background: #ececec; padding: .1rem .35rem; border-radius: .3rem; font-size: .9em; }
+hr { border: none; border-top: 1px solid #e2e2e2; margin: 2rem 0; }
+ul, ol { margin: .7rem 0; padding-left: 1.4rem; } li { margin: .25rem 0; }
+.topbar { margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #e2e2e2; }
+.topbar a { font-weight: 600; }
+.muted { color: #6b7075; font-size: .92rem; }
+.tag { display: inline-block; background: #eceff3; color: #4a5560; font-size: .72rem;
+  font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .12rem .45rem; border-radius: .4rem; margin-bottom: .35rem; }
+.card { display: block; border: 1px solid #e6e6e6; background: #fff; border-radius: .7rem;
+  padding: .9rem 1rem; margin: .7rem 0; }
+.card:hover { text-decoration: none; border-color: #9ab8e0; }
+.card h2 { margin: 0 0 .2rem; font-size: 1.15rem; } .card .muted { display: block; }
+.card .desc { margin: .35rem 0 0; }
+.btn { display: inline-block; margin: .5rem 0; padding: .55rem 1rem; background: #1a5fb4;
+  color: #fff !important; border-radius: .5rem; font-weight: 600; font-size: .95rem; }
+.btn:hover { background: #154c92; text-decoration: none; }
+
+/* --- tendina "lo so gia": contenuto ripiegato, si apre se serve --- */
+details.gia { border: 1px solid #e6e6e6; border-radius: .6rem; background: #fafafa;
+  padding: .1rem .9rem; margin: 1rem 0; }
+details.gia > summary { cursor: pointer; padding: .6rem 0; font-weight: 600;
+  font-size: .95rem; color: #6b7075; list-style: none; }
+details.gia > summary::-webkit-details-marker { display: none; }
+details.gia > summary::before { content: "▸ "; color: #9aa0a6; }
+details.gia[open] > summary::before { content: "▾ "; }
+details.gia > summary:hover { color: #1a5fb4; }
+details.gia[open] { background: transparent; }
+details.gia > *:last-child { margin-bottom: .8rem; }
+/* --- copertine dei video --- */
+.cover { display: block; width: 100%; max-width: 100%; border-radius: .7rem;
+  margin: 0 0 1.2rem; background: #ececec; aspect-ratio: 16/9; object-fit: cover; }
+.card { display: flex; gap: .85rem; align-items: flex-start; }
+.card .thumb { flex: 0 0 6.6rem; width: 6.6rem; aspect-ratio: 16/9; border-radius: .45rem;
+  object-fit: cover; background: #ececec; }
+.card .txt { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 30rem) { .card .thumb { flex-basis: 5.2rem; width: 5.2rem; } }
+.tw { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { border: 1px solid #e2e2e2; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 700; }
+
+/* --- lettura: barra di avanzamento, pillola, spunte di sezione --- */
+#rp { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: #1a5fb4; z-index: 50; transition: width .3s ease; }
+#rd { position: fixed; right: .8rem; bottom: .8rem; z-index: 50;
+  background: rgba(255,255,255,.94); border: 1px solid #e2e2e2; border-radius: 2rem;
+  padding: .4rem .8rem; font-size: .82rem; font-weight: 700; color: #4a5560;
+  box-shadow: 0 2px 10px rgba(0,0,0,.09); cursor: pointer; user-select: none; }
+#rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.sec { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 700;
+  color: #6b7075; padding: .1rem .45rem; margin-left: .5rem; border-radius: 1rem;
+  vertical-align: middle; }
+.sec:hover { background: #eceff3; color: #4a5560; }
+.sec.ok { color: #1a7f37; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  padding: .1rem .45rem; border-radius: 1rem; margin-left: .4rem; vertical-align: middle;
+  background: #eceff3; color: #4a5560; }
+.pill.done { background: #1a7f37; color: #fff; }
+.card.read { opacity: .72; }
+/* i temi scuri vanno DOPO le regole chiare: a parita' di peso vince
+   l'ultima scritta, altrimenti il chiaro le sovrascrive tutte */
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e6e6; background: #17181a; }
+  a { color: #7db3ff; } blockquote { border-color: #3a3d42; color: #b8bcc2; }
+  code { background: #2a2c30; } hr { border-color: #2a2c30; }
+  .card { background: #1e2023; border-color: #2a2c30; } .muted { color: #9aa0a6; }
+  .tag { background: #2a2c30; color: #cbd0d6; }
+  .btn { background: #2b6fd6 !important; } .btn:hover { background: #3f7fe0 !important; }
+  details.gia { border-color: #2a2c30; background: #1c1e21; }
+  details.gia > summary { color: #9aa0a6; }
+  details.gia > summary:hover { color: #7db3ff; }
+  details.gia[open] { background: transparent; }
+  th, td { border-color: #2a2c30; } th { background: #24262a; } }
+@media (prefers-color-scheme: dark) {
+  #rd { background: rgba(30,32,35,.94); border-color: #2a2c30; color: #cbd0d6; }
+  #rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+  .sec { color: #9aa0a6; } .sec:hover { background: #2a2c30; color: #cbd0d6; }
+  .sec.ok { color: #4ac26b; } .pill { background: #2a2c30; color: #cbd0d6; }
+  .pill.done { background: #1a7f37; color: #fff; } }
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← Tutti i riassunti</a></div>
+<img class="cover" loading="lazy" alt="Come essere assertivi: 6 modi per farsi rispettare (spoiler: sei troppo gentile)" src="https://i.ytimg.com/vi/hXnx_g9gCj4/hqdefault.jpg"><p><strong>In sintesi:</strong> dietro il «non sono uno che fa storie, io lascio correre» spesso non c'è equilibrio ma, nelle parole di Giuliodori, «vigliaccheria travestita da virtù»: ogni rospo ingoiato per quieto vivere è una piccola tassa pagata in autostima. La tesi liberatoria è che nessuno nasce passivo — è un'abitudine, non un tratto di personalità, e quindi si può cambiare. Seguono sei strategie per farsi rispettare senza diventare a propria volta dei palloni gonfiati.</p>
+<h2>La linea sottile tra equilibrio e resa</h2>
+<p>Il video apre con le frasi che ci raccontiamo: «guarda, io non sono uno che fa storie, sono una persona tranquilla», «io lascio correre, sono fatto così». Se le usi, dice Giuliodori, forse ti stai raccontando delle balle. Esiste una <strong>linea sottilissima</strong> tra l'essere persone equilibrate e persone che incassano sempre, tra scegliere le proprie battaglie ed evitarle tutte.</p>
+<p>Gli esempi sono deliberatamente piccoli e quotidiani: il collega che ti scarica il suo lavoro <strong>cinque minuti prima di staccare</strong>, il tizio del supermercato che ti supera in cassa senza neanche chiedertelo. Nessuno di questi episodi è drammatico, ed è esattamente il problema: ogni volta che ingoiamo il rospo per il quieto vivere paghiamo <strong>una piccola tassa in termini di autostima</strong>, e la somma di quelle tasse è quello che poi chiamiamo carattere.</p>
+<p>La buona notizia arriva subito: <strong>nessuno di noi è nato con un atteggiamento passivo</strong>. Ci siamo abituati a subire, e un'abitudine — a differenza di un tratto della personalità — può sempre essere cambiata.</p>
+<h3>Che cos'è davvero l'assertività</h3>
+<p>La definizione viene dalle ricercatrici <strong>Hadfield e Hasson</strong>, autrici del libro <em>Come essere assertivi in ogni situazione</em>: l'assertività è «la capacità di difendere i propri interessi, esprimere i propri pensieri e affermare il proprio punto di vista con disinvoltura, senza ansia e <strong>nel rispetto degli altri</strong>». Giuliodori insiste su quelle ultime parole, perché segnano il confine.</p>
+<p>Quando interagiamo possiamo assumere tre atteggiamenti. Quello <strong>passivo</strong> è di chi incassa e magari abbozza pure un sorrisetto. Quello <strong>aggressivo</strong> è «quello dei bulli e dei prepotenti, di chi confonde il farsi rispettare col calpestare gli altri». Quello <strong>assertivo</strong> è di chi esprime le proprie posizioni e si fa valere, ma con calma, senza ansia, rispettando chi ha davanti.</p>
+<h2>Prima strategia: rispetta te stesso per farti rispettare</h2>
+<p>È la fondamenta di tutto il resto, e lega assertività e <strong>autostima</strong>. Quando siamo sicuri delle nostre capacità comunichiamo quella sicurezza anche senza aprire bocca; e vale al contrario, perché gran parte della nostra passività nasce dalla poca fiducia in noi stessi e dalla paura del giudizio — paura di sembrare presuntuosi, paura di sbagliare in pubblico.</p>
+<p>L'autostima non si ricostruisce dalla sera alla mattina. Il primo passo è <strong>prendere consapevolezza</strong> di tutte le volte in cui ci diamo addosso: «non ce la farò mai», «non sono capace», «non me la sento di espormi». Il secondo è cambiare quel dialogo interiore — ma qui Giuliodori smonta la scorciatoia più ovvia: ripetersi «sì, ce la farò, sì, sono capace» <strong>non funziona</strong>, perché certe frasi «ci suonano finte se le diciamo noi».</p>
+<p>L'alternativa è in tre mosse. Esporsi quotidianamente al <strong>dialogo potenziante di persone che ammiriamo</strong>, per esempio ascoltando audiolibri di autori che si stimano. Ripetere quei contenuti <strong>con la propria voce interiore</strong>, cosa che «trasforma radicalmente il modo di pensare e parlare». E soprattutto <strong>fare azioni diverse</strong>: la percezione che abbiamo di noi stessi cambia davvero solo quando, di fronte a situazioni già affrontate male in passato, cominciamo finalmente a comportarci con più coraggio.</p>
+<h2>Seconda strategia: impara a comunicare</h2>
+<p>A volte non siamo assertivi per un motivo banale: non siamo bravi a comunicare. Conosciamo tutti qualcuno con la parlantina sciolta capace di difendere posizioni indifendibili, e allo stesso tempo persone competentissime che non riescono a far valere le proprie ragioni. È una cosa che, ammette, lo manda in bestia: il mondo ha bisogno di persone competenti, ma anche di persone che sappiano <strong>comunicare</strong> ciò che sanno.</p>
+<p>Al di là dei corsi di public speaking, propone due azioni quotidiane. La prima è <strong>leggere narrativa</strong> — e specifica: non i suoi amati saggi di crescita personale, ma romanzi, perché arricchiscono a dismisura il vocabolario, e «più parole abbiamo per descrivere il mondo, più saremo capaci di farlo». La seconda è <strong>praticare i fondamentali</strong>: soggetto, verbo, complemento. Frasi semplici, concise, chiare. «A complicare si fa sempre in tempo.»</p>
+<h2>Terza strategia: alza la mano</h2>
+<p>Esprimersi <strong>senza remore</strong> — e qui si concede una battuta, dicendo che se non sai cosa significa "remore" allora devi leggere più romanzi. Non significa diventare «il classico rompiballe che spara la prima cosa che gli passa per la testa senza neanche rifletterci». Significa che se in riunione hai un'idea per risolvere il problema di cui si discute, <strong>parli</strong>; e se in un'aula o a un corso non capisci un passaggio, <strong>chiedi</strong> che ti venga rispiegato. Non lo facciamo per paura di passare per stupidi o di essere giudicati.</p>
+<p>L'aneddoto a supporto viene dalla sua carriera: quando lavorava <strong>a Milano in consulenza</strong>, anche da stagista, se una cosa non gli tornava durante una riunione lo diceva. «Il mio manager dell'epoca mi odiava un po'», ma quel coraggio gli permise di farsi notare e di arrivare a lavorare <strong>a diretto contatto con il presidente della società</strong>. La lezione che ne trae: quando ti esponi «le mezze calzette ti guardano storto», ma chi è al vertice ti nota e ti rispetta qualunque sia il tuo ruolo — a patto di non dire sciocchezze.</p>
+<h2>Quarta strategia: filtra le critiche</h2>
+<p>L'assertività ha un rovescio della medaglia spesso ignorato: <strong>saper accettare le critiche</strong>. La maggior parte di noi, davanti a una critica, vede un attacco alla propria persona. Le persone assertive la considerano invece <strong>un dato</strong> — un dato che può essere utile oppure no.</p>
+<p>Il criterio per decidere è <strong>verificare la fonte</strong>. Se sotto un video uno sconosciuto gli scrive «hai le occhiaie» — critica che riceve regolarmente e che peraltro conferma: oltre a essere genetiche, con un figlio piccolo «me le sono guadagnate sul campo» — quella critica per lui vale zero, perché non lo aiuta a migliorare in niente. Se invece un <strong>collaboratore di fiducia</strong> gli dice «Andrea, secondo me in questo video il secondo concetto non lo hai spiegato in maniera chiara», lì drizza le orecchie: arriva da una persona competente, che lo conosce e che tiene ai risultati comuni.</p>
+<p>C'è anche un ritorno indiretto: quando le persone vedono che ascoltiamo le critiche sensate e ci impegniamo davvero a migliorare quello che non ha funzionato, <strong>ci rispettano</strong>. Nessuno rispetta chi pensa di aver capito tutto.</p>
+<h2>Quinta strategia: fai complimenti chirurgici</h2>
+<p>Sembra fuori tema in un video sul farsi rispettare, e invece è il punto più originale. Non si parla di complimenti finti né di adulazione gratuita, ma di complimenti <strong>sinceri, specifici e tempestivi</strong>: nel momento esatto in cui notiamo qualcosa di positivo, lo facciamo notare.</p>
+<p>Il motivo per cui funziona è che il complimento puntuale è <strong>la palestra più efficace dell'assertività</strong>. Criticare qualcuno in modo serio e costruttivo è necessario ma difficile, e di solito le persone non la prendono bene; fare un complimento vero è molto più facile, ma ci costringe ugualmente a <strong>dire ad alta voce quello che pensiamo</strong> — cosa a cui non siamo abituati. Il commesso del supermercato è particolarmente gentile? Diciamoglielo. La collega ha gestito con eleganza una riunione complicata? Diciamoglielo, e diciamole <strong>esattamente cosa ci è piaciuto</strong>.</p>
+<p>La riformulazione finale è netta: l'assertività non è dire bene le cose difficili, è <strong>imparare a dire le cose e a dirle bene</strong> — sia quelle difficili, sia quelle che fanno piacere.</p>
+<h2>Sesta strategia: non indietreggiare</h2>
+<p>Giuliodori premette di odiare i conflitti: da piccolo sua mamma lo chiamava <strong>«il peacemaker di famiglia»</strong>, ispirandosi al titolo di un film degli anni Novanta con <strong>George Clooney</strong> che le era piaciuto molto. Ma per quanto si possa essere pacifici, i conflitti prima o poi arrivano — al lavoro, in famiglia, nelle relazioni — e fanno parte della vita.</p>
+<p>Davanti al conflitto di solito facciamo una di due cose. Ci <strong>facciamo controllare</strong>, ed è la via passiva: incassiamo, ci spegniamo, indietreggiamo. Oppure <strong>perdiamo il controllo</strong>, ed è la via aggressiva: alziamo la voce, esplodiamo, diciamo cose di cui poi ci pentiamo.</p>
+<p>Le persone assertive scelgono la terza via, che è anche la più difficile: non perdono mai il controllo, ma allo stesso tempo non scendono a compromessi sui propri valori. Questo significa presidiare <strong>due fronti</strong>. Il primo è <strong>interno</strong>: se sentiamo che l'interlocutore ci sta trascinando verso la rabbia, dobbiamo prenderne consapevolezza e ritrovare l'equilibrio, perché «le nostre emozioni sono una nostra responsabilità» e non possiamo permettere che vengano controllate da chi ci sta urlando contro. Il secondo è <strong>valoriale</strong>: possiamo essere diplomatici e cercare un compromesso, ma non dobbiamo mai rinnegare i nostri principi. E se l'altra persona non intende ragionare, si interrompe la conversazione e si va via — nessuno ha il diritto di aggredirci. La frase che chiude il punto: <strong>«farsi rispettare a volte significa semplicemente togliere il pubblico a chi alza la voce»</strong>.</p>
+<h2>Come si allena</h2>
+<p>La chiusura riprende la premessa: non si diventa assertivi dalla sera alla mattina. <strong>L'assertività si rafforza come si rafforza un muscolo, una ripetizione alla volta, una conversazione scomoda alla volta.</strong> Quando decidiamo di far sentire la nostra voce invece di restare a testa bassa, smettiamo finalmente di versare quella tassa silenziosa che rode l'autostima. L'invito finale, per la settimana: «alza la testa, alza la mano e non abbassare mai lo sguardo».</p>
+<h2>Fonti e note</h2>
+<ul>
+<li>Video: https://www.youtube.com/watch?v=hXnx_g9gCj4 (12:36)</li>
+<li>report grezzo — con la trascrizione completa e i timestamp</li>
+</ul>
+<p><strong>Cosa ho omesso:</strong> la richiesta di like e iscrizione con l'obiettivo dichiarato dei 100.000 iscritti, piazzata a metà video con un gioco di parole sulla strategia "alza la mano"; l'autopresentazione dell'autore; il rimando al suo corso «365, un anno epico» (dove il consiglio sull'autostima diventa «leggi ogni mattina la sfida del giorno»); l'invito a farsi una playlist dei video del canale da ascoltare ogni mattina, inserito dentro la prima strategia. Ho conservato invece tutto il resto, inclusi gli aneddoti personali (Milano, le occhiaie, il peacemaker di famiglia).</p>
+<p><strong>Nomi ricostruiti dai sottotitoli automatici:</strong> «le ricercatrici Edfield ed Asson» → quasi certamente <strong>Sue Hadfield e Gill Hasson</strong>, autrici di <em>How to Be Assertive in Any Situation</em> — i sottotitoli hanno mangiato la H iniziale di entrambi i cognomi, e la ricostruzione è a orecchio, <strong>da verificare</strong>; «George Cloney» → <strong>George Clooney</strong>. Il titolo del film non viene mai pronunciato per esteso nel video, solo la parola <em>peacemaker</em>: non l'ho identificato per non inventare. «Andrea Giulio Dori» → Andrea Giuliodori, «Efficacemmenti» → EfficaceMente.</p>
+<p><strong>Nota di metodo:</strong> è l'unico dei quattro video di questa serie che <strong>non cita alcuno studio o esperimento</strong> — l'unico riferimento esterno è la definizione tratta dal libro. Tutto il resto poggia sull'esperienza personale dell'autore, il che non lo rende sbagliato ma va tenuto presente leggendolo accanto agli altri, che si appoggiano invece a paper.</p>
+<script>
+window.SB = (function () {
+  var API = 'https://brain-sync.tramitemarketing-it.workers.dev';
+  function url() { return API + '/state'; }
+  return {
+    attivo: !!API,
+    prendi: function () {
+      if (!API) return Promise.resolve(null);
+      return fetch(url(), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    },
+    manda: function (page, n, b, finale) {
+      if (!API) return;
+      var dati = JSON.stringify({ page: page, n: n, b: b });
+      try {
+        fetch(url(), {
+          method: 'POST', body: dati, keepalive: !!finale,
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(function () {});
+      } catch (e) {}
+    },
+    commenta: function (testo) {
+      if (!API) return Promise.resolve(false);
+      return fetch(API + '/commenti', {
+        method: 'POST',
+        body: JSON.stringify({ slug: location.pathname, testo: testo }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+  };
+})();
+
+
+(function () {
+  var KEY = 'sb2:' + location.pathname;
+  var WPS = 4;             // parole al secondo (~240 wpm)
+  var MIN = 0.7, MAX = 6;  // secondi per blocco: minimo e tetto
+  var PASS = 0.5;          // se l'ho letto almeno a metà e sono andato oltre, conta
+  var IDLE = 120000;       // fermo da 2 min = non sta leggendo
+  var DONE = 0.9;          // 90% dei contenuti = letto
+
+  var nodes = [].slice.call(document.querySelectorAll('p, li, blockquote'))
+    .filter(function (n) { return !n.closest('.topbar') && n.textContent.trim().length > 1; });
+  if (nodes.length < 3) return;
+
+  var words = nodes.map(function (n) {
+    return Math.max(1, n.textContent.trim().split(/\s+/).length);
+  });
+  var need = words.map(function (w) {
+    return Math.min(MAX, Math.max(MIN, w / WPS));
+  });
+  var total = words.reduce(function (a, b) { return a + b; }, 0);
+  var acc = words.map(function () { return 0; });
+  var read = words.map(function () { return false; });
+
+  // ripristina lo stato salvato (se la pagina non è cambiata)
+  try {
+    var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (s && s.n === nodes.length && typeof s.b === 'string') {
+      for (var i = 0; i < nodes.length; i++) read[i] = s.b.charAt(i) === '1';
+    }
+  } catch (e) {}
+
+  var bar = document.createElement('div'); bar.id = 'rp';
+  var dot = document.createElement('div'); dot.id = 'rd';
+  document.body.appendChild(bar); document.body.appendChild(dot);
+
+  // spunte di sezione: ogni h2 governa i blocchi fino all'h2 successivo
+  var secs = [];
+  var heads = [].slice.call(document.querySelectorAll('h2'));
+  heads.forEach(function (h) {
+    var idx = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (h.compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var prev = null;
+        for (var k = 0; k < heads.length; k++) {
+          if (heads[k].compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) prev = heads[k];
+        }
+        if (prev === h) idx.push(i);
+      }
+    }
+    if (!idx.length) return;
+    var b = document.createElement('button');
+    b.className = 'sec'; b.type = 'button';
+    b.title = 'Segna questa sezione come letta / non letta';
+    h.appendChild(b);
+    var sec = { el: b, idx: idx };
+    b.addEventListener('click', function () {
+      var allRead = idx.every(function (i) { return read[i]; });
+      idx.forEach(function (i) { read[i] = !allRead; acc[i] = allRead ? 0 : need[i]; });
+      paint(); save();
+    });
+    secs.push(sec);
+  });
+
+  function pct() {
+    var w = 0;
+    for (var i = 0; i < nodes.length; i++) if (read[i]) w += words[i];
+    return w / total;
+  }
+  function paint() {
+    var p = pct();
+    bar.style.width = (p * 100).toFixed(1) + '%';
+    var done = p >= DONE;
+    dot.textContent = done ? '✓ Letto' : Math.round(p * 100) + '%';
+    dot.className = done ? 'done' : '';
+    secs.forEach(function (s) {
+      var ok = s.idx.every(function (i) { return read[i]; });
+      s.el.className = ok ? 'sec ok' : 'sec';
+      s.el.textContent = ok ? '✓' : '○';
+    });
+  }
+  function bits() {
+    var b = '';
+    for (var i = 0; i < nodes.length; i++) b += read[i] ? '1' : '0';
+    return b;
+  }
+  var saveT = 0, syncT = 0, ultimo = '';
+  function save(finale) {
+    var b = bits();
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          v: 2, n: nodes.length, b: b, p: Math.round(pct() * 100), t: Date.now()
+        }));
+      } catch (e) {}
+    }, 400);
+    // verso il server: di rado, per non consumare la quota gratuita
+    if (!window.SB || !SB.attivo || b === ultimo) return;
+    if (finale) { ultimo = b; SB.manda(location.pathname, nodes.length, b, true); return; }
+    clearTimeout(syncT);
+    syncT = setTimeout(function () {
+      ultimo = b;
+      SB.manda(location.pathname, nodes.length, b, false);
+    }, 8000);
+  }
+
+  // all'apertura: unisco i progressi già fatti su altri dispositivi
+  if (window.SB && SB.attivo) {
+    SB.prendi().then(function (st) {
+      if (!st || !st.pages) return;
+      var r = st.pages[location.pathname];
+      if (!r || r.n !== nodes.length) return;
+      var cambiato = false;
+      for (var i = 0; i < nodes.length; i++) {
+        if (r.b.charAt(i) === '1' && !read[i]) { read[i] = true; acc[i] = need[i]; cambiato = true; }
+      }
+      if (cambiato) { paint(); save(); }
+    });
+  }
+
+  // quali blocchi sono nella fascia centrale dello schermo (dove si legge davvero)
+  var visible = Object.create(null);
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = nodes.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) visible[i] = 1; else delete visible[i];
+    });
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  nodes.forEach(function (n) { io.observe(n); });
+
+  var last = Date.now();
+  ['scroll', 'mousemove', 'keydown', 'touchstart', 'wheel', 'click'].forEach(function (ev) {
+    addEventListener(ev, function () { last = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function () {
+    if (document.hidden || Date.now() - last > IDLE) return;
+    var changed = false, i;
+    for (i in visible) {
+      i = +i;
+      if (read[i]) continue;
+      acc[i] += 0.25;
+      if (acc[i] >= need[i]) { read[i] = true; changed = true; }
+    }
+    // blocco letto almeno a metà e ormai scorso sopra la fascia di lettura:
+    // è il comportamento di chi legge un paragrafo e prosegue.
+    for (i = 0; i < nodes.length; i++) {
+      if (read[i] || acc[i] < need[i] * PASS) continue;
+      if (nodes[i].getBoundingClientRect().bottom < innerHeight * 0.25) {
+        read[i] = true; changed = true;
+      }
+    }
+    if (changed) { paint(); save(); }
+  }, 250);
+
+  dot.addEventListener('click', function () {
+    var all = pct() >= DONE;
+    for (var i = 0; i < nodes.length; i++) { read[i] = !all; acc[i] = all ? 0 : need[i]; }
+    paint(); save();
+  });
+  dot.title = 'Tocca per segnare tutto come letto / non letto';
+
+  paint();
+  addEventListener('beforeunload', function () { save(true); });
+  addEventListener('visibilitychange', function () { if (document.hidden) save(true); });
+})();
+
+(function () {
+  if (!window.SB || !SB.attivo || !SB.commenta) return;
+  var btn = document.createElement('button');
+  btn.textContent = '💬';
+  btn.title = 'Lascia un commento-istruzione per Claude';
+  btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:24px;border:none;font-size:22px;background:#2b6cb0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer';
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;right:16px;bottom:72px;z-index:60;display:none;width:min(92vw,340px);background:#1c2733;border:1px solid #33475b;border-radius:12px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+  box.innerHTML = '<textarea rows="4" placeholder="Scrivi a Claude: es. salva questo prompt come prompt-XXX e aggiungilo alla skill prompt" style="width:100%;box-sizing:border-box;background:#111a22;color:#eee;border:1px solid #33475b;border-radius:8px;padding:8px;font:inherit"></textarea>' +
+    '<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center">' +
+    '<span data-esito style="font-size:13px;color:#9fb3c8"></span>' +
+    '<button data-invia style="background:#2b6cb0;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit">Invia</button></div>';
+  document.body.appendChild(btn); document.body.appendChild(box);
+  var ta = box.querySelector('textarea'), esito = box.querySelector('[data-esito]');
+  btn.onclick = function () {
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'block') ta.focus();
+  };
+  box.querySelector('[data-invia]').onclick = function () {
+    var t = ta.value.trim(); if (!t) return;
+    esito.textContent = '…';
+    SB.commenta(t).then(function (ok) {
+      esito.textContent = ok ? 'Salvato ✓ Claude lo legge al prossimo /watch' : 'Errore, riprova';
+      if (ok) ta.value = '';
+    });
+  };
+})();
+</script>
+</body>
+</html>

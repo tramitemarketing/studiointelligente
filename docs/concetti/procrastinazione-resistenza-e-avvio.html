@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Procrastinazione, Resistenza e avvio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%2260%22%20height%3D%2242%22%20rx%3D%2211%22%20fill%3D%22%23e8262d%22/%3E%3Cpath%20d%3D%22M26%2022.5%2044%2032%2026%2041.5z%22%20fill%3D%22%23fff%22/%3E%3C/svg%3E">
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 1.1rem 1.1rem 4rem;
+  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 44rem; margin-inline: auto; color: #1a1a1a; background: #fbfbfa; }
+
+a { color: #1a5fb4; text-decoration: none; } a:hover { text-decoration: underline; }
+h1 { font-size: 1.7rem; line-height: 1.25; margin: .2rem 0 1rem; }
+h2 { font-size: 1.3rem; margin: 2rem 0 .6rem; } h3 { font-size: 1.1rem; margin: 1.4rem 0 .5rem; }
+p { margin: .7rem 0; }
+blockquote { margin: 1rem 0; padding: .2rem 0 .2rem 1rem; border-left: 3px solid #d0d0d0; color: #555; }
+code { background: #ececec; padding: .1rem .35rem; border-radius: .3rem; font-size: .9em; }
+hr { border: none; border-top: 1px solid #e2e2e2; margin: 2rem 0; }
+ul, ol { margin: .7rem 0; padding-left: 1.4rem; } li { margin: .25rem 0; }
+.topbar { margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #e2e2e2; }
+.topbar a { font-weight: 600; }
+.muted { color: #6b7075; font-size: .92rem; }
+.tag { display: inline-block; background: #eceff3; color: #4a5560; font-size: .72rem;
+  font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  padding: .12rem .45rem; border-radius: .4rem; margin-bottom: .35rem; }
+.card { display: block; border: 1px solid #e6e6e6; background: #fff; border-radius: .7rem;
+  padding: .9rem 1rem; margin: .7rem 0; }
+.card:hover { text-decoration: none; border-color: #9ab8e0; }
+.card h2 { margin: 0 0 .2rem; font-size: 1.15rem; } .card .muted { display: block; }
+.card .desc { margin: .35rem 0 0; }
+.btn { display: inline-block; margin: .5rem 0; padding: .55rem 1rem; background: #1a5fb4;
+  color: #fff !important; border-radius: .5rem; font-weight: 600; font-size: .95rem; }
+.btn:hover { background: #154c92; text-decoration: none; }
+
+/* --- tendina "lo so gia": contenuto ripiegato, si apre se serve --- */
+details.gia { border: 1px solid #e6e6e6; border-radius: .6rem; background: #fafafa;
+  padding: .1rem .9rem; margin: 1rem 0; }
+details.gia > summary { cursor: pointer; padding: .6rem 0; font-weight: 600;
+  font-size: .95rem; color: #6b7075; list-style: none; }
+details.gia > summary::-webkit-details-marker { display: none; }
+details.gia > summary::before { content: "▸ "; color: #9aa0a6; }
+details.gia[open] > summary::before { content: "▾ "; }
+details.gia > summary:hover { color: #1a5fb4; }
+details.gia[open] { background: transparent; }
+details.gia > *:last-child { margin-bottom: .8rem; }
+/* --- copertine dei video --- */
+.cover { display: block; width: 100%; max-width: 100%; border-radius: .7rem;
+  margin: 0 0 1.2rem; background: #ececec; aspect-ratio: 16/9; object-fit: cover; }
+.card { display: flex; gap: .85rem; align-items: flex-start; }
+.card .thumb { flex: 0 0 6.6rem; width: 6.6rem; aspect-ratio: 16/9; border-radius: .45rem;
+  object-fit: cover; background: #ececec; }
+.card .txt { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 30rem) { .card .thumb { flex-basis: 5.2rem; width: 5.2rem; } }
+.tw { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { border: 1px solid #e2e2e2; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 700; }
+
+/* --- lettura: barra di avanzamento, pillola, spunte di sezione --- */
+#rp { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: #1a5fb4; z-index: 50; transition: width .3s ease; }
+#rd { position: fixed; right: .8rem; bottom: .8rem; z-index: 50;
+  background: rgba(255,255,255,.94); border: 1px solid #e2e2e2; border-radius: 2rem;
+  padding: .4rem .8rem; font-size: .82rem; font-weight: 700; color: #4a5560;
+  box-shadow: 0 2px 10px rgba(0,0,0,.09); cursor: pointer; user-select: none; }
+#rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.sec { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 700;
+  color: #6b7075; padding: .1rem .45rem; margin-left: .5rem; border-radius: 1rem;
+  vertical-align: middle; }
+.sec:hover { background: #eceff3; color: #4a5560; }
+.sec.ok { color: #1a7f37; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+  padding: .1rem .45rem; border-radius: 1rem; margin-left: .4rem; vertical-align: middle;
+  background: #eceff3; color: #4a5560; }
+.pill.done { background: #1a7f37; color: #fff; }
+.card.read { opacity: .72; }
+/* i temi scuri vanno DOPO le regole chiare: a parita' di peso vince
+   l'ultima scritta, altrimenti il chiaro le sovrascrive tutte */
+@media (prefers-color-scheme: dark) {
+  body { color: #e6e6e6; background: #17181a; }
+  a { color: #7db3ff; } blockquote { border-color: #3a3d42; color: #b8bcc2; }
+  code { background: #2a2c30; } hr { border-color: #2a2c30; }
+  .card { background: #1e2023; border-color: #2a2c30; } .muted { color: #9aa0a6; }
+  .tag { background: #2a2c30; color: #cbd0d6; }
+  .btn { background: #2b6fd6 !important; } .btn:hover { background: #3f7fe0 !important; }
+  details.gia { border-color: #2a2c30; background: #1c1e21; }
+  details.gia > summary { color: #9aa0a6; }
+  details.gia > summary:hover { color: #7db3ff; }
+  details.gia[open] { background: transparent; }
+  th, td { border-color: #2a2c30; } th { background: #24262a; } }
+@media (prefers-color-scheme: dark) {
+  #rd { background: rgba(30,32,35,.94); border-color: #2a2c30; color: #cbd0d6; }
+  #rd.done { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+  .sec { color: #9aa0a6; } .sec:hover { background: #2a2c30; color: #cbd0d6; }
+  .sec.ok { color: #4ac26b; } .pill { background: #2a2c30; color: #cbd0d6; }
+  .pill.done { background: #1a7f37; color: #fff; } }
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">← Concetti</a> · <a href="../index.html">Home</a></div>
+<h1>Procrastinazione, Resistenza e avvio</h1>
+<p><strong>Gist:</strong> la procrastinazione non è pigrizia ma <strong>un meccanismo di coping</strong> contro l'ansia dell'avvio e, allo stesso tempo, <strong>il segnale che un piano non c'è</strong>. Non si batte con app, timer o playlist: si batte <strong>togliendo opzioni</strong> — la <em>strategia del vuoto</em>: o fai la cosa che ti sei ripromesso di fare, o non fai assolutamente nulla. La noia, che ci terrorizza al punto da farci preferire una scossa elettrica, fa il resto. E siccome il blocco tornerà comunque — Steven Pressfield lo chiama <strong>Resistenza</strong> e lo paragona all'entropia — l'unica cosa che si può davvero costruire non è un metodo per non sentirlo più, ma <strong>l'istante di lucida follia</strong> che apre l'azione: un muscolo, non un'ispirazione.</p>
+<h2>Due diagnosi della stessa cosa</h2>
+<p>La prima diagnosi è psicologica. Secondo il <strong>professor Neil Fiore</strong> — nei sottotitoli automatici «Nil Fiore», ricostruzione plausibile ma da verificare — la procrastinazione non è una cattiva abitudine ma un <strong>meccanismo di coping</strong>: il modo in cui la mente gestisce l'ansia che proviamo ogni volta che dobbiamo <em>iniziare</em> un compito nuovo o <em>decidere</em>. Decidere e iniziare sono le due operazioni che consumano più risorse mentali; alla mente non interessa la nostra realizzazione, le interessa sopravvivere, e il modo più economico di sopravvivere è risparmiare energia. Da qui la trovata: rendere piacevole il rimandare.</p>
+<p>La seconda diagnosi è evolutiva. Decine di migliaia di anni fa convivevano tre specie umane — <em>Homo sapiens</em>, <em>Homo erectus</em>, <em>Homo neanderthalensis</em> — e sopravvisse solo la nostra; tra le ragioni del vantaggio, molti studiosi indicano la capacità di <strong>complex planning</strong>, di immaginare azioni future e valutare quali aumentino le probabilità di sopravvivenza. Siccome pianificare è un'abilità <strong>preverbale</strong>, sviluppatasi prima del linguaggio, il cervello non ha una voce per dirci che il piano è sbagliato o che un piano non c'è: usa un canale emotivo, cioè <strong>il calo di motivazione e la tentazione di fare altro</strong>. La procrastinazione, in questa lettura, è un segnale diagnostico da leggere prima di forzarsi.</p>
+<p>I numeri citati nel video sostengono la lettura: una <strong>ricerca del 1992</strong> (nessun autore né rivista nominati) riporta che il <strong>52%</strong> degli studenti universitari dichiara un livello di procrastinazione medio o elevato, con stime che arrivano all'<strong>80-95%</strong>; e le stesse statistiche <strong>si invertono</strong> sugli studenti più brillanti, che pianificano meglio e ne risultano quasi immuni.</p>
+<blockquote>WARN: <em>La cura per la procrastinazione</em> dice che a procrastinare sono quelli che pianificano peggio (gli studenti più brillanti sono «immuni»), mentre architetto-e-muratore dice che a bloccarsi per primi sono proprio i più intelligenti, cioè quelli che pianificano troppo — verificare.</blockquote>
+<h2>La strategia del vuoto</h2>
+<p>La mossa è disarmante: <strong>nel momento in cui senti l'impulso di fare qualcosa di diverso da ciò che dovresti fare, decidi deliberatamente di non fare nulla.</strong> «Devi avere un unico sentiero davanti a te e il vuoto tutto attorno.» Niente social, niente TV, niente <em>fammi controllare un attimo WhatsApp</em>. Nella pratica personale dell'autore: quando si accorge di star procrastinando si concede due sole opzioni, sedersi sul divano dello studio e non fare assolutamente nulla — niente meditazione, niente musica, niente telefono — oppure andare avanti con i task della giornata.</p>
+<p>Lo stesso schema è attribuito a <strong>Raymond Chandler</strong>, autore di gialli degli anni Cinquanta, che dedicava <strong>4 ore al giorno</strong> alla scrittura senza sforzarsi di scrivere ma senza fare altro. Le sue <strong>due regole</strong>: «<strong>A, non sono obbligato a scrivere. B, non posso fare nient'altro. Il resto vien da sé.</strong>»</p>
+<p>La chiave, quindi, non è aggiungere strumenti ma <strong>eliminare le opzioni</strong>: «non hai bisogno di quell'app, di quel timer o di quella playlist per la concentrazione». È anche la ragione per cui questo approccio non si consuma: i <em>life hack</em> perdono effetto dopo due o tre volte, quando svanisce la novità, mentre togliere opzioni funziona ogni volta perché non dipende dalla sorpresa. Per questo l'autore insiste che sia <strong>uno stile di vita e non un trucco</strong>.</p>
+<h2>Perché funziona: la noia è letteralmente insopportabile</h2>
+<p>Il meccanismo poggia su un dato: uno **studio pubblicato nel 2014 sulla rivista <em>Science</em><strong> (autori e titolo non pronunciati nel video — non vanno attribuiti senza verifica) in cui a un gruppo di studenti universitari fu chiesto di sedersi in una stanza vuota e non fare nulla. L'unico passatempo disponibile era un pulsante che erogava una </strong>scossa elettrica<strong> piccola ma molto sgradevole. </strong>Quasi la metà<strong> dei partecipanti preferì darsi la scossa piuttosto che restare a non fare niente; e non una volta sola — </strong>un partecipante se la diede 190 volte in 15 minuti** e fu escluso dallo studio perché avrebbe sballato i dati.</p>
+<p>Conclusione operativa: se elimini ogni alternativa, entro pochi minuti inizierai a lavorare. Non perché sei diventato disciplinato, ma perché il vuoto è peggio del compito.</p>
+<h2>Dopamina istantanea e pulsante di reset</h2>
+<p>C'è un corollario che spiega perché oggi il blocco sembra peggiorato. Più riempiamo la vita di <strong>slot machine</strong> — social, cibo, gratificazioni immediate — più le attività sane appaiono <strong>noiose e difficili</strong> per contrasto. La strategia del vuoto funziona allora come <strong>cura da cavalli</strong> e <strong>pulsante di reset</strong> sui livelli di dopamina: tolte le distrazioni a basso valore, ciò che ci avvicina agli obiettivi torna attrattivo. È lo stesso meccanismo che in attenzione-focus-e-lettura rende la lettura vivibile solo dopo qualche settimana di astinenza dallo scroll, e che in ai-per-la-crescita-personale compare come domanda scomoda: <em>in quale area sto scegliendo il comfort al posto della crescita?</em></p>
+<h2>La Resistenza come bussola</h2>
+<p>Il secondo video aggiunge il nome e la forma di ciò che si prova un istante prima. <strong>Steven Pressfield</strong>, in <em>The War of Art</em> / <em>La guerra dell'arte</em>, chiama <strong>Resistenza</strong> (con la R maiuscola) la forza che blocca ogni volta che dovremmo fare la cosa giusta e difficile — i sottotitoli oscillano tra «Pressfield» e «Presfield» e rendono il nome di battesimo come «Stephen»; il titolo del libro è invece pronunciato chiaramente. Restare sul divano è Resistenza. Continuare a scrollare dopo ore è Resistenza. Rimandare quella conversazione è Resistenza.</p>
+<p>Due implicazioni pratiche. La prima: la Resistenza è <strong>una bussola</strong>, perché «più una cosa è importante per la nostra crescita, più la Resistenza cercherà di ostacolarci» — l'intensità del blocco misura l'importanza di ciò che stai evitando. La seconda: <strong>non si elimina</strong>, esattamente come l'entropia; quindi «non arriverà un giorno magico in cui tutto sarà facile e tu sarai sempre motivato», e quell'attesa è l'illusione dietro cui si rimanda. Ciò che si può fare è <strong>riconoscerla e nominarla</strong>: «Ah, eccoti ben ritrovata. Da quanto tempo? Se sei venuta a trovarmi significa che sto andando nella direzione giusta» — e poi alzarsi e iniziare. L'autore ammette di averla incontrata la mattina stessa, dovendo girare quel video, dopo vent'anni sul tema.</p>
+<h2>L'istante di lucida follia, e il muscolo che lo regge</h2>
+<p>Il video incornicia tutto in una scena: <strong>4 dicembre 1815, Sant'Elena</strong>, isola di lava nera a <strong>1900 km</strong> dalla costa più vicina; <strong>Napoleone</strong> ha <strong>46 anni</strong> e gliene restano sei da vivere; accanto a lui un memorialista francese annota le sue parole (il cognome è irriconoscibile nei sottotitoli e non è stato ricostruito). Napoleone distingue due coraggi: quello <strong>fisico</strong> — di chi carica a cavallo contro i cannoni, che liquida come istinto, adrenalina e orgoglio, e che riconosce in due suoi comandanti (nomi non ricostruibili dai sottotitoli) — e il <strong>coraggio delle 2 del mattino</strong>, il <strong>coraggio morale</strong>, quello che serve «quando la vita ti sveglia di colpo, senza preavviso, e pretende una decisione lucida». Il primo è naturale; il secondo si costruisce.</p>
+<p>Il ponte con la Resistenza è <strong>l'istante di lucida follia</strong>: guardarla dritta negli occhi per un attimo e fare ciò che è giusto invece di ciò che è comodo. Quell'istante, ripetuto, è l'allenamento. E qui il video fa un'affermazione forte: non è una metafora, è <strong>un fatto neurobiologico</strong>. La regione chiamata <strong>corteccia cingolata anteriore</strong> (nel parlato <em>anterior mid cingulate cortex</em>, «AMCC») sarebbe il centro di comando di forza di volontà e tenacia, si attiva quando facciamo qualcosa di difficile specialmente quando non ne abbiamo voglia, e <strong>cresce se la usiamo, si atrofizza se evitiamo sistematicamente il disagio</strong>. L'attribuzione va presa con le pinze: nel video il merito è dato a una neuroscienziata il cui nome i sottotitoli rendono «Lisa Felman Barret» (ricostruzione incerta) e <strong>non viene citata nessuna pubblicazione</strong>; anche la resa italiana del termine inglese oscilla. Il punto operativo resta comunque comportamentale: l'allenamento quando piove, la sveglia all'alba, la conversazione difficile.</p>
+<h2>A che cosa serve davvero</h2>
+<p>La chiusura ribalta il senso comune della crescita personale. Disciplina, costanza e buone abitudini non servono a costruire <strong>un illusorio senso di controllo</strong> sulla vita: «la vita vera a volte arriva quando non siamo pronti», con una telefonata inaspettata, una diagnosi, una raccomandata, un <em>dobbiamo parlare</em> pronunciato a tavola. In quei momenti «hai solo quello che sei diventato». Certi muscoli si allenano nei giorni tranquilli per restare saldi in quelli in cui la vita fa deragliare.</p>
+<blockquote>WARN: <em>Come rimanere calmo sotto pressione</em> ridimensiona bullet journal, morning routine e «calendari organizzati al millimetro» come illusione di controllo, mentre <a href="otto-abitudini-persone-super-produttive.html">otto-abitudini-persone-super-produttive</a> (Kruse) fa del <strong>calendario al posto della to-do list</strong> l'abitudine numero 3 e del preparare il terreno all'io futuro l'abitudine numero 4 — verificare.</blockquote>
+<h2>Ponti con il resto della zona</h2>
+<ul>
+<li><strong>Togliere invece di aggiungere</strong>: la strategia del vuoto è la stessa chiave di lettura che chiude <a href="otto-abitudini-persone-super-produttive.html">otto-abitudini-persone-super-produttive</a> — le abitudini che funzionano <em>tolgono</em> opzioni o <em>proteggono</em> qualcosa. Le prime due ore blindate e il vuoto attorno alla scrivania sono la stessa mossa.</li>
+<li><strong>Il divario sapere/fare</strong>: «il nostro problema non è sapere cosa dobbiamo fare» è il motivo ricorrente di tutta la zona; ritorna come domanda numero 6 in ai-per-la-crescita-personale e come diagnosi centrale in spettatore-o-regista.</li>
+<li><strong>Il muscolo che si atrofizza</strong>: identica metafora in attenzione-focus-e-lettura (l'attenzione) e in ai-per-la-crescita-personale (il debito cognitivo e il gesso sulla gamba sana). Vale la pena notare che l'autore la usa tre volte su organi diversi: è uno schema retorico ricorrente, più che un risultato.</li>
+<li><strong>L'avvio concreto</strong>: la traduzione operativa di «e poi ti alzi e inizi» è l'istruzione sotto le dieci parole di architetto-e-muratore.</li>
+</ul>
+<h2>Fonti</h2>
+<ul>
+<li>la-cura-per-la-procrastinazione-che-non-vorresti-sentire-2026-09-18 (Andrea Giuliodori / EfficaceMente, 2026-09-18) — la strategia del vuoto, le due regole di Chandler, la doppia diagnosi Fiore/complex planning, lo studio <em>Science</em> 2014 della stanza vuota, la dopamina istantanea. Nomi e studi ricostruiti dai sottotitoli automatici: «Nil Fiore» → Neil Fiore (da verificare); lo studio 2014 e la ricerca del 1992 sono citati senza autori né titolo.</li>
+<li>come-rimanere-calmo-sotto-pressione-e-fare-scelte-migliori-2026-09-18 (Andrea Giuliodori / EfficaceMente, 2026-09-18) — la Resistenza di Pressfield come bussola, l'istante di lucida follia, il coraggio morale delle 2 del mattino e la corteccia cingolata anteriore come muscolo, il ridimensionamento degli strumenti di pianificazione. Nomi storpiati dai sottotitoli (il memorialista di Sant'Elena, i due marescialli, «Lisa Felman Barret») e nessuna pubblicazione citata per l'AMCC.</li>
+<li>andrea-giuliodori — profilo dell'autore e ricorrenze retoriche tra i suoi video.</li>
+</ul>
+<script>
+window.SB = (function () {
+  var API = 'https://brain-sync.tramitemarketing-it.workers.dev';
+  function url() { return API + '/state'; }
+  return {
+    attivo: !!API,
+    prendi: function () {
+      if (!API) return Promise.resolve(null);
+      return fetch(url(), { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    },
+    manda: function (page, n, b, finale) {
+      if (!API) return;
+      var dati = JSON.stringify({ page: page, n: n, b: b });
+      try {
+        fetch(url(), {
+          method: 'POST', body: dati, keepalive: !!finale,
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(function () {});
+      } catch (e) {}
+    },
+    commenta: function (testo) {
+      if (!API) return Promise.resolve(false);
+      return fetch(API + '/commenti', {
+        method: 'POST',
+        body: JSON.stringify({ slug: location.pathname, testo: testo }),
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    }
+  };
+})();
+
+
+(function () {
+  var KEY = 'sb2:' + location.pathname;
+  var WPS = 4;             // parole al secondo (~240 wpm)
+  var MIN = 0.7, MAX = 6;  // secondi per blocco: minimo e tetto
+  var PASS = 0.5;          // se l'ho letto almeno a metà e sono andato oltre, conta
+  var IDLE = 120000;       // fermo da 2 min = non sta leggendo
+  var DONE = 0.9;          // 90% dei contenuti = letto
+
+  var nodes = [].slice.call(document.querySelectorAll('p, li, blockquote'))
+    .filter(function (n) { return !n.closest('.topbar') && n.textContent.trim().length > 1; });
+  if (nodes.length < 3) return;
+
+  var words = nodes.map(function (n) {
+    return Math.max(1, n.textContent.trim().split(/\s+/).length);
+  });
+  var need = words.map(function (w) {
+    return Math.min(MAX, Math.max(MIN, w / WPS));
+  });
+  var total = words.reduce(function (a, b) { return a + b; }, 0);
+  var acc = words.map(function () { return 0; });
+  var read = words.map(function () { return false; });
+
+  // ripristina lo stato salvato (se la pagina non è cambiata)
+  try {
+    var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (s && s.n === nodes.length && typeof s.b === 'string') {
+      for (var i = 0; i < nodes.length; i++) read[i] = s.b.charAt(i) === '1';
+    }
+  } catch (e) {}
+
+  var bar = document.createElement('div'); bar.id = 'rp';
+  var dot = document.createElement('div'); dot.id = 'rd';
+  document.body.appendChild(bar); document.body.appendChild(dot);
+
+  // spunte di sezione: ogni h2 governa i blocchi fino all'h2 successivo
+  var secs = [];
+  var heads = [].slice.call(document.querySelectorAll('h2'));
+  heads.forEach(function (h) {
+    var idx = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (h.compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var prev = null;
+        for (var k = 0; k < heads.length; k++) {
+          if (heads[k].compareDocumentPosition(nodes[i]) & Node.DOCUMENT_POSITION_FOLLOWING) prev = heads[k];
+        }
+        if (prev === h) idx.push(i);
+      }
+    }
+    if (!idx.length) return;
+    var b = document.createElement('button');
+    b.className = 'sec'; b.type = 'button';
+    b.title = 'Segna questa sezione come letta / non letta';
+    h.appendChild(b);
+    var sec = { el: b, idx: idx };
+    b.addEventListener('click', function () {
+      var allRead = idx.every(function (i) { return read[i]; });
+      idx.forEach(function (i) { read[i] = !allRead; acc[i] = allRead ? 0 : need[i]; });
+      paint(); save();
+    });
+    secs.push(sec);
+  });
+
+  function pct() {
+    var w = 0;
+    for (var i = 0; i < nodes.length; i++) if (read[i]) w += words[i];
+    return w / total;
+  }
+  function paint() {
+    var p = pct();
+    bar.style.width = (p * 100).toFixed(1) + '%';
+    var done = p >= DONE;
+    dot.textContent = done ? '✓ Letto' : Math.round(p * 100) + '%';
+    dot.className = done ? 'done' : '';
+    secs.forEach(function (s) {
+      var ok = s.idx.every(function (i) { return read[i]; });
+      s.el.className = ok ? 'sec ok' : 'sec';
+      s.el.textContent = ok ? '✓' : '○';
+    });
+  }
+  function bits() {
+    var b = '';
+    for (var i = 0; i < nodes.length; i++) b += read[i] ? '1' : '0';
+    return b;
+  }
+  var saveT = 0, syncT = 0, ultimo = '';
+  function save(finale) {
+    var b = bits();
+    clearTimeout(saveT);
+    saveT = setTimeout(function () {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          v: 2, n: nodes.length, b: b, p: Math.round(pct() * 100), t: Date.now()
+        }));
+      } catch (e) {}
+    }, 400);
+    // verso il server: di rado, per non consumare la quota gratuita
+    if (!window.SB || !SB.attivo || b === ultimo) return;
+    if (finale) { ultimo = b; SB.manda(location.pathname, nodes.length, b, true); return; }
+    clearTimeout(syncT);
+    syncT = setTimeout(function () {
+      ultimo = b;
+      SB.manda(location.pathname, nodes.length, b, false);
+    }, 8000);
+  }
+
+  // all'apertura: unisco i progressi già fatti su altri dispositivi
+  if (window.SB && SB.attivo) {
+    SB.prendi().then(function (st) {
+      if (!st || !st.pages) return;
+      var r = st.pages[location.pathname];
+      if (!r || r.n !== nodes.length) return;
+      var cambiato = false;
+      for (var i = 0; i < nodes.length; i++) {
+        if (r.b.charAt(i) === '1' && !read[i]) { read[i] = true; acc[i] = need[i]; cambiato = true; }
+      }
+      if (cambiato) { paint(); save(); }
+    });
+  }
+
+  // quali blocchi sono nella fascia centrale dello schermo (dove si legge davvero)
+  var visible = Object.create(null);
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = nodes.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) visible[i] = 1; else delete visible[i];
+    });
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  nodes.forEach(function (n) { io.observe(n); });
+
+  var last = Date.now();
+  ['scroll', 'mousemove', 'keydown', 'touchstart', 'wheel', 'click'].forEach(function (ev) {
+    addEventListener(ev, function () { last = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function () {
+    if (document.hidden || Date.now() - last > IDLE) return;
+    var changed = false, i;
+    for (i in visible) {
+      i = +i;
+      if (read[i]) continue;
+      acc[i] += 0.25;
+      if (acc[i] >= need[i]) { read[i] = true; changed = true; }
+    }
+    // blocco letto almeno a metà e ormai scorso sopra la fascia di lettura:
+    // è il comportamento di chi legge un paragrafo e prosegue.
+    for (i = 0; i < nodes.length; i++) {
+      if (read[i] || acc[i] < need[i] * PASS) continue;
+      if (nodes[i].getBoundingClientRect().bottom < innerHeight * 0.25) {
+        read[i] = true; changed = true;
+      }
+    }
+    if (changed) { paint(); save(); }
+  }, 250);
+
+  dot.addEventListener('click', function () {
+    var all = pct() >= DONE;
+    for (var i = 0; i < nodes.length; i++) { read[i] = !all; acc[i] = all ? 0 : need[i]; }
+    paint(); save();
+  });
+  dot.title = 'Tocca per segnare tutto come letto / non letto';
+
+  paint();
+  addEventListener('beforeunload', function () { save(true); });
+  addEventListener('visibilitychange', function () { if (document.hidden) save(true); });
+})();
+
+(function () {
+  if (!window.SB || !SB.attivo || !SB.commenta) return;
+  var btn = document.createElement('button');
+  btn.textContent = '💬';
+  btn.title = 'Lascia un commento-istruzione per Claude';
+  btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:24px;border:none;font-size:22px;background:#2b6cb0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer';
+  var box = document.createElement('div');
+  box.style.cssText = 'position:fixed;right:16px;bottom:72px;z-index:60;display:none;width:min(92vw,340px);background:#1c2733;border:1px solid #33475b;border-radius:12px;padding:10px;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+  box.innerHTML = '<textarea rows="4" placeholder="Scrivi a Claude: es. salva questo prompt come prompt-XXX e aggiungilo alla skill prompt" style="width:100%;box-sizing:border-box;background:#111a22;color:#eee;border:1px solid #33475b;border-radius:8px;padding:8px;font:inherit"></textarea>' +
+    '<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end;align-items:center">' +
+    '<span data-esito style="font-size:13px;color:#9fb3c8"></span>' +
+    '<button data-invia style="background:#2b6cb0;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font:inherit">Invia</button></div>';
+  document.body.appendChild(btn); document.body.appendChild(box);
+  var ta = box.querySelector('textarea'), esito = box.querySelector('[data-esito]');
+  btn.onclick = function () {
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'block') ta.focus();
+  };
+  box.querySelector('[data-invia]').onclick = function () {
+    var t = ta.value.trim(); if (!t) return;
+    esito.textContent = '…';
+    SB.commenta(t).then(function (ok) {
+      esito.textContent = ok ? 'Salvato ✓ Claude lo legge al prossimo /watch' : 'Errore, riprova';
+      if (ok) ta.value = '';
+    });
+  };
+})();
+</script>
+</body>
+</html>
